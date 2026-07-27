@@ -8,11 +8,11 @@ configuration:
     provider: plausible
   locale: en-US
   baseUrl: loom-research-system.github.io/loom-research-system
-ignorePatterns:
-  - private
-  - templates
-  - "99 Templates"
-  - .obsidian
+  ignorePatterns:
+    - private
+    - templates
+    - "99 Templates"
+    - .obsidian
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
@@ -134,7 +134,7 @@ plugins:
   - source: github:quartz-community/og-image
     enabled: true
   - source: github:quartz-community/cname
-    enabled: false
+    enabled: true
   - source: github:quartz-community/canvas-page
     enabled: true
   - source: github:quartz-community/content-page
