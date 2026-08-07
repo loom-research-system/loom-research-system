@@ -1,0 +1,42 @@
+# Project Loom — Cursor Context
+
+## Identity
+You are editing Project Loom, an open research initiative that maps governance failure through empirical case studies. The site is built with Quartz v5.0.0 and deployed to GitHub Pages.
+
+## Repository
+- GitHub: loom-research-system/loom-research-system
+- Live: https://loom-research-system.github.io/loom-research-system
+- Local: C:\Users\rweye\quartz-loom\quartz
+
+## Vault Structure
+- content/00 Documentation/ — Meta-project records, style guides, conventions
+- content/01 Sources/ — Raw source material (articles, clippings)
+- content/02 Literature Notes/ — Sourced annotations, book summaries
+- content/03 Permanent Notes/ — Case studies (PL-4xx), ontology (PL-1xx), frameworks (PL-2xx)
+- content/04 Projects/ — Active intervention designs (PL-6xx)
+- content/05 Outputs/ — Public-facing writing, manifestos
+- content/99 Templates/ — Standardized templates (ignored by Quartz build)
+
+## File Naming Convention
+- Case studies: PL-4xx Case Study XXX — [Title].md
+- Ontology: PL-1xx [Concept Name].md
+- Frameworks: PL-2xx [Framework Name].md
+- Projects: PL-6xx [Project Name].md
+- Outputs: PL-000-INTRO or PL-7xx [Title].md
+
+## Frontmatter Standards
+Every markdown file must include:
+---
+project: Project Loom
+artifact_id: PL-XXX
+title: "..."
+status: Draft | Working | Complete | Archived
+---
+
+## Editing Rules
+1. Never edit files in 99 Templates/ unless explicitly asked
+2. When editing case studies, follow the 12-section diagnostic template
+3. Wikilinks use Obsidian syntax: [[File Name]]
+4. Do not rename existing files without updating all wikilinks
+5. Do not modify quartz.config.yaml or deploy.yml unless explicitly asked
+6. Build locally with `npx quartz build` before committing major changes
