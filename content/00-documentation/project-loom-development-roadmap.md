@@ -1,11 +1,15 @@
 ---
-title: Project Loom — Development Roadmap
-description: Public roadmap showing what Loom has built, what is being tested, and what remains to be established
+title: Project Loom — Research & Contributor Roadmap
+description: Detailed development roadmap for researchers, auditors, developers, and contributors
 ---
 
-# Project Loom — Development Roadmap
+# Project Loom — Research & Contributor Roadmap
 
 **Stage: Building the foundation**
+
+This is the detailed roadmap for people who want to understand how Loom is being constructed, inspect the methodology, contribute research or technical work, or participate in testing and audit.
+
+For a plain-language explanation, start with **[What Loom Is Building](roadmap)**.
 
 Project Loom is being built as a research system, not as an AI answer generator. The roadmap therefore tracks the development of the research infrastructure itself: specifications, evidence handling, provenance, validation, adversarial testing, human audit, and public research outputs.
 
@@ -123,6 +127,49 @@ Make the research infrastructure broadly inspectable and usable while preserving
 
 Explore use by external researchers and institutions only after the underlying research and governance mechanisms have been demonstrated internally.
 
+## What contribution means
+
+Loom is being built in public, but contribution does not mean simply adding text to the website. Contributions need to fit the research and provenance model.
+
+### Researchers
+
+Researchers can contribute by:
+
+- locating and registering relevant sources;
+- extracting evidence with precise source locations;
+- testing whether Loom concepts explain documented cases;
+- identifying counterexamples and contradictory evidence;
+- proposing ontology or methodology changes with supporting evidence;
+- reviewing case reconstructions; and
+- challenging claims that appear stronger than their evidence supports.
+
+### Auditors
+
+Auditors will test whether Loom's research and governance mechanisms behave according to their specifications. Auditor roles, independence requirements, conflicts of interest, review boundaries, and sign-off procedures are being established before the audit process is treated as operational.
+
+### Developers
+
+Developers can contribute to the research infrastructure itself, including schemas, validators, provenance systems, capture and process APIs, automated tests, and public interfaces.
+
+Technical contributions must preserve the central separation between **capture, evidence, verification, and promotion**. Automation must not silently become an epistemic authority.
+
+### Case researchers
+
+Case researchers can help reconstruct individual cases from source material. The expected contribution is not a polished narrative alone; it is a traceable research record showing sources, evidence, claims, contradictions, and unresolved questions.
+
+## What contributors should not do
+
+Contributors should not:
+
+- invent sources, reviewers, attestations, hashes, signatures, or governance events;
+- treat an AI-generated statement as verified evidence;
+- describe an unretrieved document as inspected;
+- silently replace a flawed research record instead of recording the correction;
+- promote a claim merely because it sounds plausible; or
+- describe planned infrastructure as operational.
+
+The system is specifically being designed to make these failures detectable.
+
 ## What progress means here
 
 Progress in Loom is not measured only by the number of pages, case studies, or features produced.
@@ -143,5 +190,19 @@ The immediate work is to move from specification toward validation:
 4. build the machine-readable research objects and validator;
 5. establish the four-person human audit process;
 6. run adversarial tests before describing the resulting capabilities as operational.
+
+## Contribution pathway
+
+The contribution process will become more formal as the research infrastructure is implemented. For now, the most useful contributions are **evidence, criticism, reproducible tests, case reconstruction, schema/validator work, and documented challenges to existing assumptions**.
+
+The project will distinguish between:
+
+- a suggestion;
+- a proposed research object;
+- an implemented change;
+- a verified research result; and
+- a human governance decision.
+
+Those are different things and will not be collapsed into one status simply because they appear on the same website.
 
 *This roadmap is a living project record. Statuses should change when the underlying work changes, not simply when a page is written.*
