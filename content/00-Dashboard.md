@@ -167,7 +167,8 @@ description: Navigation hub and project status for Project Loom
 <p>Project operations, standards, and current development status.</p>
 <ul>
 <li><a href="00-documentation/documentation-getting-started">Getting Started</a></li>
-<li><a href="00-documentation/project-loom-development-roadmap">Development Roadmap</a> <span class="status-badge status-wip">Building</span></li>
+<li><a href="00-documentation/roadmap">What Loom Is Building</a> <span class="status-badge status-live">Public</span></li>
+<li><a href="00-documentation/project-loom-development-roadmap">Research & Contributor Roadmap</a> <span class="status-badge status-wip">Building</span></li>
 <li><a href="00-documentation/documentation-style-guide">Style Guide</a></li>
 <li><a href="00-documentation/documentation-naming-conventions">Naming Conventions</a></li>
 <li><a href="00-documentation/documentation-git-workflow">Git Workflow</a></li>
@@ -208,8 +209,9 @@ description: Navigation hub and project status for Project Loom
 
 ## Quick Actions
 
+- **[What Loom Is Building](00-documentation/roadmap)** — Plain-language explanation for general readers
+- **[Research & Contributor Roadmap](00-documentation/project-loom-development-roadmap)** — Detailed development, methodology, and contribution path
 - **[Add a new case study](00-documentation/documentation-getting-started#adding-a-case-study)** — Follow the 10-stage protocol
-- **[Development Roadmap](00-documentation/project-loom-development-roadmap)** — See what has been built, what is being tested, and what remains to be established
 - **[Propose an ontology change](03-permanent-notes/pl-105-ontology-evolution-log)** — Log the proposal with evidence
 - **[Review open questions](03-permanent-notes/open-questions)** — Unresolved analytical gaps
 - **[View site on GitHub](https://github.com/loom-research-system/loom-research-system)** — Source repository
