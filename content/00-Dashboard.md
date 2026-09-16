@@ -164,9 +164,10 @@ description: Navigation hub and project status for Project Loom
 
 <div class="dashboard-card">
 <h3>⚙️ Meta & Documentation</h3>
-<p>Project operations and standards.</p>
+<p>Project operations, standards, and current development status.</p>
 <ul>
 <li><a href="00-documentation/documentation-getting-started">Getting Started</a></li>
+<li><a href="00-documentation/project-loom-development-roadmap">Development Roadmap</a> <span class="status-badge status-wip">Building</span></li>
 <li><a href="00-documentation/documentation-style-guide">Style Guide</a></li>
 <li><a href="00-documentation/documentation-naming-conventions">Naming Conventions</a></li>
 <li><a href="00-documentation/documentation-git-workflow">Git Workflow</a></li>
@@ -201,12 +202,14 @@ description: Navigation hub and project status for Project Loom
 | Autopsy of a Vanishing | 📝 Draft | 2026-07-25 |
 | Neo4j Knowledge Graph | 📋 Planned | — |
 | Public Site (Quartz) | 🔄 Live / Improving | 2026-07-27 |
+| Research System & Validation Infrastructure | 🔄 Building | 2026-09-16 |
 
 ---
 
 ## Quick Actions
 
 - **[Add a new case study](00-documentation/documentation-getting-started#adding-a-case-study)** — Follow the 10-stage protocol
+- **[Development Roadmap](00-documentation/project-loom-development-roadmap)** — See what has been built, what is being tested, and what remains to be established
 - **[Propose an ontology change](03-permanent-notes/pl-105-ontology-evolution-log)** — Log the proposal with evidence
 - **[Review open questions](03-permanent-notes/open-questions)** — Unresolved analytical gaps
 - **[View site on GitHub](https://github.com/loom-research-system/loom-research-system)** — Source repository
