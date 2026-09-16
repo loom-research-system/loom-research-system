@@ -14,7 +14,7 @@ Project Loom is an open research initiative that maps, analyzes, and improves go
 
 Loom is not a think tank. It is not a consultancy. It is a research operating system: a set of conceptual tools, case study protocols, and analytical frameworks designed to answer one question with surgical precision:
 
-&gt; **Why do announced policies fail to become actual outcomes?**
+> **Why do announced policies fail to become actual outcomes?**
 
 The gap between political ambition and institutional capacity is not a bug in the system. It is the system. Project Loom exists to make that gap visible, measurable, and—eventually—bridgeable.
 
@@ -90,6 +90,18 @@ This framework is politically neutral. It studies governance mechanisms, not ide
 Project Loom does not start from theory and look for examples. It starts from cases and builds theory. Every concept in the ontology must earn its place by explaining something that actually happened. If a concept cannot be operationalized—if it cannot be tested against a documented case—it does not belong in the framework.
 
 This is empirical research, not opinion journalism. The goal is to build tools that are useful, not to build a brand that is popular.
+
+---
+
+## Loom Is Being Built in Public
+
+The research system itself is under development. We distinguish between what has been built, what is being tested, and what is only planned.
+
+**For a quick explanation:** [What Loom Is Building](00-Documentation/roadmap)
+
+**For researchers, auditors, developers, and contributors:** [Research & Contributor Roadmap](00-Documentation/project-loom-development-roadmap)
+
+These pages document the development process rather than presenting unfinished capabilities as established ones.
 
 ---
 
