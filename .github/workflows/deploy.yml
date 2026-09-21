@@ -15,53 +15,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-22.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Prepare Loom v2 site
+      - name: Prepare site
         run: |
           rm -rf public
-          mkdir -p public
-          unzip -q loomresearch-v2.zip -d public
+          cp -R site public
           mkdir -p public/roadmap
           cp roadmap/index.html public/roadmap/index.html
           echo "loomresearch.xyz" > public/CNAME
 
-      - name: Add roadmap to site navigation
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          root = Path("public")
-          for path in root.rglob("*.html"):
-              if path.name == "index.html" and path.parent.name == "roadmap":
-                  continue
-              text = path.read_text(encoding="utf-8")
-              if re.search(r'>Roadmap</a>', text):
-                  continue
-              rel = "../" * len(path.relative_to(root).parts[:-1]) + "roadmap/"
-              link = f'<a href="{rel}">Roadmap</a>'
-              text = text.replace("</nav>", link + "</nav>", 1)
-              path.write_text(text, encoding="utf-8")
-          PY
-
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: public
 
-  deploy:
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy Loom v2
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
