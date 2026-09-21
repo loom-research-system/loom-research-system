@@ -7,7 +7,7 @@ configuration:
   analytics:
     provider: plausible
   locale: en-US
-  baseUrl: loom-research-system.github.io/loom-research-system
+  baseUrl: loomresearch.xyz
   ignorePatterns:
     - private
     - templates
