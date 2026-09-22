@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ward Mirror — Project Loom</title>
+<meta name="description" content="A Project Loom prototype for connecting residents, elected officials, public records, and verified civic evidence.">
+<style>
+:root{--ink:#202522;--paper:#f5f0e7;--teal:#175f5c;--rust:#9b4f3e;--rule:#d5ccbe;--muted:#6d716c;--white:#fffdf8}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65}a{color:inherit}
+header{border-bottom:1px solid var(--rule);padding:1.2rem 5vw;background:var(--paper)}header a{text-decoration:none}.brand{font-weight:700;letter-spacing:.12em}.nav{float:right;display:flex;gap:1.2rem;font:600 .78rem/1.2 Arial,sans-serif}.nav a:hover{text-decoration:underline}main{max-width:1080px;margin:auto;padding:4.5rem 5vw}.eyebrow{font:700 .72rem Arial,sans-serif;letter-spacing:.14em;color:var(--rust)}h1{font-size:clamp(2.7rem,7vw,5.6rem);line-height:.98;margin:.5rem 0 1.4rem;max-width:850px}h2{font-size:2rem;line-height:1.15;margin:.2rem 0 1rem}h3{font-size:1.15rem}.lead{font-size:1.3rem;max-width:760px}.note{border-left:4px solid var(--teal);padding:1rem 1.3rem;background:rgba(255,255,255,.35);margin:2rem 0;max-width:820px}.section{border-top:1px solid var(--rule);padding:3rem 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.card{border:1px solid var(--rule);background:rgba(255,255,255,.28);padding:1.5rem}.num{font:700 .72rem Arial,sans-serif;color:var(--rust);letter-spacing:.12em}.demo{background:var(--white);border:1px solid var(--rule);padding:2rem;box-shadow:0 8px 24px rgba(32,37,34,.05)}label{display:block;font:700 .76rem Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}input{width:100%;padding:.85rem;border:1px solid #bdb6aa;background:white;font:1rem Georgia,serif}.btn{display:inline-block;border:0;padding:.8rem 1.1rem;background:var(--teal);color:white;font:700 .8rem Arial,sans-serif;letter-spacing:.04em;cursor:pointer;margin-top:1rem}.result{display:none;margin-top:1.5rem;border-top:1px solid var(--rule);padding-top:1.5rem}.pill{display:inline-block;border:1px solid var(--rule);padding:.25rem .55rem;font:700 .68rem Arial,sans-serif;margin:.15rem .2rem .15rem 0}.architecture{display:grid;grid-template-columns:1fr 1fr;gap:2rem}.small{color:var(--muted);font-size:.92rem}.flow{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;font-weight:bold}.flow span{border:1px solid var(--rule);padding:.4rem .7rem}.arrow{color:var(--rust)}footer{border-top:1px solid var(--rule);padding:2rem 5vw;font-size:.9rem}@media(max-width:760px){.nav{float:none;margin-top:1rem;flex-wrap:wrap}.grid,.architecture{grid-template-columns:1fr}main{padding-top:3rem}}
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="../">PROJECT LOOM</a>
+<nav class="nav"><a href="../">Home</a><a href="../start/">Start Here</a><a href="../library/">Research</a><a href="../notes/">Archive</a><a href="../roadmap/">Roadmap</a><a href="./">Ward Mirror</a></nav>
+<div style="clear:both"></div>
+</header>
+
+<main>
+<p class="eyebrow">CIVIC INFRASTRUCTURE · PROTOTYPE</p>
+<h1>Ward Mirror</h1>
+<p class="lead"><strong>One neighborhood. One office. One question:</strong> What did your elected representative actually do?</p>
+<p class="lead">Ward Mirror is a proposed social layer for Project Loom: a way for residents to see their elected officials, inspect the public record, state what issues matter to them, and compare those things without turning the platform into a popularity contest.</p>
+
+<div class="note"><strong>This page is a prototype, not a live civic-data service.</strong><br>
+No officeholder, vote, alignment percentage, or jurisdictional assignment is being presented here as a verified fact. Live claims will only appear after the underlying public records have been retrieved and verified through the Loom research process.</div>
+
+<section class="section">
+<div class="eyebrow">THE MVP</div><h2>Three simple screens</h2>
+<div class="grid">
+<div class="card"><span class="num">01 / ADDRESS</span><h3>Who represents me?</h3><p>Enter an address. The system determines the relevant jurisdiction and elected offices. The raw address should not become part of the public research record.</p></div>
+<div class="card"><span class="num">02 / MIRROR</span><h3>What did they do?</h3><p>Choose a small set of priorities. The mirror compares those priorities with a verified record of votes or other documented actions.</p></div>
+<div class="card"><span class="num">03 / RECEIPT</span><h3>Show me the evidence.</h3><p>Every substantive result links back to the underlying public record and its Loom evidence object rather than asking the user to trust a score.</p></div>
+</div>
+</section>
+
+<section class="section">
+<div class="eyebrow">INTERACTIVE PROTOTYPE</div><h2>Start with the question</h2>
+<div class="demo">
+<label for="address">Your address</label>
+<input id="address" autocomplete="street-address" placeholder="Enter an address for the prototype">
+<button class="btn" onclick="showDemo()">CONTINUE</button>
+<div id="result" class="result">
+<h3>Live jurisdiction lookup is not connected yet.</h3>
+<p>The interface is ready for the first responsive-city dataset. Once a jurisdiction and verified data source are selected, this screen will return the actual elected offices rather than invented sample data.</p>
+<p><span class="pill">No live claim</span><span class="pill">Data source required</span><span class="pill">Verification required</span></p>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="eyebrow">THE LOOM CONNECTION</div><h2>The social layer does not decide what is true.</h2>
+<div class="architecture">
+<div><h3>Residents can contribute</h3><p>Users can identify questions, submit public documents, bookmark contradictions, and help prioritize what should be investigated.</p><p>Those interactions create research work. They do not automatically create verified claims.</p></div>
+<div><h3>Evidence establishes the record</h3><p>Votes, promises, statements, and other civic facts remain subject to Loom's evidence and verification rules.</p><p>A crowd can ask for an investigation. It cannot vote a claim into truth.</p></div>
+</div>
+<div class="flow"><span>Question</span><span class="arrow">→</span><span>Retrieval</span><span class="arrow">→</span><span>Evidence</span><span class="arrow">→</span><span>Claim</span><span class="arrow">→</span><span>Verification</span></div>
+</section>
+
+<section class="section">
+<div class="eyebrow">WHAT COMES NEXT</div><h2>Build only after the data source is real.</h2>
+<ol>
+<li>Select one responsive municipality and one office.</li>
+<li>Identify the authoritative source for its voting record.</li>
+<li>Verify a small seed set of votes through Loom.</li>
+<li>Publish those verified records as machine-readable data.</li>
+<li>Connect the address lookup to the actual jurisdictional boundaries.</li>
+<li>Then add the resident-facing social layer.</li>
+</ol>
+<div class="note"><strong>The first milestone is not user count.</strong><br>
+It is one small, independently inspectable civic dataset that another person can reconstruct from the public record.</div>
+</section>
+
+<section class="section">
+<div class="eyebrow">DESIGN RULE</div>
+<blockquote style="font-size:1.35rem;margin:0;max-width:850px">Users can help decide <em>what to investigate next</em>. They do not decide <em>what the evidence means</em>.</blockquote>
+</section>
+</main>
+
+<footer>Project Loom · Ward Mirror prototype · Built in public</footer>
+<script>
+function showDemo(){document.getElementById("result").style.display="block";document.getElementById("result").scrollIntoView({behavior:"smooth",block:"nearest"});}
+</script>
+</body>
+</html>
