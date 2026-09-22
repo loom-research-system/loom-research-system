@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Civic Receipts — Project Loom</title>
+<meta name="description" content="A Project Loom social research prototype built around resident receipts, corroboration, contradiction, and evidence.">
+<style>
+:root{--ink:#202522;--paper:#f5f0e7;--teal:#175f5c;--rust:#9b4f3e;--rule:#d5ccbe;--muted:#6d716c;--white:#fffdf8}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65}a{color:inherit}header{border-bottom:1px solid var(--rule);padding:1.2rem 5vw;background:var(--paper)}header a{text-decoration:none}.brand{font-weight:700;letter-spacing:.12em}.nav{float:right;display:flex;gap:1.2rem;font:600 .78rem/1.2 Arial,sans-serif}.nav a:hover{text-decoration:underline}main{max-width:1100px;margin:auto;padding:4.5rem 5vw}.eyebrow{font:700 .72rem Arial,sans-serif;letter-spacing:.14em;color:var(--rust)}h1{font-size:clamp(2.7rem,7vw,5.6rem);line-height:.98;margin:.5rem 0 1.4rem;max-width:900px}h2{font-size:2rem;line-height:1.15;margin:.2rem 0 1rem}h3{font-size:1.15rem}.lead{font-size:1.3rem;max-width:820px}.note{border-left:4px solid var(--teal);padding:1rem 1.3rem;background:rgba(255,255,255,.35);margin:2rem 0;max-width:880px}.section{border-top:1px solid var(--rule);padding:3rem 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.card{border:1px solid var(--rule);background:rgba(255,255,255,.28);padding:1.5rem}.num{font:700 .72rem Arial,sans-serif;color:var(--rust);letter-spacing:.12em}.receipt{background:var(--white);border:1px solid var(--rule);padding:2rem;box-shadow:0 8px 24px rgba(32,37,34,.05);max-width:850px}.receipt-grid{display:grid;grid-template-columns:150px 1fr;gap:.55rem 1.2rem}.label{font:700 .7rem Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.status{display:inline-block;border:1px solid var(--rule);padding:.25rem .55rem;font:700 .68rem Arial,sans-serif;text-transform:uppercase;letter-spacing:.07em}.btn{display:inline-block;border:0;padding:.8rem 1.1rem;background:var(--teal);color:white;font:700 .8rem Arial,sans-serif;letter-spacing:.04em;cursor:pointer;margin-top:1rem}.result{display:none;margin-top:1.5rem;border-top:1px solid var(--rule);padding-top:1.5rem}.pill{display:inline-block;border:1px solid var(--rule);padding:.25rem .55rem;font:700 .68rem Arial,sans-serif;margin:.15rem .2rem .15rem 0}.architecture{display:grid;grid-template-columns:1fr 1fr;gap:2rem}.flow{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;font-weight:bold}.flow span{border:1px solid var(--rule);padding:.4rem .7rem}.arrow{color:var(--rust)}blockquote{border-left:3px solid var(--rust);padding:.7rem 1.2rem;font-size:1.2rem;margin:1.5rem 0}footer{border-top:1px solid var(--rule);padding:2rem 5vw;font-size:.9rem}@media(max-width:760px){.nav{float:none;margin-top:1rem;flex-wrap:wrap}.grid,.architecture{grid-template-columns:1fr}.receipt-grid{grid-template-columns:1fr}main{padding-top:3rem}}
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="../">PROJECT LOOM</a>
+<nav class="nav"><a href="../">Home</a><a href="../start/">Start Here</a><a href="../library/">Research</a><a href="../notes/">Archive</a><a href="../roadmap/">Roadmap</a><a href="../mirror/">Ward Mirror</a><a href="./">Receipts</a></nav>
+<div style="clear:both"></div>
+</header>
+
+<main>
+<p class="eyebrow">CIVIC SOCIAL INFRASTRUCTURE · MVP</p>
+<h1>Receipts</h1>
+<p class="lead"><strong>Don't post your opinion. Put a receipt on the table.</strong></p>
+<p class="lead">This is the social layer of the Loom concept: a civic network in which the primary object is a claim backed by material evidence. People do not build friend graphs. They encounter claims, corroborate them, challenge them, and leave a trace of what the evidence can actually establish.</p>
+
+<div class="note"><strong>This is separate from Ward Mirror.</strong> Ward Mirror is a diagnostic interface you look at. Receipts is a social research interface you participate in. The social graph is built around corroboration and contradiction rather than friendship or popularity.</div>
+
+<section class="section">
+<div class="eyebrow">THE ATOMIC OBJECT</div><h2>The Receipt</h2>
+<div class="receipt">
+<div class="receipt-grid">
+<div class="label">Receipt type</div><div>Water Bill</div>
+<div class="label">Claim</div><div>“My water bill doubled after the rate-stabilization ordinance.”</div>
+<div class="label">Evidence</div><div>Document or image attached; content hashed; location generalized to census tract rather than exact address.</div>
+<div class="label">Scope</div><div>Your census tract · specified date range</div>
+<div class="label">Epistemic status</div><div><span class="status">Proposed</span> → potentially supported after evidence review</div>
+</div>
+</div>
+<p class="small">A Receipt is not a post, vote, like, or reputation point. It is an input to the research record. Corroboration can strengthen verification, but promotion remains a separate Loom governance event.</p>
+</section>
+
+<section class="section">
+<div class="eyebrow">THE FEED</div><h2>The Contradiction Stream</h2>
+<div class="receipt">
+<p><strong>City claim:</strong> “Water rates remained stable.” <span class="status">Supported</span></p>
+<p><strong>Neighbor receipts:</strong> Multiple households report substantially higher bills during the same period.</p>
+<p><strong>Current state:</strong> <span class="status">Contested</span> · scope and causal relationship require investigation.</p>
+<p><strong>Your move:</strong> Add a document, challenge the scope, provide a counterexample, or mark that the experience does not match your own.</p>
+</div>
+<blockquote>A disagreement is not automatically evidence that either side is wrong. The system's job is to expose the contradiction and preserve the evidence needed to resolve it.</blockquote>
+</section>
+
+<section class="section">
+<div class="eyebrow">THE GRAPH</div><h2>The Alignment Web</h2>
+<div class="grid">
+<div class="card"><span class="num">NODE</span><h3>Pseudonymous resident</h3><p>Public-facing identity is a stable pseudonymous handle. Exact household location is not exposed in the social graph.</p></div>
+<div class="card"><span class="num">EDGE</span><h3>Shared evidence pattern</h3><p>Connections emerge from overlapping receipts, contradictions, claim types, time periods, and research questions—not friend requests.</p></div>
+<div class="card"><span class="num">CLUSTER</span><h3>Claim Cluster</h3><p>A group of materially related receipts can be assembled for joint evidence review. A cluster is not itself proof.</p></div>
+</div>
+</section>
+
+<section class="section">
+<div class="eyebrow">THE LOOP</div><h2>Evidence is the social action.</h2>
+<div class="flow"><span>Submit Receipt</span><span class="arrow">→</span><span>Match Related Receipts</span><span class="arrow">→</span><span>Corroborate / Challenge</span><span class="arrow">→</span><span>Verify</span><span class="arrow">→</span><span>Review / Promote</span></div>
+<p>When three or more genuinely independent households provide materially relevant evidence, the system can flag the claim for <strong>cross-verification</strong>. That is a verification state—not an automatic declaration of a “Neighborhood Fact.”</p>
+</section>
+
+<section class="section">
+<div class="eyebrow">PRESSURE PACKET</div><h2>Turn a verified record into an institutional question.</h2>
+<p>When a sufficiently verified neighborhood claim materially conflicts with an official claim, the system can assemble a Pressure Packet: the claim, scope, evidence identifiers, verification events, relevant official record, contradiction, and unresolved questions.</p>
+<div class="note"><strong>The packet does not declare who is right.</strong> It makes the underlying record inspectable so a journalist, agency, elected office, or resident can respond to the actual evidence.</div>
+</section>
+
+<section class="section">
+<div class="eyebrow">MVP · ONE TRACT</div><h2>Four development steps</h2>
+<ol>
+<li><strong>The Drop:</strong> choose one tract and seed it with a small set of genuinely verified, anonymized founding receipts.</li>
+<li><strong>The Match:</strong> compare new receipts by claim type, time overlap, geographic scope, and other explicit matching fields.</li>
+<li><strong>The Review:</strong> allow corroboration and contradiction while preserving source independence and provenance.</li>
+<li><strong>The Pressure:</strong> generate an inspectable packet when the evidence reaches the required verification state and a documented contradiction exists.</li>
+</ol>
+</section>
+
+<section class="section">
+<div class="eyebrow">TECHNICAL DELTA</div><h2>What has to be built</h2>
+<div class="architecture">
+<div><h3>1 · Storage</h3><p>Receipt objects need durable storage. A database is the straightforward MVP path; a Git-backed prototype is possible if every submission becomes a structured, reviewable artifact rather than an unvalidated file.</p></div>
+<div><h3>2 · Identity</h3><p>Generate stable pseudonymous handles without publishing exact addresses. The identity layer must separate authentication from the public research record.</p></div>
+<div><h3>3 · Corroboration</h3><p>Match receipts using explicit fields such as claim type, overlapping timeframe, geographic scope, and material similarity. Matching suggests a cluster; it does not establish truth.</p></div>
+<div><h3>4 · Loom integration</h3><p>Receipts become research inputs. Evidence, observations, claims, verification events, contradictions, and promotions remain distinct objects with their own provenance.</p></div>
+</div>
+</section>
+
+<section class="section">
+<div class="eyebrow">NON-NEGOTIABLE</div>
+<h2>The social mechanic cannot become a truth mechanic.</h2>
+<p>The network can make evidence easier to produce, discover, compare, and challenge. It cannot turn popularity into verification.</p>
+<div class="note"><strong>AI may propose. Evidence must establish. Humans may promote.</strong><br><br>The social graph can increase the rate at which evidence appears. It must not lower the evidentiary standard for what Loom publishes as established.</div>
+</section>
+</main>
+
+<footer>Project Loom · Receipts prototype · Built in public</footer>
+</body>
+</html>
