@@ -31,8 +31,13 @@ jobs:
         run: |
           rm -rf public
           cp -R site public
-          mkdir -p public/roadmap
+
+          # Publish standalone app/prototype directories alongside the main site.
+          mkdir -p public/roadmap public/mirror public/receipts
           cp roadmap/index.html public/roadmap/index.html
+          cp mirror/index.html public/mirror/index.html
+          cp receipts/index.html public/receipts/index.html
+
           echo "loomresearch.xyz" > public/CNAME
 
       - name: Upload artifact
