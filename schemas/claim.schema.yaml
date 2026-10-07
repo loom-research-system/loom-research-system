@@ -1,0 +1,133 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/claim.schema.yaml"
+title: "Claim"
+description: "A discrete, falsifiable assertion about the world"
+type: object
+required:
+  - id
+  - type
+  - claim_type
+  - statement
+  - status
+  - epistemic_status
+  - verification_level
+  - promotion_stage
+  - primary_applicability
+  - current_as_of
+  - related_evidence
+  - contradiction_status
+  - created
+  - updated
+properties:
+  id:
+    type: string
+    pattern: "^CLM-[0-9]{4,}$"
+    description: "Unique claim identifier"
+  type:
+    type: string
+    const: "claim"
+  claim_type:
+    type: string
+    enum: ["standard", "dispositive_document"]
+    description: "Type of claim (dispositive_document has special rules)"
+  statement:
+    type: string
+    description: "The actual claim statement (must be atomic: one assertion per claim)"
+  dispositive_document_justification:
+    type: string
+    description: "Required if claim_type is dispositive_document: why is this purely about document content?"
+  dispositive_document_scope_check:
+    type: boolean
+    description: "Required if claim_type is dispositive_document: is the claim strictly about document content (not causal/evaluative)?"
+  status:
+    type: string
+    enum: ["proposed", "under_review", "system_flagged_for_review", "completed", "rejected", "deprecated"]
+  epistemic_status:
+    type: string
+    enum: ["proposed", "unknown", "unresolved", "contested", "supported", "known"]
+  verification_level:
+    type: string
+    enum: ["none", "source_backed", "cross_verified", "primary_verified"]
+  promotion_stage:
+    type: string
+    enum: ["candidate", "accepted", "canonical"]
+  primary_applicability:
+    type: string
+    enum: ["applicable", "not_applicable", "destroyed_or_inaccessible"]
+    description: "MANDATORY: No silent default allowed"
+  current_as_of:
+    type: string
+    format: date
+    description: "Date this claim was last verified as current"
+  search_protocol_id:
+    type: string
+    pattern: "^PROT-[0-9]{4,}$"
+    description: "Required if epistemic_status is unknown"
+  related_evidence:
+    type: array
+    items:
+      type: string
+      pattern: "^EVD-[0-9]{4,}$"
+    description: "Evidence objects supporting this claim"
+  contradictory_evidence:
+    type: array
+    items:
+      type: string
+      pattern: "^EVD-[0-9]{4,}$"
+    description: "Evidence objects contradicting this claim"
+  contradiction_status:
+    type: string
+    enum: ["none", "documented", "unresolved", "resolved"]
+  contradiction_note:
+    type: string
+    description: "Explanation if contradiction_status is not 'none'"
+  contradiction_resolution:
+    type: string
+    description: "How the contradiction was resolved (if applicable)"
+  scope:
+    type: object
+    properties:
+      population:
+        type: string
+      geography:
+        type: string
+      timeframe:
+        type: string
+      institution:
+        type: string
+      event:
+        type: string
+      exclusions:
+        type: array
+        items:
+          type: string
+    description: "Scope boundaries for this claim"
+  provenance:
+    type: object
+    required:
+      - proposed_by
+      - proposed_at
+    properties:
+      proposed_by:
+        type: string
+        description: "Actor ID who proposed this claim"
+      proposed_at:
+        type: string
+        format: date-time
+  created:
+    type: string
+    format: date-time
+  updated:
+    type: string
+    format: date-time
+additionalProperties: false
+
+# Validation rules (enforced by validator, not JSON Schema):
+# - If claim_type is "dispositive_document", dispositive_document_justification and dispositive_document_scope_check are required
+# - If claim_type is "dispositive_document", the statement must NOT be causal or evaluative
+# - If epistemic_status is "unknown", search_protocol_id is required
+# - If verification_level is "cross_verified", related_evidence must have 2+ items from 2+ independent sources
+# - If verification_level is "primary_verified" and claim_type is "standard", must also be cross_verified
+# - If epistemic_status is "supported" or "known", verification_level must be at least "cross_verified"
+# - If epistemic_status is "known", must have human review event and no unresolved contradictions
+# - If contradiction_status is "unresolved", epistemic_status cannot be "supported" or "known"

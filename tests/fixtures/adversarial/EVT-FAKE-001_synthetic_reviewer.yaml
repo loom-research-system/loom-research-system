@@ -1,0 +1,9 @@
+event_id: EVT-FAKE-001
+type: promotion_event
+action: promote_to_canonical
+actor: "human:dr_elena_rostova"  # Fabricated identity
+timestamp: "2026-09-12T00:00:00Z"
+target_object_id: CLM-FAKE-002
+target_object_type: claim
+disclosure_text: "Reviewed by independent auditor"
+publication_location: "test"

@@ -1,0 +1,28 @@
+# Loom Research System Specification Manifest
+# This file is the authoritative registry of locked specifications.
+# Every research artifact must reference a version listed here.
+
+version: "1.0"
+updated: "2026-09-12"
+
+specifications:
+  - id: "PL-307"
+    title: "Claims, Epistemic Status, Verification & Promotion Specification"
+    version: "1.0"
+    status: "LOCKED"
+    effective_date: "2026-09-10"
+    file_path: "specifications/PL-307_v1.0_Claims_Epistemic_Status_Verification_Promotion.md"
+    content_hash: "[PENDING_GIT_COMMIT_HASH]"
+
+  - id: "PL-001"
+    title: "Project Loom Implementation Roadmap & Governance Control Document"
+    version: "1.1"
+    status: "LOCKED"
+    effective_date: "2026-09-12"
+    file_path: "specifications/PL-001_v1.1_Implementation_Roadmap_Governance_Control.md"
+    content_hash: "[PENDING_GIT_COMMIT_HASH]"
+
+governance_state:
+  current_phase: "Phase 1: Repository Initialization"
+  interim_rule_active: true
+  interim_rule_description: "Founder-led artifacts may advance to 'accepted' only with at least two designated internal auditors recorded as provenance events. 'canonical' remains blocked until the Phase 5 external audit addendum is ratified."

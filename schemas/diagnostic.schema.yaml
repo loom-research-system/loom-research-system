@@ -1,0 +1,64 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/diagnostic.schema.yaml"
+title: "Diagnostic"
+description: "An analytical interpretation using Loom's ontology"
+type: object
+required:
+  - id
+  - type
+  - ontology_concept_id
+  - thesis
+  - supporting_claims
+  - epistemic_status
+  - status
+  - created
+properties:
+  id:
+    type: string
+    pattern: "^DIAG-[0-9]{4,}$"
+    description: "Unique diagnostic identifier"
+  type:
+    type: string
+    const: "diagnostic"
+  ontology_concept_id:
+    type: string
+    pattern: "^PL-[0-9]{3,}$"
+    description: "Reference to the Loom ontology concept being applied"
+  thesis:
+    type: string
+    description: "The core conclusion of this diagnostic (mandatory for materiality checks)"
+  supporting_claims:
+    type: array
+    items:
+      type: object
+      required:
+        - claim_id
+        - materiality
+      properties:
+        claim_id:
+          type: string
+          pattern: "^CLM-[0-9]{4,}$"
+        materiality:
+          type: boolean
+          description: "Is this claim material to the thesis? (removal would collapse the diagnostic)"
+    description: "Claims supporting this diagnostic, with materiality flags"
+  epistemic_status:
+    type: string
+    enum: ["proposed", "unknown", "unresolved", "contested", "supported", "known"]
+    description: "Cannot exceed the weakest material supporting claim"
+  status:
+    type: string
+    enum: ["proposed", "under_review", "system_flagged_for_review", "completed"]
+  created:
+    type: string
+    format: date-time
+  updated:
+    type: string
+    format: date-time
+additionalProperties: false
+
+# Validation rules (enforced by validator):
+# - epistemic_status cannot exceed min(epistemic_status of material supporting claims)
+# - Lattice ordering: proposed < unknown < unresolved < contested < supported < known
+# - At least one supporting claim must be marked as material
+# - All supporting claims must exist and be in a valid state
