@@ -1,0 +1,14 @@
+id: SRC-FAKE-001
+type: source
+title: "Single Source Document"
+publisher: "Test Publisher"
+date: "2026-01-01"
+primary_secondary: secondary
+independence: true
+retrieved: true
+document_hash: "sha256:aaaa..."
+copyright_status: "public_domain"
+source_assessment:
+  quality_rating: "high"
+  factors: ["directness: high"]
+  rationale: "Test source"
