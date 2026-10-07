@@ -1,0 +1,8 @@
+id: EVD-FAKE-002
+type: evidence
+source_id: SRC-FAKE-001
+extracted_content: "Second excerpt"
+location: "page 2"
+retrieved_at: "2026-09-12T00:00:00Z"
+document_hash: "sha256:aaaa..."
+extracted_by: "human:reviewer_A"
