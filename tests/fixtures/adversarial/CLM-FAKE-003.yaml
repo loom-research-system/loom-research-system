@@ -1,0 +1,14 @@
+id: CLM-FAKE-003
+type: claim
+claim_type: standard
+statement: "Claim flagged by system without cascade event"
+status: system_flagged_for_review
+epistemic_status: contested
+verification_level: cross_verified
+promotion_stage: candidate
+primary_applicability: applicable
+current_as_of: "2026-09-12"
+related_evidence: []
+contradiction_status: unresolved
+created: "2026-09-12T00:00:00Z"
+updated: "2026-09-12T00:00:00Z"
