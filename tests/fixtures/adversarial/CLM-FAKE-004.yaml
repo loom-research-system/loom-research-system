@@ -1,0 +1,17 @@
+id: CLM-FAKE-004
+type: claim
+claim_type: dispositive_document
+statement: "The agency memo caused the policy failure"
+dispositive_document_justification: "Based on agency memo"
+dispositive_document_scope_check: false
+status: completed
+epistemic_status: supported
+verification_level: primary_verified
+promotion_stage: candidate
+primary_applicability: applicable
+current_as_of: "2026-09-12"
+related_evidence:
+  - EVD-FAKE-003
+contradiction_status: none
+created: "2026-09-12T00:00:00Z"
+updated: "2026-09-12T00:00:00Z"

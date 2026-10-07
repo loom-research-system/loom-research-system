@@ -1,8 +1,16 @@
 id: EVD-FAKE-001
 type: evidence
+<<<<<<< HEAD
 source_id: SRC-FAKE-001  # Same source
+=======
+source_id: SRC-FAKE-001
+>>>>>>> 6a46dac2acf4074d0aa8255b8b5e64a161617fc6
 extracted_content: "First excerpt"
 location: "page 1"
 retrieved_at: "2026-09-12T00:00:00Z"
 document_hash: "sha256:aaaa..."
+<<<<<<< HEAD
 extracted_by: "human:reviewer_A"
+=======
+extracted_by: "human:reviewer_A"
+>>>>>>> 6a46dac2acf4074d0aa8255b8b5e64a161617fc6

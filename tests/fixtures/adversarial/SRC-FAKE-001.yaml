@@ -11,4 +11,8 @@ copyright_status: "public_domain"
 source_assessment:
   quality_rating: "high"
   factors: ["directness: high"]
+<<<<<<< HEAD
   rationale: "Test source"
+=======
+  rationale: "Test source"
+>>>>>>> 6a46dac2acf4074d0aa8255b8b5e64a161617fc6

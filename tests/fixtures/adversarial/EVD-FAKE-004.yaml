@@ -1,0 +1,8 @@
+id: EVD-FAKE-004
+type: evidence
+source_id: SRC-FAKE-002
+extracted_content: "AI-extracted content"
+location: "page 1"
+retrieved_at: "2026-09-12T00:00:00Z"
+document_hash: "sha256:bbbb..."
+extracted_by: "model:llama-3-70b"
