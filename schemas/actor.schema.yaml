@@ -1,13 +1,45 @@
-$schema: "http://json-schema.org/draft-07/schema#"
+﻿$schema: "http://json-schema.org/draft-07/schema#"
 $id: "loom://schemas/actor.schema.yaml"
 title: "Actor"
 type: object
-required: [id, type, name, created]
+required: [id, type, name, role, classification, active, created]
 properties:
-  id: {type: string, pattern: "^ACT-[0-9]{4,}$"}
-  type: {type: string, enum: ["human", "system", "agent", "model"]}
-  name: {type: string}
-  role: {type: string, enum: ["founder", "internal_auditor", "external_auditor", "researcher", "system"]}
-  conflict_disclosure: {type: string}
-  created: {type: string, format: date-time}
+  id: 
+    type: string
+    pattern: "^ACT-[0-9]{4,}$"
+  type: 
+    type: string
+    enum: ["human", "system", "agent", "model"]
+  name: 
+    type: string
+  role: 
+    type: string
+    enum: ["founder", "internal_auditor", "external_auditor", "researcher", "system"]
+  classification: 
+    type: string
+    enum: ["internal_auditor", "external_auditor", "researcher", "founder", "system"]
+    description: "Internal auditors are not the founder and not directly managed by the founder. External auditors have no financial, professional, or reporting relationship to the project."
+  conflict_disclosure: 
+    type: string
+    description: "Explicit statement of any potential conflicts of interest."
+  auditor_agreement_signed: 
+    type: boolean
+    description: "Must be true for any actor performing human audit or promotion events."
+  capacity_limit: 
+    type: integer
+    minimum: 0
+    description: "Maximum number of concurrent audit assignments allowed."
+  current_assignments: 
+    type: integer
+    minimum: 0
+    description: "Current number of active audit assignments."
+  independence_distance: 
+    type: string
+    enum: ["none", "organizational", "financial", "professional", "personal"]
+    description: "The highest level of independence distance from the subject of the research."
+  active: 
+    type: boolean
+  created: 
+    type: string
+    format: date-time
 additionalProperties: false

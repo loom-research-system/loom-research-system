@@ -1,0 +1,12 @@
+﻿id: ACT-0001
+type: "human"
+name: "Dr. Sarah Chen"
+role: "internal_auditor"
+classification: "internal_auditor"
+conflict_disclosure: "No financial or professional ties to the State of Michigan or the EPA."
+auditor_agreement_signed: true
+capacity_limit: 5
+current_assignments: 1
+independence_distance: "professional"
+active: true
+created: "2026-10-09T12:00:00Z"
