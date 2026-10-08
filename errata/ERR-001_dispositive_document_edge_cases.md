@@ -1,14 +1,14 @@
----
+﻿---
 id: ERR-001
 status: open
 severity: moderate
 source: "PL-307 v0.5 §30 Open Questions"
-imported_date: "2026-09-12"
+imported_date: "2026-10-09"
 related_spec: "PL-307 v1.0"
 ---
 ## Issue: Dispositive-Document Edge Cases
 PL-307 v1.0 allows a single primary source to satisfy `primary_verified` for `dispositive_document` claims.
 ## Risk
-Without strict schema guarding, this carve-out may be abused to bypass the two-independent-source requirement.
+Without strict schema guarding, this carve-out may be abused to bypass the two-independent-source requirement for low-quality or biased single-source assertions.
 ## Resolution Path (Phase 2)
-The schema must require explicit justification and subject-scope narrowness check.
+The schema must require explicit `dispositive_document` justification and subject-scope narrowness check.

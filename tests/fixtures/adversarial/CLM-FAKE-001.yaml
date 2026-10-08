@@ -1,4 +1,4 @@
-id: CLM-FAKE-001
+﻿id: CLM-FAKE-001
 type: claim
 claim_type: standard
 statement: "Test claim with same-source cross-verification"
@@ -9,6 +9,6 @@ promotion_stage: candidate
 primary_applicability: applicable
 current_as_of: "2026-09-12"
 related_evidence:
-  - EVD-FAKE-001
-  - EVD-FAKE-002
+- EVD-FAKE-001
+- EVD-FAKE-002
 contradiction_status: none

@@ -1,4 +1,15 @@
-none
-source_backed
-cross_verified
-primary_verified
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/evidence.schema.yaml"
+title: "Evidence"
+type: object
+required: [id, type, source_id, extracted_content, location, retrieved_at, document_hash, extracted_by]
+properties:
+  id: {type: string, pattern: "^EVD-[0-9]{4,}$"}
+  type: {type: string, const: "evidence"}
+  source_id: {type: string, pattern: "^SRC-[0-9]{4,}$"}
+  extracted_content: {type: string}
+  location: {type: string}
+  retrieved_at: {type: string, format: date-time}
+  document_hash: {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
+  extracted_by: {type: string}
+additionalProperties: false

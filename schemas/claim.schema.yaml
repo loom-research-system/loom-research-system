@@ -1,4 +1,25 @@
-none
-source_backed
-cross_verified
-primary_verified
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/claim.schema.yaml"
+title: "Claim"
+type: object
+required: [id, type, claim_type, statement, status, epistemic_status, verification_level, promotion_stage, primary_applicability, current_as_of, related_evidence, contradiction_status, created, updated]
+properties:
+  id: {type: string, pattern: "^CLM-[0-9]{4,}$"}
+  type: {type: string, const: "claim"}
+  claim_type: {type: string, enum: ["standard", "dispositive_document"]}
+  statement: {type: string}
+  dispositive_document_justification: {type: string}
+  dispositive_document_scope_check: {type: boolean}
+  status: {type: string, enum: ["proposed", "under_review", "system_flagged_for_review", "completed", "rejected", "deprecated"]}
+  epistemic_status: {type: string, enum: ["proposed", "unknown", "unresolved", "contested", "supported", "known"]}
+  verification_level: {type: string, enum: ["none", "source_backed", "cross_verified", "primary_verified"]}
+  promotion_stage: {type: string, enum: ["candidate", "accepted", "canonical"]}
+  primary_applicability: {type: string, enum: ["applicable", "not_applicable", "destroyed_or_inaccessible"]}
+  current_as_of: {type: string, format: date}
+  search_protocol_id: {type: string, pattern: "^PROT-[0-9]{4,}$"}
+  related_evidence: {type: array, items: {type: string, pattern: "^EVD-[0-9]{4,}$"}}
+  contradictory_evidence: {type: array, items: {type: string, pattern: "^EVD-[0-9]{4,}$"}}
+  contradiction_status: {type: string, enum: ["none", "documented", "unresolved", "resolved"]}
+  created: {type: string, format: date-time}
+  updated: {type: string, format: date-time}
+additionalProperties: false

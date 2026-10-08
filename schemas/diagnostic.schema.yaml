@@ -1,4 +1,22 @@
-none
-source_backed
-cross_verified
-primary_verified
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/diagnostic.schema.yaml"
+title: "Diagnostic"
+type: object
+required: [id, type, ontology_concept_id, thesis, supporting_claims, epistemic_status, status, created]
+properties:
+  id: {type: string, pattern: "^DIAG-[0-9]{4,}$"}
+  type: {type: string, const: "diagnostic"}
+  ontology_concept_id: {type: string, pattern: "^PL-[0-9]{3,}$"}
+  thesis: {type: string}
+  supporting_claims:
+    type: array
+    items:
+      type: object
+      required: [claim_id, materiality]
+      properties:
+        claim_id: {type: string, pattern: "^CLM-[0-9]{4,}$"}
+        materiality: {type: boolean}
+  epistemic_status: {type: string, enum: ["proposed", "unknown", "unresolved", "contested", "supported", "known"]}
+  status: {type: string, enum: ["proposed", "under_review", "system_flagged_for_review", "completed"]}
+  created: {type: string, format: date-time}
+additionalProperties: false

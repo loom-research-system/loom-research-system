@@ -1,6 +1,7 @@
 """
 Loom Research System Validator
 Enforces PL-307 v1.0 schemas and cross-object validation rules.
+Exit code 0 = valid, non-zero = invalid.
 """
 import json
 import yaml
@@ -24,13 +25,13 @@ class LoomValidator:
         self.objects: Dict[str, dict] = {}
         self.events: List[dict] = []
         self.errors: List[ValidationError] = []
-        
+
     def load_repository(self):
         for schema_dir in ["artifacts", "tests/fixtures"]:
             path = self.repo_root / schema_dir
             if path.exists():
                 for yaml_file in path.rglob("*.yaml"):
-                    with open(yaml_file) as f:
+                    with open(yaml_file, encoding='utf-8') as f:
                         obj = yaml.safe_load(f)
                         if obj:
                             obj_id = obj.get("id") or obj.get("event_id")
@@ -38,7 +39,7 @@ class LoomValidator:
                                 self.objects[obj_id] = obj
                                 if obj.get("type") == "provenance_event" or "event_id" in obj:
                                     self.events.append(obj)
-    
+
     def validate_all(self) -> List[ValidationError]:
         self.errors = []
         for obj_id, obj in self.objects.items():
@@ -58,13 +59,14 @@ class LoomValidator:
         promotion = claim.get("promotion_stage")
         claim_type = claim.get("claim_type")
         related_evidence = claim.get("related_evidence", [])
-        
+
         if epistemic == "known" and contradiction == "unresolved":
             self.errors.append(ValidationError("EPISTEMIC-004", "error", claim_id, "Claim declares 'known' while contradictory evidence remains unresolved", "Resolve contradiction or downgrade epistemic_status", False))
         if epistemic == "supported" and contradiction == "unresolved":
             self.errors.append(ValidationError("EPISTEMIC-005", "error", claim_id, "Claim declares 'supported' while contradictory evidence remains unresolved", "Resolve contradiction or downgrade epistemic_status", False))
         if epistemic in ["supported", "known"] and verification in ["none", "source_backed"]:
             self.errors.append(ValidationError("VERIFICATION-001", "error", claim_id, f"epistemic_status '{epistemic}' requires verification_level >= cross_verified", "Upgrade verification_level or downgrade epistemic_status", False))
+        
         if verification == "cross_verified":
             source_ids = set()
             for evd_id in related_evidence:
@@ -72,19 +74,23 @@ class LoomValidator:
                 if evd: source_ids.add(evd.get("source_id"))
             if len(source_ids) < 2:
                 self.errors.append(ValidationError("VERIFICATION-002", "error", claim_id, f"cross_verified requires 2+ independent sources, found {len(source_ids)}", "Add evidence from a second independent source", False))
+
         if promotion == "canonical" and verification in ["none", "source_backed"]:
             self.errors.append(ValidationError("PROMOTION-001", "error", claim_id, "canonical promotion requires verification_level >= cross_verified", "Complete cross-verification before canonical promotion", False))
+
         if claim_type == "dispositive_document":
             if not claim.get("dispositive_document_justification"):
                 self.errors.append(ValidationError("DISPOSITIVE-001", "error", claim_id, "dispositive_document claim missing justification", "Add dispositive_document_justification", False))
             if not claim.get("dispositive_document_scope_check"):
                 self.errors.append(ValidationError("DISPOSITIVE-002", "error", claim_id, "dispositive_document claim missing scope check", "Confirm claim is strictly about document content", False))
+
         if epistemic == "unknown" and not claim.get("search_protocol_id"):
             self.errors.append(ValidationError("UNKNOWN-001", "error", claim_id, "unknown claim missing search_protocol_id", "Reference a formalized research protocol", False))
+
         if claim.get("status") == "system_flagged_for_review":
             cascade_events = [e for e in self.events if e.get("type") == "cascade_trigger_event" and claim_id in e.get("affected_object_ids", [])]
             if not cascade_events:
-                self.errors.append(ValidationError("CASCADE-001", "error", claim_id, "Claim has status 'system_flagged_for_review' but no cascade_trigger_event", "Add cascade_trigger_event or change status", False))
+                self.errors.append(ValidationError("CASCADE-001", "error", claim_id, "Claim has status 'system_flagged_for_review' but no cascade_trigger_event", "Add cascade_trigger_event or change status to 'under_review'", False))
 
     def _validate_diagnostic(self, diag: dict):
         diag_id = diag["id"]
@@ -95,15 +101,12 @@ class LoomValidator:
             self.errors.append(ValidationError("DIAG-001", "error", diag_id, "Diagnostic has no material supporting claims", "Mark at least one supporting claim as material", False))
             return
         min_level = min(lattice.get(self.objects.get(cid, {}).get("epistemic_status"), -1) for cid in material_claims)
-        diag_level = lattice.get(diag_epistemic, -1)
-        if diag_level > min_level:
-            self.errors.append(ValidationError("SCOPE-001", "error", diag_id, f"Diagnostic epistemic_status '{diag_epistemic}' exceeds weakest material claim", f"Downgrade diagnostic", False))
+        if lattice.get(diag_epistemic, -1) > min_level:
+            self.errors.append(ValidationError("SCOPE-001", "error", diag_id, f"Diagnostic epistemic_status '{diag_epistemic}' exceeds weakest material claim", f"Downgrade diagnostic to at most '{list(lattice.keys())[min_level]}'", False))
 
     def _validate_evidence(self, evd: dict):
-        evd_id = evd["id"]
-        source_id = evd.get("source_id")
-        if source_id not in self.objects:
-            self.errors.append(ValidationError("PHANTOM-001", "error", evd_id, f"Evidence references non-existent source '{source_id}'", "Create source object or correct source_id reference", False))
+        if evd.get("source_id") not in self.objects:
+            self.errors.append(ValidationError("PHANTOM-001", "error", evd["id"], f"Evidence references non-existent source '{evd.get('source_id')}'", "Create source object or correct source_id reference", False))
 
     def _validate_source(self, src: dict):
         if src.get("retrieved") and not src.get("document_hash"):
@@ -120,7 +123,7 @@ class LoomValidator:
         if not self.errors: return "✓ All validation rules passed"
         lines = [f"✗ {len(self.errors)} validation error(s) found:\n"]
         for err in self.errors:
-            lines.append(f"[{err.rule_code}] {err.object_id}\n  Reason: {err.reason}\n  Remediation: {err.remediation}\n  Override allowed: {err.override_allowed}\n")
+            lines.extend([f"[{err.rule_code}] {err.object_id}", f"  Reason: {err.reason}", f"  Remediation: {err.remediation}", f"  Override allowed: {err.override_allowed}", ""])
         return "\n".join(lines)
 
 if __name__ == "__main__":

@@ -1,39 +1,22 @@
-loom-research-system/
-├── README.md
-├── specifications/
-│   ├── MANIFEST.yaml
-│   ├── PL-307_v1.0_Claims_Epistemic_Status_Verification_Promotion.md
-│   └── PL-001_v1.1_Implementation_Roadmap_Governance_Control.md
-├── errata/
-│   ├── ERR-001_dispositive_document_edge_cases.md
-│   ├── ERR-002_source_assessment_calibration.md
-│   ├── ERR-003_semantic_similarity_tuning.md
-│   └── ERR-004_search_protocol_formalization.md
-├── diary/
-│   ├── decisions/
-│   ├── builds/
-│   ├── experiments/
-│   ├── failures/
-│   ├── audits/
-│   ├── milestones/
-│   │   └── 2026-09-12_phase_1_initialization.md
-│   └── changelog/
-├── schemas/
-│   ├── claim.schema.yaml
-│   ├── evidence.schema.yaml
-│   ├── source.schema.yaml
-│   ├── observation.schema.yaml
-│   ├── diagnostic.schema.yaml
-│   ├── verification.schema.yaml
-│   ├── provenance-event.schema.yaml
-│   └── actor.schema.yaml
-├── tests/
-│   ├── fixtures/
-│   │   ├── adversarial/
-│   │   └── valid/
-│   └── results/
-├── artifacts/
-│   └── (Future research outputs, e.g., REQ-006)
-└── .github/
-    └── workflows/
-        └── validate-artifacts.yml (Phase 3 CI enforcement)
+﻿# Loom Research System Specification Manifest
+version: "1.0"
+updated: "2026-10-09"
+specifications:
+  - id: "PL-307"
+    title: "Claims, Epistemic Status, Verification & Promotion Specification"
+    version: "1.0"
+    status: "LOCKED"
+    effective_date: "2026-09-10"
+    file_path: "specifications/PL-307_v1.0_Claims_Epistemic_Status_Verification_Promotion.md"
+    content_hash: "[PENDING_GIT_COMMIT_HASH]"
+  - id: "PL-001"
+    title: "Project Loom Implementation Roadmap & Governance Control Document"
+    version: "1.1"
+    status: "LOCKED"
+    effective_date: "2026-09-12"
+    file_path: "specifications/PL-001_v1.1_Implementation_Roadmap_Governance_Control.md"
+    content_hash: "[PENDING_GIT_COMMIT_HASH]"
+governance_state:
+  current_phase: "Phase 1: Repository Initialization"
+  interim_rule_active: true
+  interim_rule_description: "Founder-led artifacts may advance to 'accepted' only with at least two designated internal auditors recorded as provenance events. 'canonical' remains blocked until the Phase 5 external audit addendum is ratified."
