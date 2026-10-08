@@ -1,0 +1,16 @@
+﻿id: CLM-FLINT-001
+type: claim
+claim_type: "standard"
+statement: "Corrosion-control treatment was not in place at the outset of the April 2014 Flint River water switch."
+status: "completed"
+epistemic_status: "supported"
+verification_level: "cross_verified"
+promotion_stage: "accepted"
+primary_applicability: "applicable"
+current_as_of: "2026-10-09"
+related_evidence:
+  - "EVD-FLINT-001"
+  - "EVD-FLINT-002"
+contradiction_status: "none"
+created: "2026-10-09T11:00:00Z"
+updated: "2026-10-09T11:00:00Z"

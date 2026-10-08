@@ -1,0 +1,14 @@
+﻿id: SRC-FLINT-001
+type: source
+title: "Flint Water Advisory Task Force Final Report"
+publisher: "State of Michigan"
+date: "2016-03-17"
+primary_secondary: "secondary"
+independence: true
+retrieved: true
+document_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000001"
+copyright_status: "public_domain"
+source_assessment:
+  quality_rating: "high"
+  factors: ["directness: high", "bias_risk: low"]
+  rationale: "Comprehensive, independent post-crisis investigation with access to internal state documents."

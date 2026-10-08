@@ -1,0 +1,8 @@
+﻿id: EVD-FLINT-001
+type: evidence
+source_id: "SRC-FLINT-001"
+extracted_content: "The Task Force found that corrosion control was not implemented at the time of the switch in April 2014."
+location: "page 12, paragraph 3"
+retrieved_at: "2026-10-09T10:00:00Z"
+document_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000001"
+extracted_by: "human:founder"

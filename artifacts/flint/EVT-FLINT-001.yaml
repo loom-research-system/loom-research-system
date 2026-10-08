@@ -1,0 +1,9 @@
+﻿event_id: EVT-FLINT-001
+type: "verification_event"
+action: "human_source_confirmation"
+actor: "human:founder"
+timestamp: "2026-10-09T10:05:00Z"
+target_object_id: "EVD-FLINT-001"
+target_object_type: "evidence"
+method: "Manual PDF text comparison of page 12 against extracted string."
+result: "confirmed"

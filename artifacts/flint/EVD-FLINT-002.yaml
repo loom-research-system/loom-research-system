@@ -1,0 +1,8 @@
+﻿id: EVD-FLINT-002
+type: evidence
+source_id: "SRC-FLINT-002"
+extracted_content: "Flint is not optimizing corrosion control, which is a violation of the Lead and Copper Rule."
+location: "page 4, section 3"
+retrieved_at: "2026-10-09T10:15:00Z"
+document_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000002"
+extracted_by: "human:founder"

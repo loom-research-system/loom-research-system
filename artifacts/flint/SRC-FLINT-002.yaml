@@ -1,0 +1,14 @@
+﻿id: SRC-FLINT-002
+type: source
+title: "Draft Review of Flint Water System"
+publisher: "US Environmental Protection Agency (Region 5)"
+date: "2015-06-24"
+primary_secondary: "primary"
+independence: true
+retrieved: true
+document_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000002"
+copyright_status: "public_domain"
+source_assessment:
+  quality_rating: "high"
+  factors: ["directness: high", "bias_risk: low"]
+  rationale: "Primary federal regulatory assessment identifying the lack of corrosion control and elevated lead risk."
