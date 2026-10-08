@@ -1,0 +1,8 @@
+﻿id: EVD-FLINT-003
+type: evidence
+source_id: "SRC-FLINT-003"
+extracted_content: "The water in Flint is safe to drink and meets all state and federal standards."
+location: "Press Release, January 21, 2015"
+retrieved_at: "2026-10-09T10:30:00Z"
+document_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000003"
+extracted_by: "human:founder"

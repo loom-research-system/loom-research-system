@@ -1,0 +1,11 @@
+﻿id: DIAG-FLINT-001
+type: diagnostic
+ontology_concept_id: "PL-104"
+thesis: "The Flint water crisis was a failure of self-correction fragility, where institutional bias overrode technical warnings."
+supporting_claims:
+  - claim_id: "CLM-FLINT-001"
+    materiality: true
+epistemic_status: "contested"
+status: "under_review"
+created: "2026-10-09T14:30:00Z"
+updated: "2026-10-09T14:30:00Z"

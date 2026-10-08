@@ -1,0 +1,14 @@
+﻿id: SRC-FLINT-003
+type: source
+title: "MDEQ Public Statement on Flint Water Safety"
+publisher: "Michigan Department of Environmental Quality"
+date: "2015-01-21"
+primary_secondary: "primary"
+independence: false
+retrieved: true
+document_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000003"
+copyright_status: "public_domain"
+source_assessment:
+  quality_rating: "moderate"
+  factors: ["directness: high", "bias_risk: high (self-reporting during crisis)"]
+  rationale: "Primary source of the contradictory claim, but carries high institutional bias risk."
