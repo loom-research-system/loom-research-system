@@ -1,24 +1,37 @@
 $schema: "http://json-schema.org/draft-07/schema#"
-$id: "loom://schemas/research-protocol.schema.yaml"
-title: "Research Protocol"
+$id: "loom://schemas/actor.schema.yaml"
+title: "Actor"
+description: "A human, system, agent, or model that participates in the Loom research process"
 type: object
-required: [id, type, title, scope, databases_searched, query_strings, date_range, inclusion_criteria, exclusion_criteria, created_by, created_at]
+required:
+  - id
+  - type
+  - name
+  - created
 properties:
-  id: {type: string, pattern: "^PROT-[0-9]{4,}$"}
-  type: {type: string, const: "research_protocol"}
-  title: {type: string}
-  scope: {type: string}
-  databases_searched: {type: array, items: {type: string}}
-  query_strings: {type: array, items: {type: string}}
-  date_range:
-    type: object
-    required: [start, end]
-    properties:
-      start: {type: string, format: date}
-      end: {type: string, format: date}
-  inclusion_criteria: {type: array, items: {type: string}}
-  exclusion_criteria: {type: array, items: {type: string}}
-  created_by: {type: string}
-  created_at: {type: string, format: date-time}
-  last_executed: {type: string, format: date-time}
+  id:
+    type: string
+    pattern: "^ACT-[0-9]{4,}$"
+    description: "Unique actor identifier"
+  type:
+    type: string
+    enum: ["human", "system", "agent", "model"]
+    description: "Actor classification"
+  name:
+    type: string
+    description: "Human-readable name or identifier"
+  affiliation:
+    type: string
+    description: "Optional organizational affiliation (for humans)"
+  role:
+    type: string
+    enum: ["founder", "internal_auditor", "external_auditor", "researcher", "system"]
+    description: "Actor's role in the Loom governance model"
+  conflict_disclosure:
+    type: string
+    description: "Any conflicts of interest (required for auditors)"
+  created:
+    type: string
+    format: date-time
+    description: "When this actor record was created"
 additionalProperties: false

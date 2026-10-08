@@ -1,27 +1,39 @@
-$schema: "http://json-schema.org/draft-07/schema#"
-$id: "loom://schemas/source.schema.yaml"
-title: "Source"
-type: object
-required: [id, type, title, publisher, date, primary_secondary, independence, retrieved, document_hash, copyright_status, source_assessment]
-properties:
-  id: {type: string, pattern: "^SRC-[0-9]{4,}$"}
-  type: {type: string, const: "source"}
-  title: {type: string}
-  publisher: {type: string}
-  date: {type: string, format: date}
-  primary_secondary: {type: string, enum: ["primary", "secondary"]}
-  independence: {type: boolean}
-  url: {type: string, format: uri}
-  retrieved: {type: boolean}
-  document_hash: {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
-  copyright_status: {type: string, enum: ["public_domain", "creative_commons", "fair_use", "restricted", "unknown"]}
-  source_assessment:
-    type: object
-    required: [quality_rating, factors, rationale]
-    properties:
-      quality_rating: {type: string, enum: ["high", "moderate", "low", "unknown"]}
-      factors: {type: array, items: {type: string}}
-      rationale: {type: string}
-  retrieval_date: {type: string, format: date-time}
-  retrieval_method: {type: string}
-additionalProperties: false
+loom-research-system/
+├── README.md
+├── specifications/
+│   ├── MANIFEST.yaml
+│   ├── PL-307_v1.0_Claims_Epistemic_Status_Verification_Promotion.md
+│   └── PL-001_v1.1_Implementation_Roadmap_Governance_Control.md
+├── errata/
+│   ├── ERR-001_dispositive_document_edge_cases.md
+│   ├── ERR-002_source_assessment_calibration.md
+│   ├── ERR-003_semantic_similarity_tuning.md
+│   └── ERR-004_search_protocol_formalization.md
+├── diary/
+│   ├── decisions/
+│   ├── builds/
+│   ├── experiments/
+│   ├── failures/
+│   ├── audits/
+│   ├── milestones/
+│   │   └── 2026-09-12_phase_1_initialization.md
+│   └── changelog/
+├── schemas/
+│   ├── claim.schema.yaml
+│   ├── evidence.schema.yaml
+│   ├── source.schema.yaml
+│   ├── observation.schema.yaml
+│   ├── diagnostic.schema.yaml
+│   ├── verification.schema.yaml
+│   ├── provenance-event.schema.yaml
+│   └── actor.schema.yaml
+├── tests/
+│   ├── fixtures/
+│   │   ├── adversarial/
+│   │   └── valid/
+│   └── results/
+├── artifacts/
+│   └── (Future research outputs, e.g., REQ-006)
+└── .github/
+    └── workflows/
+        └── validate-artifacts.yml (Phase 3 CI enforcement)

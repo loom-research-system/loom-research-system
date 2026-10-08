@@ -1,25 +1,4 @@
-$schema: "http://json-schema.org/draft-07/schema#"
-$id: "loom://schemas/provenance-event.schema.yaml"
-title: "Provenance Event"
-type: object
-required: [event_id, type, action, actor, timestamp, target_object_id]
-properties:
-  event_id: {type: string, pattern: "^EVT-[0-9]{4,}$"}
-  type: {type: string, enum: ["extraction_event", "verification_event", "assessment_event", "promotion_event", "demotion_event", "contradiction_search_event", "retraction_event", "correction_event", "cascade_trigger_event"]}
-  action: {type: string}
-  actor: {type: string}
-  timestamp: {type: string, format: date-time}
-  target_object_id: {type: string}
-  target_object_type: {type: string, enum: ["source", "evidence", "claim", "observation", "diagnostic"]}
-  inputs: {type: array, items: {type: string}}
-  result: {type: string}
-  method: {type: string}
-  rationale: {type: string}
-  disclosure_text: {type: string}
-  publication_location: {type: string}
-  model_identifier: {type: string}
-  cascade_type: {type: string, enum: ["source_invalidation", "staleness_expiration", "material_claim_flagged"]}
-  trigger_source_id: {type: string}
-  affected_object_ids: {type: array, items: {type: string}}
-  cascade_action: {type: string, enum: ["flag_for_review", "recompute_verification_downward", "demote_epistemic_status"]}
-additionalProperties: false
+none
+source_backed
+cross_verified
+primary_verified
