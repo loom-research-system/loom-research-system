@@ -1,78 +1,25 @@
 $schema: "http://json-schema.org/draft-07/schema#"
 $id: "loom://schemas/provenance-event.schema.yaml"
 title: "Provenance Event"
-description: "An append-only record of an action taken on a research object"
 type: object
-required:
-  - event_id
-  - type
-  - action
-  - actor
-  - timestamp
-  - target_object_id
+required: [event_id, type, action, actor, timestamp, target_object_id]
 properties:
-  event_id:
-    type: string
-    pattern: "^EVT-[0-9]{4,}$"
-    description: "Unique event identifier"
-  type:
-    type: string
-    enum: [
-      "extraction_event",
-      "verification_event",
-      "assessment_event",
-      "promotion_event",
-      "demotion_event",
-      "contradiction_search_event",
-      "retraction_event",
-      "correction_event"
-    ]
-  action:
-    type: string
-    description: "Specific action taken (e.g., 'ai_extraction', 'human_source_confirmation', 'promote_to_canonical')"
-  actor:
-    type: string
-    description: "Actor ID who performed this action"
-  timestamp:
-    type: string
-    format: date-time
-  target_object_id:
-    type: string
-    description: "ID of the object this action was performed on"
-  target_object_type:
-    type: string
-    enum: ["source", "evidence", "claim", "observation", "diagnostic"]
-  inputs:
-    type: array
-    items:
-      type: string
-    description: "Input object IDs (e.g., evidence objects examined)"
-  result:
-    type: string
-    description: "Outcome of the action (e.g., 'confirmed', 'rejected', 'source_backed_cap_applied')"
-  method:
-    type: string
-    description: "How the action was performed (e.g., 'manual PDF text comparison')"
-  rationale:
-    type: string
-    description: "Why this action was taken"
-  disclosure_text:
-    type: string
-    description: "For promotion events: the exact disclosure text (if solo-founder exception applies)"
-  publication_location:
-    type: string
-    description: "For promotion events: where the object will be published"
-  model_identifier:
-    type: string
-    description: "For AI actions: model name and version"
-  prompt_or_instruction:
-    type: string
-    description: "For AI actions: reference to the prompt or instruction used"
+  event_id: {type: string, pattern: "^EVT-[0-9]{4,}$"}
+  type: {type: string, enum: ["extraction_event", "verification_event", "assessment_event", "promotion_event", "demotion_event", "contradiction_search_event", "retraction_event", "correction_event", "cascade_trigger_event"]}
+  action: {type: string}
+  actor: {type: string}
+  timestamp: {type: string, format: date-time}
+  target_object_id: {type: string}
+  target_object_type: {type: string, enum: ["source", "evidence", "claim", "observation", "diagnostic"]}
+  inputs: {type: array, items: {type: string}}
+  result: {type: string}
+  method: {type: string}
+  rationale: {type: string}
+  disclosure_text: {type: string}
+  publication_location: {type: string}
+  model_identifier: {type: string}
+  cascade_type: {type: string, enum: ["source_invalidation", "staleness_expiration", "material_claim_flagged"]}
+  trigger_source_id: {type: string}
+  affected_object_ids: {type: array, items: {type: string}}
+  cascade_action: {type: string, enum: ["flag_for_review", "recompute_verification_downward", "demote_epistemic_status"]}
 additionalProperties: false
-
-# Validation rules:
-# - Events are append-only; existing events cannot be modified
-# - AI actors cannot perform promotion_event actions
-# - AI actors cannot set epistemic_status above 'proposed'
-# - Promotion events require disclosure_text if actor is founder and no external auditor is recorded
-# - Human confirmation events must include method describing how source was re-examined

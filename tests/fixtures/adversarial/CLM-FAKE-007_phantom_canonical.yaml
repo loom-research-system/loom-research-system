@@ -1,16 +1,15 @@
-﻿id: CLM-FAKE-001
+﻿id: CLM-FAKE-007
 type: claim
 claim_type: standard
-statement: "Test claim with same-source cross-verification"
+statement: "This claim is canonical but lacks the required verification and event."
 status: completed
 epistemic_status: supported
-verification_level: cross_verified
-promotion_stage: candidate
+verification_level: source_backed
+promotion_stage: canonical
 primary_applicability: applicable
 current_as_of: "2026-09-12"
 related_evidence:
   - EVD-FAKE-001
-  - EVD-FAKE-002
 contradiction_status: none
 created: "2026-09-12T00:00:00Z"
 updated: "2026-09-12T00:00:00Z"

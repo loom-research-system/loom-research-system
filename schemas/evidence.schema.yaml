@@ -1,51 +1,17 @@
 $schema: "http://json-schema.org/draft-07/schema#"
 $id: "loom://schemas/evidence.schema.yaml"
 title: "Evidence"
-description: "A specific excerpt or data point extracted from a retrieved source"
 type: object
-required:
-  - id
-  - type
-  - source_id
-  - extracted_content
-  - location
-  - retrieved_at
-  - document_hash
-  - extracted_by
+required: [id, type, source_id, extracted_content, location, retrieved_at, document_hash, extracted_by]
 properties:
-  id:
-    type: string
-    pattern: "^EVD-[0-9]{4,}$"
-    description: "Unique evidence identifier"
-  type:
-    type: string
-    const: "evidence"
-  source_id:
-    type: string
-    pattern: "^SRC-[0-9]{4,}$"
-    description: "Reference to the source this evidence was extracted from"
-  extracted_content:
-    type: string
-    description: "The actual text or data extracted"
-  location:
-    type: string
-    description: "Precise location in the source (e.g., 'page 14, paragraph 3', 'line 42')"
-  retrieved_at:
-    type: string
-    format: date-time
-    description: "When this evidence was extracted"
-  document_hash:
-    type: string
-    pattern: "^sha256:[a-f0-9]{64}$"
-    description: "Hash of the source document at time of extraction"
-  extracted_by:
-    type: string
-    description: "Actor ID who performed the extraction (human or AI model)"
-  extraction_method:
-    type: string
-    description: "How extraction was performed (e.g., 'manual copy', 'OCR', 'AI extraction')"
-  content_hash:
-    type: string
-    pattern: "^sha256:[a-f0-9]{64}$"
-    description: "Hash of the extracted_content itself"
+  id: {type: string, pattern: "^EVD-[0-9]{4,}$"}
+  type: {type: string, const: "evidence"}
+  source_id: {type: string, pattern: "^SRC-[0-9]{4,}$"}
+  extracted_content: {type: string}
+  location: {type: string}
+  retrieved_at: {type: string, format: date-time}
+  document_hash: {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
+  extracted_by: {type: string}
+  extraction_method: {type: string}
+  content_hash: {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
 additionalProperties: false

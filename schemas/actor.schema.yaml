@@ -1,37 +1,22 @@
 $schema: "http://json-schema.org/draft-07/schema#"
 $id: "loom://schemas/actor.schema.yaml"
 title: "Actor"
-description: "A human, system, agent, or model that participates in the Loom research process"
 type: object
-required:
-  - id
-  - type
-  - name
-  - created
+required: [id, type, name, created]
 properties:
-  id:
-    type: string
-    pattern: "^ACT-[0-9]{4,}$"
-    description: "Unique actor identifier"
-  type:
-    type: string
-    enum: ["human", "system", "agent", "model"]
-    description: "Actor classification"
-  name:
-    type: string
-    description: "Human-readable name or identifier"
-  affiliation:
-    type: string
-    description: "Optional organizational affiliation (for humans)"
-  role:
-    type: string
-    enum: ["founder", "internal_auditor", "external_auditor", "researcher", "system"]
-    description: "Actor's role in the Loom governance model"
-  conflict_disclosure:
-    type: string
-    description: "Any conflicts of interest (required for auditors)"
-  created:
-    type: string
-    format: date-time
-    description: "When this actor record was created"
+  id: {type: string, pattern: "^ACT-[0-9]{4,}$"}
+  type: {type: string, enum: ["human", "system", "agent", "model"]}
+  name: {type: string}
+  affiliation: {type: string}
+  role: {type: string, enum: ["founder", "internal_auditor", "external_auditor", "researcher", "system"]}
+  conflict_disclosure: {type: string}
+  classification: {type: string, enum: ["internal_auditor", "external_auditor", "researcher", "founder", "system"]}
+  auditor_agreement_signed: {type: boolean}
+  capacity_limit: {type: integer, minimum: 0}
+  current_assignments: {type: integer, minimum: 0}
+  independence_distance: {type: string, enum: ["none", "organizational", "financial", "professional", "personal"]}
+  can_promote_to_accepted: {type: boolean}
+  can_promote_to_canonical: {type: boolean}
+  active: {type: boolean}
+  created: {type: string, format: date-time}
 additionalProperties: false

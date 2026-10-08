@@ -1,75 +1,24 @@
 $schema: "http://json-schema.org/draft-07/schema#"
 $id: "loom://schemas/research-protocol.schema.yaml"
 title: "Research Protocol"
-description: "A formalized search and verification protocol for claims"
 type: object
-required:
-  - id
-  - type
-  - title
-  - scope
-  - databases_searched
-  - query_strings
-  - date_range
-  - inclusion_criteria
-  - exclusion_criteria
-  - created_by
-  - created_at
+required: [id, type, title, scope, databases_searched, query_strings, date_range, inclusion_criteria, exclusion_criteria, created_by, created_at]
 properties:
-  id:
-    type: string
-    pattern: "^PROT-[0-9]{4,}$"
-    description: "Unique protocol identifier"
-  type:
-    type: string
-    const: "research_protocol"
-  title:
-    type: string
-    description: "Brief description of what this protocol searches for"
-  scope:
-    type: string
-    description: "Geographic, temporal, or topical scope of the search"
-  databases_searched:
-    type: array
-    items:
-      type: string
-    description: "List of databases, archives, or sources searched"
-  query_strings:
-    type: array
-    items:
-      type: string
-    description: "Exact search queries used"
+  id: {type: string, pattern: "^PROT-[0-9]{4,}$"}
+  type: {type: string, const: "research_protocol"}
+  title: {type: string}
+  scope: {type: string}
+  databases_searched: {type: array, items: {type: string}}
+  query_strings: {type: array, items: {type: string}}
   date_range:
     type: object
-    required:
-      - start
-      - end
+    required: [start, end]
     properties:
-      start:
-        type: string
-        format: date
-      end:
-        type: string
-        format: date
-    description: "Temporal range of sources considered"
-  inclusion_criteria:
-    type: array
-    items:
-      type: string
-    description: "What makes a source eligible for consideration"
-  exclusion_criteria:
-    type: array
-    items:
-      type: string
-    description: "What disqualifies a source from consideration"
-  created_by:
-    type: string
-    description: "Actor ID who created this protocol"
-  created_at:
-    type: string
-    format: date-time
-  last_executed:
-    type: string
-    format: date-time
-    description: "When this protocol was last run"
+      start: {type: string, format: date}
+      end: {type: string, format: date}
+  inclusion_criteria: {type: array, items: {type: string}}
+  exclusion_criteria: {type: array, items: {type: string}}
+  created_by: {type: string}
+  created_at: {type: string, format: date-time}
+  last_executed: {type: string, format: date-time}
 additionalProperties: false

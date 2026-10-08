@@ -1,85 +1,27 @@
 $schema: "http://json-schema.org/draft-07/schema#"
 $id: "loom://schemas/source.schema.yaml"
 title: "Source"
-description: "A retrieved documentary source that can provide evidence"
 type: object
-required:
-  - id
-  - type
-  - title
-  - publisher
-  - date
-  - primary_secondary
-  - independence
-  - retrieved
-  - document_hash
-  - copyright_status
-  - source_assessment
+required: [id, type, title, publisher, date, primary_secondary, independence, retrieved, document_hash, copyright_status, source_assessment]
 properties:
-  id:
-    type: string
-    pattern: "^SRC-[0-9]{4,}$"
-    description: "Unique source identifier"
-  type:
-    type: string
-    const: "source"
-  title:
-    type: string
-    description: "Title or description of the source"
-  publisher:
-    type: string
-    description: "Publishing entity or author"
-  date:
-    type: string
-    format: date
-    description: "Publication or creation date"
-  primary_secondary:
-    type: string
-    enum: ["primary", "secondary"]
-    description: "Whether this is a primary or secondary source"
-  independence:
-    type: boolean
-    description: "Is this source independent from the claim's subject? (binary, not graded)"
-  url:
-    type: string
-    format: uri
-    description: "URL where source was retrieved (if applicable)"
-  retrieved:
-    type: boolean
-    description: "Was the full document actually retrieved? (not just discovered)"
-  document_hash:
-    type: string
-    pattern: "^sha256:[a-f0-9]{64}$"
-    description: "Cryptographic hash of the retrieved document"
-  copyright_status:
-    type: string
-    enum: ["public_domain", "creative_commons", "fair_use", "restricted", "unknown"]
-    description: "Copyright/licensing status for publication"
+  id: {type: string, pattern: "^SRC-[0-9]{4,}$"}
+  type: {type: string, const: "source"}
+  title: {type: string}
+  publisher: {type: string}
+  date: {type: string, format: date}
+  primary_secondary: {type: string, enum: ["primary", "secondary"]}
+  independence: {type: boolean}
+  url: {type: string, format: uri}
+  retrieved: {type: boolean}
+  document_hash: {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
+  copyright_status: {type: string, enum: ["public_domain", "creative_commons", "fair_use", "restricted", "unknown"]}
   source_assessment:
     type: object
-    required:
-      - quality_rating
-      - factors
-      - rationale
+    required: [quality_rating, factors, rationale]
     properties:
-      quality_rating:
-        type: string
-        enum: ["high", "moderate", "low", "unknown"]
-        description: "Overall quality assessment"
-      factors:
-        type: array
-        items:
-          type: string
-        description: "Specific factors considered (e.g., 'directness: high', 'bias_risk: moderate')"
-      rationale:
-        type: string
-        description: "Brief justification for the quality rating"
-    additionalProperties: false
-  retrieval_date:
-    type: string
-    format: date-time
-    description: "When the source was retrieved"
-  retrieval_method:
-    type: string
-    description: "How the source was retrieved (e.g., 'direct download', 'FOIA request', 'archive snapshot')"
+      quality_rating: {type: string, enum: ["high", "moderate", "low", "unknown"]}
+      factors: {type: array, items: {type: string}}
+      rationale: {type: string}
+  retrieval_date: {type: string, format: date-time}
+  retrieval_method: {type: string}
 additionalProperties: false

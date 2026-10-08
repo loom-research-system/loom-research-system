@@ -1,0 +1,14 @@
+﻿id: CLM-FAKE-008
+type: claim
+claim_type: standard
+statement: "This claim is unknown, but no search protocol is referenced."
+status: completed
+epistemic_status: unknown
+verification_level: none
+promotion_stage: candidate
+primary_applicability: destroyed_or_inaccessible
+current_as_of: "2026-09-12"
+related_evidence: []
+contradiction_status: none
+created: "2026-09-12T00:00:00Z"
+updated: "2026-09-12T00:00:00Z"

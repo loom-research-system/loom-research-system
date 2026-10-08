@@ -1,16 +1,17 @@
-﻿id: CLM-FAKE-001
+﻿id: CLM-FAKE-006
 type: claim
 claim_type: standard
-statement: "Test claim with same-source cross-verification"
+statement: "This claim is known, but has an unresolved contradiction."
 status: completed
-epistemic_status: supported
+epistemic_status: known
 verification_level: cross_verified
-promotion_stage: candidate
+promotion_stage: accepted
 primary_applicability: applicable
 current_as_of: "2026-09-12"
 related_evidence:
   - EVD-FAKE-001
+contradictory_evidence:
   - EVD-FAKE-002
-contradiction_status: none
+contradiction_status: unresolved
 created: "2026-09-12T00:00:00Z"
 updated: "2026-09-12T00:00:00Z"

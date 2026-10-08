@@ -1,46 +1,16 @@
 $schema: "http://json-schema.org/draft-07/schema#"
 $id: "loom://schemas/observation.schema.yaml"
 title: "Observation"
-description: "A preliminary interpretation derived from evidence (not a claim, cannot enter promotion ladder)"
 type: object
-required:
-  - id
-  - type
-  - source_id
-  - evidence_id
-  - interpretation
-  - status
-  - created
+required: [id, type, source_id, evidence_id, interpretation, status, created]
 properties:
-  id:
-    type: string
-    pattern: "^OBS-[0-9]{4,}$"
-    description: "Unique observation identifier"
-  type:
-    type: string
-    const: "observation"
-  source_id:
-    type: string
-    pattern: "^SRC-[0-9]{4,}$"
-  evidence_id:
-    type: string
-    pattern: "^EVD-[0-9]{4,}$"
-  interpretation:
-    type: string
-    description: "The preliminary interpretation"
-  status:
-    type: string
-    enum: ["proposed", "under_review", "completed"]
-  related_claims:
-    type: array
-    items:
-      type: string
-      pattern: "^CLM-[0-9]{4,}$"
-    description: "Claims that were derived from this observation"
-  created:
-    type: string
-    format: date-time
-  updated:
-    type: string
-    format: date-time
+  id: {type: string, pattern: "^OBS-[0-9]{4,}$"}
+  type: {type: string, const: "observation"}
+  source_id: {type: string, pattern: "^SRC-[0-9]{4,}$"}
+  evidence_id: {type: string, pattern: "^EVD-[0-9]{4,}$"}
+  interpretation: {type: string}
+  status: {type: string, enum: ["proposed", "under_review", "completed"]}
+  related_claims: {type: array, items: {type: string, pattern: "^CLM-[0-9]{4,}$"}}
+  created: {type: string, format: date-time}
+  updated: {type: string, format: date-time}
 additionalProperties: false
