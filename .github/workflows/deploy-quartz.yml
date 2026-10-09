@@ -1,4 +1,4 @@
-﻿name: Validate and Deploy Loom Quartz Site
+name: Validate and Deploy Loom Quartz Site
 
 on:
   push:
@@ -13,11 +13,11 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # --- PHASE 1: LOOM VALIDATION (Fail-Closed Gate) ---
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.11'
 
@@ -38,7 +38,7 @@ jobs:
 
       # --- PHASE 2: QUARTZ BUILD ---
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
@@ -52,7 +52,7 @@ jobs:
 
       # --- PHASE 3: DEPLOY TO GITHUB PAGES ---
       - name: Upload artifact for deployment
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: public
 
@@ -69,4 +69,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
