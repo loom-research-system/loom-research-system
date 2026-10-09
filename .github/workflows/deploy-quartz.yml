@@ -1,0 +1,72 @@
+﻿name: Validate and Deploy Loom Quartz Site
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validate-and-build:
+    name: Loom Validator + Quartz Build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # --- PHASE 1: LOOM VALIDATION (Fail-Closed Gate) ---
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install pyyaml
+
+      - name: Run Loom Validator
+        run: |
+          echo "🛡️ Running epistemic and schema validation..."
+          python loom_validator/validator.py .
+          
+      - name: Fail if validation errors exist
+        if: failure()
+        run: |
+          echo "::error::🚨 VALIDATION FAILED! Epistemic rules were violated."
+          echo "A change that fails validation cannot be published."
+          exit 1
+
+      # --- PHASE 2: QUARTZ BUILD ---
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install Quartz dependencies
+        run: npm ci
+
+      - name: Build Quartz site
+        run: npx quartz build
+
+      # --- PHASE 3: DEPLOY TO GITHUB PAGES ---
+      - name: Upload artifact for deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: validate-and-build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
