@@ -5,7 +5,7 @@ thesis: "The Flint water crisis was a failure of self-correction fragility, wher
 supporting_claims:
   - claim_id: "CLM-FLINT-001"
     materiality: true
-epistemic_status: "contested"
-status: "under_review"
+epistemic_status: "supported"
+status: "completed"
 created: "2026-10-09T14:30:00Z"
-updated: "2026-10-09T14:30:00Z"
+updated: "2026-10-09T16:15:00Z"

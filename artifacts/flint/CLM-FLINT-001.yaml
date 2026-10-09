@@ -3,9 +3,9 @@ type: claim
 claim_type: "standard"
 statement: "Corrosion-control treatment was not in place at the outset of the April 2014 Flint River water switch."
 status: "completed"
-epistemic_status: "contested"
+epistemic_status: "supported"
 verification_level: "cross_verified"
-promotion_stage: "candidate"
+promotion_stage: "accepted"
 primary_applicability: "applicable"
 current_as_of: "2026-10-09"
 related_evidence:
@@ -13,7 +13,8 @@ related_evidence:
   - "EVD-FLINT-002"
 contradictory_evidence:
   - "EVD-FLINT-003"
-contradiction_status: "unresolved"
+contradiction_status: "resolved"
 contradiction_note: "MDEQ publicly stated water was safe in Jan 2015, contradicting the Task Force's later findings."
+contradiction_resolution: "The 2015 MDEQ statement was a premature political assurance, explicitly contradicted and superseded by the independent 2016 Task Force report and the EPA Del Toral memo."
 created: "2026-10-09T11:00:00Z"
-updated: "2026-10-09T14:00:00Z"
+updated: "2026-10-09T16:15:00Z"

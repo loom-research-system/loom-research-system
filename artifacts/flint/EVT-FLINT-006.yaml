@@ -1,0 +1,10 @@
+﻿event_id: EVT-FLINT-006
+type: "promotion_event"
+action: "promote_to_completed"
+actor: "human:ACT-0002"
+timestamp: "2026-10-09T16:15:00Z"
+target_object_id: "DIAG-FLINT-001"
+target_object_type: "diagnostic"
+previous_stage: "under_review"
+new_stage: "completed"
+rationale: "Diagnostic thesis is fully supported by the now-accepted CLM-FLINT-001. Lattice ceiling rule satisfied."

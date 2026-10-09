@@ -1,0 +1,10 @@
+﻿event_id: EVT-FLINT-004
+type: "promotion_event"
+action: "promote_to_accepted"
+actor: "human:ACT-0001"
+timestamp: "2026-10-09T15:15:00Z"
+target_object_id: "CLM-FLINT-001"
+target_object_type: "claim"
+previous_stage: "candidate"
+new_stage: "accepted"
+rationale: "Claim is cross-verified by two independent sources (Task Force, EPA). Contradiction formally resolved. Meets all criteria for accepted status."
