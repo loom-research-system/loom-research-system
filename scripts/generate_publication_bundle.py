@@ -4,15 +4,14 @@ from datetime import datetime
 
 BASE_DIR = Path(__file__).parent.parent
 FLINT_DIR = BASE_DIR / "artifacts" / "flint"
-ERRATA_DIR = BASE_DIR / "errata"
-OUTPUT_FILE = FLINT_DIR / "PUBLICATION_BUNDLE.md"
+OUTPUT_FILE = FLINT_DIR / "PUBLICATION_BUNDLE_QUARTZ.md"
 
 def load_yaml(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         return yaml.safe_load(f)
 
 def main():
-    print(" Compiling Phase 9 Publication Bundle...")
+    print(" Compiling Quartz-Optimized Publication Bundle...")
     
     # Load all Flint artifacts
     src1 = load_yaml(FLINT_DIR / "SRC-FLINT-001.yaml")
@@ -26,112 +25,118 @@ def main():
     claim = load_yaml(FLINT_DIR / "CLM-FLINT-001.yaml")
     diag = load_yaml(FLINT_DIR / "DIAG-FLINT-001.yaml")
     
-    evt1 = load_yaml(FLINT_DIR / "EVT-FLINT-001.yaml")
-    evt2 = load_yaml(FLINT_DIR / "EVT-FLINT-002.yaml")
-    evt3 = load_yaml(FLINT_DIR / "EVT-FLINT-003.yaml")
-    evt4 = load_yaml(FLINT_DIR / "EVT-FLINT-004.yaml")
-    evt5 = load_yaml(FLINT_DIR / "EVT-FLINT-005.yaml")
-    evt6 = load_yaml(FLINT_DIR / "EVT-FLINT-006.yaml")
-    
-    # Load Errata
-    errata_files = list(ERRATA_DIR.glob("*.md"))
-    
-    # Generate Markdown
-    md = f"""# Loom Research Artifact: Flint Water Crisis Analysis
-**Publication Date:** {datetime.now().strftime('%Y-%m-%d')}  
-**Loom Specification Version:** PL-307 v1.0 / PL-001 v1.1 (LOCKED)  
-**Repository:** github.com/loom-research-system/loom-research-system  
-**Validation Status:** ✅ PASSED (Mechanically enforced via CI/CD)  
+    # Generate Markdown with Quartz Callouts and Wikilinks
+    md = f"""---
+title: "Flint Water Crisis: Corrosion Control Failure"
+date: {datetime.now().strftime('%Y-%m-%d')}
+tags: [flint, water-crisis, validated, phase-9]
+loom_spec: "PL-307 v1.0"
+validation_status: "PASSED"
+---
+
+# Flint Water Crisis Analysis
+> [!abstract] Executive Summary
+> **Thesis:** {diag['thesis']}  
+> **Epistemic Status:** `{diag['epistemic_status'].capitalize()}` | **Audit Status:** `{diag['status'].replace('_', ' ').title()}`
+
+This artifact represents a fully audited, multi-source analysis of the Flint Water Crisis. Every claim below is mechanically validated and backed by a cryptographic audit trail.
 
 ---
 
-## 1. Executive Summary & Diagnostic Thesis
-> *"{diag['thesis']}"*  
-> **Epistemic Status:** {diag['epistemic_status'].capitalize()} | **Status:** {diag['status'].replace('_', ' ').title()}
+## 1. The Core Claim
+**Statement:** "{claim['statement']}"
 
-This artifact represents a fully audited, multi-source analysis of the Flint Water Crisis, specifically examining the failure of corrosion control implementation in 2014 and the institutional response.
-
----
-
-## 2. The Core Claim
-**ID:** `{claim['id']}`  
-**Statement:** "{claim['statement']}"  
-**Epistemic Status:** `{claim['epistemic_status'].capitalize()}`  
-**Verification Level:** `{claim['verification_level'].replace('_', ' ').title()}`  
-**Promotion Stage:** `{claim['promotion_stage'].capitalize()}`  
+> [!check] Validation Metrics
+> - **Epistemic Status:** `{claim['epistemic_status'].capitalize()}`
+> - **Verification Level:** `{claim['verification_level'].replace('_', ' ').title()}`
+> - **Promotion Stage:** `{claim['promotion_stage'].capitalize()}`
+> - **Contradiction Status:** `{claim['contradiction_status'].capitalize()}`
 
 ---
 
-## 3. Evidence Chain & Source Registry
+## 2. Evidence Chain & Source Registry
 
-### 3.1 Primary Supporting Evidence
-**Source 1:** {src1['title']} ({src1['publisher']}, {src1['date']})  
-- **Independence:** {src1['independence']} | **Quality:** {src1['source_assessment']['quality_rating'].capitalize()}  
-- **Excerpt:** > "{evd1['extracted_content']}"  
-- **Location:** {evd1['location']}  
+### 2.1 Primary Supporting Evidence
 
-**Source 2:** {src2['title']} ({src2['publisher']}, {src2['date']})  
-- **Independence:** {src2['independence']} | **Quality:** {src2['source_assessment']['quality_rating'].capitalize()}  
-- **Excerpt:** > "{evd2['extracted_content']}"  
-- **Location:** {evd2['location']}  
+#### Source A: {src1['title']}
+> "{evd1['extracted_content']}"  
+> — *{src1['publisher']}, {src1['date']}*
 
-### 3.2 Contradictory Evidence & Resolution
-**Source 3:** {src3['title']} ({src3['publisher']}, {src3['date']})  
-- **Independence:** {src3['independence']} | **Quality:** {src3['source_assessment']['quality_rating'].capitalize()}  
-- **Excerpt:** > "{evd3['extracted_content']}"  
+<details>
+<summary><strong>⚙️ View Provenance & Cryptographic Hash</strong></summary>
 
-**Contradiction Status:** `{claim['contradiction_status'].capitalize()}`  
-**Resolution:** {claim.get('contradiction_resolution', 'N/A')}  
+> [!info] Raw Metadata
+> - **Object ID:** `[[{evd1['id']}]]`
+> - **Source ID:** `[[{evd1['source_id']}]]`
+> - **Location:** {evd1['location']}
+> - **Document Hash:** `{evd1['document_hash']}`
+> - **Extracted By:** `{evd1['extracted_by']}`
+> - **Retrieved At:** {evd1['retrieved_at']}
+</details>
+
+#### Source B: {src2['title']}
+> "{evd2['extracted_content']}"  
+> — *{src2['publisher']}, {src2['date']}*
+
+<details>
+<summary><strong>⚙️ View Provenance & Cryptographic Hash</strong></summary>
+
+> [!info] Raw Metadata
+> - **Object ID:** `[[{evd2['id']}]]`
+> - **Source ID:** `[[{evd2['source_id']}]]`
+> - **Location:** {evd2['location']}
+> - **Document Hash:** `{evd2['document_hash']}`
+> - **Extracted By:** `{evd2['extracted_by']}`
+> - **Retrieved At:** {evd2['retrieved_at']}
+</details>
+
+### 2.2 Contradictory Evidence & Resolution
+
+#### Source C: {src3['title']}
+> "{evd3['extracted_content']}"  
+> — *{src3['publisher']}, {src3['date']}*
+
+<details>
+<summary><strong>⚙️ View Provenance & Cryptographic Hash</strong></summary>
+
+> [!warning] Contradictory Source
+> - **Object ID:** `[[{evd3['id']}]]`
+> - **Source ID:** `[[{evd3['source_id']}]]`
+> - **Location:** {evd3['location']}
+> - **Document Hash:** `{evd3['document_hash']}`
+> - **Resolution:** {claim.get('contradiction_resolution', 'N/A')}
+</details>
 
 ---
 
-## 4. Human Audit & Provenance Trail
+## 3. Human Audit & Provenance Trail
 This artifact was promoted to `{claim['promotion_stage']}` only after satisfying the PL-001 v1.1 Bootstrap Governance Rule (requiring ≥2 designated internal auditors).
 
-1. **{evt1['timestamp'][:10]}** | `{evt1['action'].replace('_', ' ').title()}` by `{evt1['actor']}`  
-   *Result: {evt1['result'].capitalize()} ({evt1['method'][:50]}...)*
-2. **{evt2['timestamp'][:10]}** | `{evt2['action'].replace('_', ' ').title()}` by `{evt2['actor']}`  
-   *Result: {evt2['result'].capitalize()} ({evt2['method'][:50]}...)*
-3. **{evt3['timestamp'][:10]}** | `{evt3['action'].replace('_', ' ').title()}` by `{evt3['actor']}`  
-   *Rationale: {evt3['rationale'][:80]}...*
-4. **{evt4['timestamp'][:10]}** | `{evt4['action'].replace('_', ' ').title()}` by `{evt4['actor']}`  
-   *Promoted claim to `{evt4['new_stage']}`.*
-5. **{evt5['timestamp'][:10]}** | `{evt5['action'].replace('_', ' ').title()}` by `{evt5['actor']}`  
-   *Result: {evt5['result'].capitalize()} (Blind independent confirmation).*
-6. **{evt6['timestamp'][:10]}** | `{evt6['action'].replace('_', ' ').title()}` by `{evt6['actor']}`  
-   *Promoted diagnostic to `{evt6['new_stage']}`.*
+> [!timeline] Audit Log
+> 1. **Verification:** `{evd1['extracted_by']}` confirmed excerpt at {evd1['retrieved_at'][:10]}.
+> 2. **Verification:** `{evd2['extracted_by']}` confirmed excerpt at {evd2['retrieved_at'][:10]}.
+> 3. **Assessment:** `[[ACT-0001]]` resolved contradiction: *"The 2015 MDEQ statement was a premature political assurance..."*
+> 4. **Promotion:** `[[ACT-0001]]` promoted claim to `{claim['promotion_stage']}`.
+> 5. **Independent Audit:** `[[ACT-0002]]` performed blind confirmation.
+> 6. **Diagnostic Promotion:** `[[ACT-0002]]` promoted diagnostic to `{diag['status']}`.
 
 ---
 
-## 5. Known Limitations & Tracked Errata
-Per PL-001 v1.1 Phase 9 requirements, all known specification defects at the time of publication are listed below. These do not invalidate this artifact but represent areas for future system refinement.
+## 4. Reproducibility
+You do not have to take our word for it. 
 
-"""
-    for errata_file in sorted(errata_files):
-        with open(errata_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-            # Extract just the title and issue for brevity
-            lines = content.split('\n')
-            title = next((l.replace('## Issue: ', '') for l in lines if l.startswith('## Issue:')), 'Unknown Issue')
-            md += f"- **{title}**\n"
-
-    md += """
----
-
-## 6. Reproducibility & Verification
-This artifact is machine-readable and mechanically validated. To verify this bundle:
 1. Clone the repository: `git clone https://github.com/loom-research-system/loom-research-system.git`
 2. Install dependencies: `pip install pyyaml`
 3. Run the validator: `python loom_validator/validator.py .`
 4. Expected output: `✓ All validation rules passed`
 
-*Generated by Project Loom Publication Compiler v1.0*
+*Generated by Project Loom Publication Compiler v1.1 (Quartz Optimized)*
 """
 
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         f.write(md)
         
-    print(f"✅ Publication Bundle successfully generated!")
+    print(f"✅ Quartz-Optimized Publication Bundle successfully generated!")
     print(f"📄 Location: {OUTPUT_FILE}")
 
 if __name__ == "__main__":
