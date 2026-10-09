@@ -7,10 +7,16 @@ from datetime import datetime
 BASE_DIR = Path(__file__).parent.parent
 FLINT_DIR = BASE_DIR / "artifacts" / "flint"
 OUTPUT_FILE = FLINT_DIR / "PUBLICATION_BUNDLE_QUARTZ.md"
+GITHUB_REPO = "https://github.com/loom-research-system/loom-research-system/blob/main"
 
 def load_yaml(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        return yaml.safe_load(f)
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
+    except FileNotFoundError:
+        print(f"🚨 VALIDATION FAILED: Missing required artifact '{filepath.name}'.")
+        print("The audit trail is incomplete. Refusing to generate publication bundle.")
+        sys.exit(1)
 
 def main():
     print("🛡️ STEP 1: Running mechanical validation (Fail-Closed Gate)...")
@@ -30,7 +36,7 @@ def main():
         
     print("✅ Validation passed. Proceeding to bundle generation...\n")
     
-    # 2. Load all Flint artifacts
+    # 2. Load all Flint artifacts (will fail-closed gracefully if any are missing)
     src1 = load_yaml(FLINT_DIR / "SRC-FLINT-001.yaml")
     src2 = load_yaml(FLINT_DIR / "SRC-FLINT-002.yaml")
     src3 = load_yaml(FLINT_DIR / "SRC-FLINT-003.yaml")
@@ -49,8 +55,7 @@ def main():
     evt5 = load_yaml(FLINT_DIR / "EVT-FLINT-005.yaml")
     evt6 = load_yaml(FLINT_DIR / "EVT-FLINT-006.yaml")
     
-    # 3. Generate Markdown with explicit paths and dynamic data
-    # Using claim['current_as_of'] for epistemic date, not generation date
+    # 3. Generate Markdown with direct GitHub links and dynamic data
     epistemic_date = claim.get('current_as_of', datetime.now().strftime('%Y-%m-%d'))
     
     md = f"""---
@@ -93,8 +98,8 @@ This artifact represents a fully audited, multi-source analysis of the Flint Wat
 <summary><strong>⚙️ View Provenance & Cryptographic Hash</strong></summary>
 
 > [!info] Raw Metadata
-> - **Object ID:** `[[artifacts/flint/{evd1['id']}|{evd1['id']}]]`
-> - **Source ID:** `[[artifacts/flint/{evd1['source_id']}|{evd1['source_id']}]]`
+> - **Object ID:** [`{evd1['id']}`]({GITHUB_REPO}/artifacts/flint/{evd1['id']}.yaml)
+> - **Source ID:** [`{evd1['source_id']}`]({GITHUB_REPO}/artifacts/flint/{evd1['source_id']}.yaml)
 > - **Location:** {evd1['location']}
 > - **Document Hash:** `{evd1['document_hash']}`
 > - **Extracted By:** `{evd1['extracted_by']}`
@@ -109,8 +114,8 @@ This artifact represents a fully audited, multi-source analysis of the Flint Wat
 <summary><strong>⚙️ View Provenance & Cryptographic Hash</strong></summary>
 
 > [!info] Raw Metadata
-> - **Object ID:** `[[artifacts/flint/{evd2['id']}|{evd2['id']}]]`
-> - **Source ID:** `[[artifacts/flint/{evd2['source_id']}|{evd2['source_id']}]]`
+> - **Object ID:** [`{evd2['id']}`]({GITHUB_REPO}/artifacts/flint/{evd2['id']}.yaml)
+> - **Source ID:** [`{evd2['source_id']}`]({GITHUB_REPO}/artifacts/flint/{evd2['source_id']}.yaml)
 > - **Location:** {evd2['location']}
 > - **Document Hash:** `{evd2['document_hash']}`
 > - **Extracted By:** `{evd2['extracted_by']}`
@@ -127,8 +132,8 @@ This artifact represents a fully audited, multi-source analysis of the Flint Wat
 <summary><strong>⚙️ View Provenance & Cryptographic Hash</strong></summary>
 
 > [!warning] Contradictory Source
-> - **Object ID:** `[[artifacts/flint/{evd3['id']}|{evd3['id']}]]`
-> - **Source ID:** `[[artifacts/flint/{evd3['source_id']}|{evd3['source_id']}]]`
+> - **Object ID:** [`{evd3['id']}`]({GITHUB_REPO}/artifacts/flint/{evd3['id']}.yaml)
+> - **Source ID:** [`{evd3['source_id']}`]({GITHUB_REPO}/artifacts/flint/{evd3['source_id']}.yaml)
 > - **Location:** {evd3['location']}
 > - **Document Hash:** `{evd3['document_hash']}`
 > - **Resolution:** {claim.get('contradiction_resolution', 'N/A')}
@@ -140,12 +145,12 @@ This artifact represents a fully audited, multi-source analysis of the Flint Wat
 This artifact was promoted to `{claim['promotion_stage']}` only after satisfying the PL-001 v1.1 Bootstrap Governance Rule (requiring ≥2 designated internal auditors).
 
 > [!timeline] Audit Log
-> 1. **Verification:** `{evt1['actor']}` confirmed excerpt at {evt1['timestamp'][:10]}.
-> 2. **Verification:** `{evt2['actor']}` confirmed excerpt at {evt2['timestamp'][:10]}.
-> 3. **Assessment:** `{evt3['actor']}` resolved contradiction: *"The 2015 MDEQ statement was a premature political assurance..."*
-> 4. **Promotion:** `{evt4['actor']}` promoted claim to `{evt4['new_stage']}`.
-> 5. **Independent Audit:** `{evt5['actor']}` performed blind confirmation.
-> 6. **Diagnostic Promotion:** `{evt6['actor']}` promoted diagnostic to `{evt6['new_stage']}`.
+> 1. **Verification:** [`{evt1['actor']}`]({GITHUB_REPO}/artifacts/actors/{evt1['actor'].split(':')[1]}.yaml) confirmed excerpt at {evt1['timestamp'][:10]}.
+> 2. **Verification:** [`{evt2['actor']}`]({GITHUB_REPO}/artifacts/actors/{evt2['actor'].split(':')[1]}.yaml) confirmed excerpt at {evt2['timestamp'][:10]}.
+> 3. **Assessment:** [`{evt3['actor']}`]({GITHUB_REPO}/artifacts/actors/{evt3['actor'].split(':')[1]}.yaml) resolved contradiction.
+> 4. **Promotion:** [`{evt4['actor']}`]({GITHUB_REPO}/artifacts/actors/{evt4['actor'].split(':')[1]}.yaml) promoted claim to `{evt4['new_stage']}`.
+> 5. **Independent Audit:** [`{evt5['actor']}`]({GITHUB_REPO}/artifacts/actors/{evt5['actor'].split(':')[1]}.yaml) performed blind confirmation.
+> 6. **Diagnostic Promotion:** [`{evt6['actor']}`]({GITHUB_REPO}/artifacts/actors/{evt6['actor'].split(':')[1]}.yaml) promoted diagnostic to `{evt6['new_stage']}`.
 
 ---
 
@@ -161,7 +166,7 @@ You do not have to take our word for it.
 > This bundle was automatically generated on **{datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}**. 
 > The epistemic validity of the claims is anchored to the `current_as_of` date: **{epistemic_date}**.
 
-*Generated by Project Loom Publication Compiler v1.2 (Fail-Closed)*
+*Generated by Project Loom Publication Compiler v1.3 (Fail-Closed + Direct GitHub Linking)*
 """
 
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
