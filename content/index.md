@@ -1,43 +1,54 @@
 ﻿---
 title: "Project Loom"
 date: 2026-10-09
-tags: [homepage, methodology]
+tags: [homepage]
 ---
 
-# Project Loom
-> *An empirical governance research program. We do not rely on the inherent trustworthiness of AI, nor the inherent authority of human reviewers. We rely on a mechanically enforced, auditable trail of evidence.*
+# Why didn't it happen the way they said it would?
 
----
-
-## 📚 Validated Research Artifacts
-
-Project Loom publishes research only after it has passed strict mechanical validation and multi-actor human audit. Every claim is traceable to its source, hash, and reviewer.
-
-### 🔬 Flint Water Crisis: Corrosion Control Failure
-**Status:** `Accepted` | **Verification:** `Cross-Verified` | **Spec:** `PL-307 v1.0`
-
-An audited analysis of the failure of corrosion control implementation in 2014 and the institutional response. This artifact includes resolved contradictory evidence and a full multi-actor audit trail.
-
-👉 **[Read the Validated Artifact](flint-water-crisis.md)**
+> [!abstract] 
+> Loom investigates what happens between political decisions and what people actually experience. A policy can be announced, funded, passed, or signed—and still produce a very different result. Loom traces what happened in between.
 
 ---
 
-## 🛡️ How We Guarantee Rigor
+## A promise is not an outcome.
 
-Traditional research asks you to trust the author. Project Loom asks you to **verify the system**.
+A politician might promise: *"We're going to fix this."*
 
-1. **Mechanical Validation:** Every artifact must pass a strict Python validator enforcing 23+ epistemic rules (e.g., no "known" claims with unresolved contradictions).
-2. **Cryptographic Anchoring:** Every source is hashed (SHA-256). If the document changes, the evidence is invalidated.
-3. **Multi-Actor Audit:** No solo-founder exceptions. Artifacts require independent sign-off from designated auditors whose conflicts of interest are publicly disclosed.
-4. **Fail-Closed Publishing:** If an artifact fails validation, our CI/CD pipeline physically prevents it from being published to this website.
+The law gets passed. The money gets allocated. An agency is told to implement it. 
 
-> [!info] Inspect the Machinery
-> You do not have to take our word for it. The entire specification, validator code, and raw YAML artifacts are open-source.  
-> 🔗 **[View the GitHub Repository](https://github.com/loom-research-system/loom-research-system)**
+And yet, years later, people are still asking: **What happened?**
+
+Loom looks at the space between those points. We study the journey a decision takes through institutions, people, rules, budgets, technology, contracts, and competing authorities before it becomes something people actually experience.
 
 ---
 
-## 🚧 Coming Soon
-- Mount Vernon Case Study (In Progress)
-- Public API for Programmatic Verification
-- External Auditor Onboarding Portal
+## Explore a Case
+
+The best way to understand Loom is to see it in action. 
+
+### 💧 [Flint Water Crisis](flint-water-crisis)
+**Why did a water emergency become a prolonged governance failure?**  
+Follow the decisions, institutions, warnings, dependencies, and failures that shaped what happened. This is our first fully audited, mechanically validated case study.
+
+### 🏥 [Healthcare.gov](#) *(Coming Soon)*
+**How did a major government program go from policy launch to technological crisis?**
+
+### 🚗 [Cash for Clunkers](#) *(Coming Soon)*
+**What happens when a policy achieves its immediate goal but creates unexpected consequences elsewhere?**
+
+---
+
+## Don't take Loom's word for it.
+
+Every research conclusion on this site has a trail back to the evidence. We believe you should always be able to ask:
+- Where did this claim come from?
+- What evidence supports it?
+- Is there contradictory evidence?
+- Who reviewed it?
+- What is still unknown?
+
+That is why every claim on Loom includes a **"Trace the Evidence"** layer. You can drill down from a simple explanation, to the specific claim, to the extracted evidence, to the original source document, and finally to the cryptographic hash and human audit record that proves it wasn't altered.
+
+**[Learn how Loom works →](how-it-works)**  
+**[View the development roadmap →](roadmap)**
