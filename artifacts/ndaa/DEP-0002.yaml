@@ -1,0 +1,7 @@
+﻿id: DEP-0002
+source_node_id: "MECH-PROC-001"
+target_node_id: "MECH-1100"
+relationship_type: "supersedes"
+dependency_strength: "operational"
+valid_from: "2026-07-22"
+valid_to: null

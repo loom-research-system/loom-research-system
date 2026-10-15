@@ -1,0 +1,9 @@
+﻿id: MECH-PROC-001
+type: mechanism
+name: "DoD Co-production and Technology Transition Pathway (Program of Record)"
+authority_source: "Department of Defense (Program Executive Offices)"
+reversibility_channel: "contract_renewal"
+implementation_debt_risk: "critical"
+status: "active"
+effective_from: "2020-01-01"
+effective_to: null

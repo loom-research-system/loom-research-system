@@ -1,0 +1,7 @@
+﻿id: DEP-0001
+source_node_id: "MECH-2190"
+target_node_id: "MECH-PROC-001"
+relationship_type: "authorizes"
+dependency_strength: "direct"
+valid_from: "2026-07-22"
+valid_to: null
