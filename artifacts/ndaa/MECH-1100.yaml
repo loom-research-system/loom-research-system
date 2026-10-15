@@ -1,0 +1,9 @@
+﻿id: MECH-1100
+type: mechanism
+name: "Annual Foreign Military Financing (FMF) Appropriation for Israel"
+authority_source: "United States Congress (Annual Appropriations Act)"
+reversibility_channel: "annual_appropriation"
+implementation_debt_risk: "low"
+status: "active"
+effective_from: "1976-01-01"
+effective_to: null

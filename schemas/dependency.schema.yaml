@@ -1,0 +1,29 @@
+﻿$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/dependency.schema.yaml"
+title: "Governance Dependency"
+type: object
+required: [id, source_node_id, target_node_id, relationship_type]
+properties:
+  id: 
+    type: string
+    pattern: "^DEP-[0-9]{4,}$"
+  source_node_id: 
+    type: string
+    description: "The node that depends on, or acts upon, the target."
+  target_node_id: 
+    type: string
+    description: "The node being depended upon or acted upon."
+  relationship_type: 
+    type: string
+    enum: ["requires", "authorizes", "implements", "funds", "constrains", "supersedes", "inherits", "operationalizes", "references", "delegates_to"]
+  dependency_strength: 
+    type: string
+    enum: ["direct", "institutional", "operational", "temporal"]
+    description: "Direct: cannot operate without. Institutional: legally independent but relies on. Operational: theoretically independent but practically fails without."
+  valid_from: 
+    type: string
+    format: date
+  valid_to: 
+    type: string
+    format: date
+additionalProperties: false

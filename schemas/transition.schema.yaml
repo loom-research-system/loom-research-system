@@ -1,0 +1,30 @@
+﻿$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/transition.schema.yaml"
+title: "Policy Transition"
+type: object
+required: [id, target_node_id, current_state, target_state, transition_action]
+properties:
+  id: 
+    type: string
+    pattern: "^TRANS-[0-9]{4,}$"
+  target_node_id: 
+    type: string
+  current_state: 
+    type: string
+  target_state: 
+    type: string
+  transition_action: 
+    type: string
+    enum: ["create", "modify", "transfer", "replace", "deprecate", "remove", "monitor"]
+  required_capacity: 
+    type: array
+    items: 
+      type: string
+      enum: ["legal_authority", "personnel", "budget", "procurement", "technical_infrastructure", "data", "interagency_coordination"]
+  risk_level: 
+    type: string
+    enum: ["low", "medium", "high", "critical"]
+  sequence_order: 
+    type: integer
+    description: "Ordering constraint. This action must occur at this step in the transition."
+additionalProperties: false

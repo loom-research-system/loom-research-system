@@ -1,0 +1,35 @@
+﻿$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/mechanism.schema.yaml"
+title: "Policy Mechanism"
+type: object
+required: [id, type, name, authority_source, reversibility_channel, status]
+properties:
+  id: 
+    type: string
+    pattern: "^MECH-[0-9]{4,}$"
+  type: 
+    type: string
+    enum: ["executive_order", "statute", "regulation", "guidance", "appropriation", "procurement", "personnel", "data_system", "contract"]
+  name: 
+    type: string
+  authority_source: 
+    type: string
+    description: "The legal or institutional source of authority (e.g., Congress, DoD Instruction 5101.01)."
+  reversibility_channel: 
+    type: string
+    enum: ["annual_appropriation", "statutory_repeal", "executive_action", "regulatory_change", "contract_renewal"]
+    description: "The primary mechanism required to reverse or alter this node."
+  implementation_debt_risk: 
+    type: string
+    enum: ["low", "medium", "high", "critical"]
+    description: "The risk that removing this mechanism will expose hidden dependencies."
+  status: 
+    type: string
+    enum: ["proposed", "active", "suspended", "terminated"]
+  effective_from: 
+    type: string
+    format: date
+  effective_to: 
+    type: string
+    format: date
+additionalProperties: false

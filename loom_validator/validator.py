@@ -1,4 +1,4 @@
-"""
+﻿"""
 Loom Research System Validator
 Enforces PL-307 v1.0 schemas and cross-object validation rules.
 Exit code 0 = valid, non-zero = invalid.
@@ -48,6 +48,9 @@ class LoomValidator:
             elif obj_type == "diagnostic": self._validate_diagnostic(obj)
             elif obj_type == "evidence": self._validate_evidence(obj)
             elif obj_type == "source": self._validate_source(obj)
+            elif obj_type == "mechanism": self._validate_mechanism(obj)
+            elif obj_type == "dependency": self._validate_dependency(obj)
+            elif obj_type == "transition": self._validate_transition(obj)
         self._validate_cascade_integrity()
         return self.errors
 
@@ -58,12 +61,15 @@ class LoomValidator:
         contradiction = claim.get("contradiction_status")
         promotion = claim.get("promotion_stage")
         claim_type = claim.get("claim_type")
+        claim_category = claim.get("claim_category")
         related_evidence = claim.get("related_evidence", [])
 
         if epistemic == "known" and contradiction == "unresolved":
             self.errors.append(ValidationError("EPISTEMIC-004", "error", claim_id, "Claim declares 'known' while contradictory evidence remains unresolved", "Resolve contradiction or downgrade epistemic_status", False))
         if epistemic == "supported" and contradiction == "unresolved":
             self.errors.append(ValidationError("EPISTEMIC-005", "error", claim_id, "Claim declares 'supported' while contradictory evidence remains unresolved", "Resolve contradiction or downgrade epistemic_status", False))
+        if epistemic == "contested" and contradiction == "resolved":
+            self.errors.append(ValidationError("EPISTEMIC-003", "error", claim_id, "Claim is 'contested' but contradiction is marked 'resolved' (stale state)", "Reassess contradiction_status or update epistemic_status", False))
         if epistemic in ["supported", "known"] and verification in ["none", "source_backed"]:
             self.errors.append(ValidationError("VERIFICATION-001", "error", claim_id, f"epistemic_status '{epistemic}' requires verification_level >= cross_verified", "Upgrade verification_level or downgrade epistemic_status", False))
         
@@ -77,6 +83,24 @@ class LoomValidator:
 
         if promotion == "canonical" and verification in ["none", "source_backed"]:
             self.errors.append(ValidationError("PROMOTION-001", "error", claim_id, "canonical promotion requires verification_level >= cross_verified", "Complete cross-verification before canonical promotion", False))
+        if promotion == "canonical" and epistemic in ["proposed", "unknown", "unresolved", "contested"]:
+            self.errors.append(ValidationError("PROMOTION-003", "error", claim_id, f"canonical promotion requires epistemic_status 'supported' or 'known', found '{epistemic}'", "Resolve epistemic barriers before canonical promotion", False))
+        if promotion == "accepted" and epistemic in ["proposed", "unknown", "unresolved", "contested"]:
+            self.errors.append(ValidationError("PROMOTION-004", "error", claim_id, f"accepted promotion requires epistemic_status 'supported' or 'known', found '{epistemic}'", "Resolve epistemic barriers before accepted promotion", False))
+
+        if verification == "primary_verified" and claim_type == "standard":
+            source_ids = set(evd.get("source_id") for evd_id in related_evidence if (evd := self.objects.get(evd_id)))
+            if len(source_ids) < 2:
+                self.errors.append(ValidationError("VERIFICATION-004", "error", claim_id, "primary_verified on a 'standard' claim requires cross_verified basis (2+ sources)", "Add second independent source or change claim_type to 'dispositive_document'", False))
+        if verification == "primary_verified" and claim.get("primary_applicability") in ["not_applicable", "destroyed_or_inaccessible"]:
+            self.errors.append(ValidationError("VERIFICATION-005", "error", claim_id, "primary_verified requires primary_applicability to be 'applicable'", "Correct primary_applicability or downgrade verification_level", False))
+
+        if claim.get("status") == "completed" and epistemic == "proposed":
+            self.errors.append(ValidationError("WORKFLOW-001", "error", claim_id, "Claim status is 'completed' but epistemic_status is still 'proposed'", "Complete epistemic assessment or revert status to 'under_review'", False))
+        if claim.get("status") == "completed" and verification == "none" and epistemic != "unknown":
+            self.errors.append(ValidationError("WORKFLOW-002", "error", claim_id, "Completed claim must have at least source_backed verification", "Map evidence or downgrade status", False))
+        if promotion == "canonical" and claim.get("status") == "deprecated":
+            self.errors.append(ValidationError("WORKFLOW-003", "error", claim_id, "Claim is 'deprecated' but remains in 'canonical' promotion stage", "Demote promotion_stage to 'candidate' or remove deprecated status", False))
 
         if claim_type == "dispositive_document":
             if not claim.get("dispositive_document_justification"):
@@ -91,6 +115,14 @@ class LoomValidator:
             cascade_events = [e for e in self.events if e.get("type") == "cascade_trigger_event" and claim_id in e.get("affected_object_ids", [])]
             if not cascade_events:
                 self.errors.append(ValidationError("CASCADE-001", "error", claim_id, "Claim has status 'system_flagged_for_review' but no cascade_trigger_event", "Add cascade_trigger_event or change status to 'under_review'", False))
+
+        atomicity_events = [e for e in self.events if e.get("type") == "assessment_event" and e.get("action") == "atomicity_verification" and e.get("target_object_id") == claim_id]
+        if not atomicity_events:
+            self.errors.append(ValidationError("ATOMICITY-001", "error", claim_id, "Claim lacks a human atomicity_verification event", "Add assessment_event confirming the claim contains only one discrete assertion", False))
+
+        if claim_category == "meta_state":
+            if epistemic == "unknown" or promotion in ["accepted", "canonical"]:
+                self.errors.append(ValidationError("METACLAIM-001", "error", claim_id, "Meta-claims about establishability cannot be 'unknown' or promoted", "Rewrite as a world-state claim or downgrade to observation", False))
 
     def _validate_diagnostic(self, diag: dict):
         diag_id = diag["id"]
@@ -111,6 +143,26 @@ class LoomValidator:
     def _validate_source(self, src: dict):
         if src.get("retrieved") and not src.get("document_hash"):
             self.errors.append(ValidationError("SOURCE-001", "error", src["id"], "Retrieved source missing document_hash", "Add sha256 hash of retrieved document", False))
+
+    def _validate_mechanism(self, mech: dict):
+        mech_id = mech["id"]
+        if mech.get("effective_from") and mech.get("effective_to"):
+            if mech["effective_from"] > mech["effective_to"]:
+                self.errors.append(ValidationError("MECH-001", "error", mech_id, "effective_from is after effective_to", "Correct the dates", False))
+
+    def _validate_dependency(self, dep: dict):
+        dep_id = dep["id"]
+        if dep.get("source_node_id") and dep["source_node_id"] not in self.objects:
+            self.errors.append(ValidationError("DEP-001", "error", dep_id, f"Dependency references non-existent source node '{dep.get('source_node_id')}'", "Create source node or correct ID", False))
+        if dep.get("target_node_id") and dep["target_node_id"] not in self.objects:
+            self.errors.append(ValidationError("DEP-002", "error", dep_id, f"Dependency references non-existent target node '{dep.get('target_node_id')}'", "Create target node or correct ID", False))
+
+    def _validate_transition(self, trans: dict):
+        trans_id = trans["id"]
+        if trans.get("target_node_id") and trans["target_node_id"] not in self.objects:
+            self.errors.append(ValidationError("TRANS-001", "error", trans_id, f"Transition references non-existent target node '{trans.get('target_node_id')}'", "Create target node or correct ID", False))
+        if trans.get("sequence_order") is not None and trans["sequence_order"] < 1:
+            self.errors.append(ValidationError("TRANS-002", "error", trans_id, "sequence_order must be >= 1", "Update sequence order", False))
 
     def _validate_cascade_integrity(self):
         for event in self.events:

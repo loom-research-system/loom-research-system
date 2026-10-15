@@ -1,0 +1,9 @@
+﻿id: MECH-2190
+type: mechanism
+name: "NDAA FY2027 Section 219 / United States-Israel FUTURES Act Provision"
+authority_source: "United States Congress (House H.R. 8800 / Senate S.4543)"
+reversibility_channel: "statutory_repeal"
+implementation_debt_risk: "critical"
+status: "proposed"
+effective_from: "2026-07-22"
+effective_to: null
