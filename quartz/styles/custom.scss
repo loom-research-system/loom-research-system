@@ -1,3 +1,42 @@
-@use "./variables.scss" as *;
+﻿@use "./variables.scss" as *;
 
-// put your custom CSS here!
+/* Project Loom / EROS: "Ratchet" Theme (Quartz v5 Compatible) */
+
+:root {
+  --light: #fdfbf7;        /* Warm Cream background */
+  --lightgray: #e5e0d8;    /* Warm gray for borders */
+  --gray: #a1a1aa;         /* Muted gray */
+  --darkgray: #575757;     /* Secondary text */
+  --dark: #2d2d2d;         /* Deep Charcoal text */
+  --secondary: #475569;    /* Slate for subtle elements */
+  --tertiary: #cbd5e1;     /* Light slate */
+  --highlight: #d97706;    /* The Ratchet: Tangerine accent */
+  --textHighlight: rgba(217, 119, 6, 0.15);
+}
+
+:root[saved-theme="dark"] {
+  --light: #1e1e24;        /* Deep Slate background */
+  --lightgray: #3f3f46;    /* Slate gray for borders */
+  --gray: #71717a;         /* Muted gray */
+  --darkgray: #a1a1aa;     /* Secondary text */
+  --dark: #e2e2e2;         /* Warm Gray text */
+  --secondary: #94a3b8;    /* Light slate */
+  --tertiary: #475569;     /* Slate */
+  --highlight: #f59e0b;    /* Brighter Tangerine for dark mode contrast */
+  --textHighlight: rgba(245, 158, 11, 0.2);
+}
+
+/* Editorial feel: subtle bottom border on headers */
+h1, h2, h3 {
+  color: var(--dark);
+  border-bottom: 1px solid var(--lightgray);
+  padding-bottom: 0.3rem;
+}
+
+/* Blockquotes styled as cited evidence */
+blockquote {
+  border-left: 4px solid var(--highlight);
+  background-color: var(--textHighlight);
+  padding: 0.5rem 1rem;
+  border-radius: 0 4px 4px 0;
+}
