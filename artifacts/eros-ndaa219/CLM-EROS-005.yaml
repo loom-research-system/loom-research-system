@@ -1,0 +1,14 @@
+id: CLM-EROS-005
+type: claim
+claim_type: "standard"
+statement: "Placeholder structural claim 5 regarding NDAA Section 219 implementation debt and institutional capacity."
+status: "under_review"
+epistemic_status: "proposed"
+verification_level: "none"
+promotion_stage: "candidate"
+primary_applicability: "applicable"
+current_as_of: "2026-10-20"
+related_evidence: []
+contradiction_status: "none"
+created: "2026-10-20T10:00:00Z"
+updated: "2026-10-20T10:00:00Z"

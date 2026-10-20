@@ -1,0 +1,16 @@
+﻿id: SRC-NDAA-001
+type: source
+title: "119 HR 8800 EH: National Defense Authorization Act for Fiscal Year 2027"
+publisher: "U.S. House of Representatives"
+date: "2026-07-22"
+primary_secondary: "primary"
+independence: true
+retrieved: true
+document_hash: "sha256:f0d864285be33e12984debe892e722d3ce563a14cc751f9e6ec3efaabeede304"
+copyright_status: "public_domain"
+source_assessment:
+  quality_rating: "high"
+  factors: 
+    - "directness: high"
+    - "bias_risk: none (official legislative text)"
+  rationale: "Official Engrossed-in-House XML text of the FY2027 NDAA."

@@ -1,0 +1,9 @@
+﻿id: DIAG-EROS-001
+type: diagnostic
+thesis: "The response to a self-correcting channel (annual appropriations) trending against the policy was not repair but relocation. The system didn't correct; it defended."
+epistemic_status: "proposed"
+status: "completed"
+supporting_claims:
+  - claim_id: "CLM-EROS-001"
+    materiality: true
+created: "2026-10-20T10:00:00Z"

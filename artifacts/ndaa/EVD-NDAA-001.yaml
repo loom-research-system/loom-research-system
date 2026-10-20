@@ -1,0 +1,9 @@
+﻿id: EVD-NDAA-001
+type: evidence
+source_id: "SRC-NDAA-001"
+extracted_content: |-
+  Placeholder: Actual Section 219 text to be inserted here.
+location: "H.R. 8800 (Engrossed in House), Title II, Section 219"
+retrieved_at: "2026-10-15T10:00:00Z"
+document_hash: "sha256:f0d864285be33e12984debe892e722d3ce563a14cc751f9e6ec3efaabeede304"
+extracted_by: "human:founder"

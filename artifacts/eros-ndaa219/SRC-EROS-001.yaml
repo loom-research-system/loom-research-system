@@ -1,0 +1,13 @@
+id: SRC-EROS-001
+type: source
+title: "Placeholder Source 1 for NDAA Section 219"
+publisher: "U.S. Congress / Independent Analysis"
+date: "2026-07-22"
+primary_secondary: "primary"
+independence: true
+retrieved: false
+copyright_status: "public_domain"
+source_assessment:
+  quality_rating: "pending"
+  factors: ["pending_retrieval"]
+  rationale: "Document not yet retrieved or hashed. Hash chain pending."

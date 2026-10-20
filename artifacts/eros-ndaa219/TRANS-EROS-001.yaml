@@ -1,0 +1,10 @@
+id: TRANS-EROS-001
+target_node_id: "MECH-EROS-001"
+current_state: "proposed"
+target_state: "active"
+transition_action: "create"
+required_capacity:
+  - "legal_authority"
+  - "procurement"
+risk_level: "high"
+sequence_order: 1

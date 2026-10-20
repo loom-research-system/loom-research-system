@@ -1,0 +1,9 @@
+id: MECH-EROS-001
+type: mechanism
+name: "NDAA Section 219 Statutory Procurement Pathway"
+authority_source: "U.S. Congress"
+reversibility_channel: "statutory_repeal"
+implementation_debt_risk: "critical"
+status: "proposed"
+effective_from: "2026-07-22"
+effective_to: null

@@ -1,0 +1,15 @@
+id: CLM-EROS-002
+type: claim
+claim_type: "standard"
+statement: "The provision merely coordinates existing cooperation. Congress retains full authority to amend or repeal. Reversal cost does not materially change."
+status: "completed"
+epistemic_status: "contested"
+verification_level: "source_backed"
+promotion_stage: "candidate"
+primary_applicability: "applicable"
+current_as_of: "2026-10-20"
+related_evidence:
+  - "EVD-EROS-005"
+contradiction_status: "unresolved"
+created: "2026-10-20T10:00:00Z"
+updated: "2026-10-20T10:00:00Z"

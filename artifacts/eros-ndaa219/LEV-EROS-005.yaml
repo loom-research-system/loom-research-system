@@ -1,0 +1,9 @@
+id: LEV-EROS-005
+type: mechanism
+name: "Reversal Lever 5 (e.g., Strip Amendment, Appropriations Defund)"
+authority_source: "U.S. Congress / Executive Branch"
+reversibility_channel: "annual_appropriation"
+implementation_debt_risk: "medium"
+status: "proposed"
+effective_from: "2026-07-22"
+effective_to: null

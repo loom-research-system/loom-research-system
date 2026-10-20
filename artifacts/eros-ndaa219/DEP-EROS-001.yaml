@@ -1,0 +1,7 @@
+id: DEP-EROS-001
+source_node_id: "MECH-EROS-001"
+target_node_id: "LEV-EROS-003"
+relationship_type: "constrains"
+dependency_strength: "operational"
+valid_from: "2026-07-22"
+valid_to: null

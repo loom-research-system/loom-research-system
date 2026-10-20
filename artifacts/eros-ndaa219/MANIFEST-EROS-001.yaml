@@ -1,0 +1,7 @@
+id: MANIFEST-EROS-001
+type: manifest
+title: "EROS NDAA Section 219 Artifact Set"
+version: "1.0.0-draft"
+status: "draft"
+total_objects: 31
+notes: "Structural skeleton. All source hashes and URLs are placeholders pending actual document retrieval and hashing."

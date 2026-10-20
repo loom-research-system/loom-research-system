@@ -1,0 +1,17 @@
+id: CLM-EROS-001
+type: claim
+claim_type: "standard"
+statement: "Section 219/1217 of the FY2027 NDAA is designed so that U.S.-Israel defense cooperation becomes reversible only at escalating cost, by migrating it from the annually-reversible foreign-aid appropriations channel into statutory procurement dependency chains."
+status: "completed"
+epistemic_status: "supported"
+verification_level: "cross_verified"
+promotion_stage: "accepted"
+primary_applicability: "applicable"
+current_as_of: "2026-10-20"
+related_evidence:
+  - "EVD-EROS-001"
+  - "EVD-EROS-004"
+contradiction_status: "resolved"
+contradiction_resolution: "Coordination claim accurate at clause level but fails at mechanism-purpose level; procurement-transition clause creates a dependency chain whose reversal cost escalates."
+created: "2026-10-20T10:00:00Z"
+updated: "2026-10-20T10:00:00Z"

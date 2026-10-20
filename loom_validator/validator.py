@@ -83,7 +83,7 @@ class LoomValidator:
 
         if promotion == "canonical" and verification in ["none", "source_backed"]:
             self.errors.append(ValidationError("PROMOTION-001", "error", claim_id, "canonical promotion requires verification_level >= cross_verified", "Complete cross-verification before canonical promotion", False))
-        if promotion == "canonical" and epistemic in ["proposed", "unknown", "unresolved", "contested"]:
+        if promotion == "canonical" and epistemic in ["proposed", "unknown", "unresolved", "contested", "contradicted"]:
             self.errors.append(ValidationError("PROMOTION-003", "error", claim_id, f"canonical promotion requires epistemic_status 'supported' or 'known', found '{epistemic}'", "Resolve epistemic barriers before canonical promotion", False))
         if promotion == "accepted" and epistemic in ["proposed", "unknown", "unresolved", "contested"]:
             self.errors.append(ValidationError("PROMOTION-004", "error", claim_id, f"accepted promotion requires epistemic_status 'supported' or 'known', found '{epistemic}'", "Resolve epistemic barriers before accepted promotion", False))
@@ -163,6 +163,10 @@ class LoomValidator:
             self.errors.append(ValidationError("TRANS-001", "error", trans_id, f"Transition references non-existent target node '{trans.get('target_node_id')}'", "Create target node or correct ID", False))
         if trans.get("sequence_order") is not None and trans["sequence_order"] < 1:
             self.errors.append(ValidationError("TRANS-002", "error", trans_id, "sequence_order must be >= 1", "Update sequence order", False))
+
+    
+        if promotion == "rejected" and epistemic_status != "contradicted":
+            self.errors.append(ValidationError("EROS-001", "error", claim_id, "Rejected claims must have epistemic_status 'contradicted'", "Update epistemic status", False))
 
     def _validate_cascade_integrity(self):
         for event in self.events:
