@@ -112,7 +112,7 @@ def render(doc):
 <div class="doc-shell">
 <header class="doc-top">
   <a class="wordmark" href="../../">LOOM<span>.</span></a>
-  <nav><a href="../record/">Research Record</a> &nbsp;·&nbsp; <a href="../">Research</a></nav>
+  <nav><a href="../../record/">Research Record</a> &nbsp;·&nbsp; <a href="../../">Research</a></nav>
 </header>
 <section class="doc-head">
   <div class="eyebrow">PUBLIC RESEARCH DOCUMENT · {html.escape(doc['label'])}</div>
