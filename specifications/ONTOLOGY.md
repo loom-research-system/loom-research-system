@@ -106,6 +106,6 @@ The detailed working ontology remains versioned in the repository. This public p
 
 ## Related documents
 
-- [Evidence and Provenance Model](../research/documents/evidence-provenance/)
-- [Research Protocol](../research/documents/research-protocol/)
-- [PL-307 — Claims, Epistemic Status, Verification & Promotion](../research/documents/pl-307/)
+- [Evidence and Provenance Model](../evidence-provenance/)
+- [Research Protocol](../research-protocol/)
+- [PL-307 — Claims, Epistemic Status, Verification & Promotion](../pl-307/)
