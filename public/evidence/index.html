@@ -1,1 +1,107 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Evidence — Project Loom</title><link rel="stylesheet" href="../css/style.css"></head><body><header class="site-header"><div class="wrap nav-row"><a class="wordmark" href="../">LOOM<span>.</span></a><nav><a href="../research/">Research</a><a href="../cases/">Cases</a><a href="../how-loom-works/">How Loom Works</a><a class="active" href="./">Evidence</a><a href="../development/">Development</a></nav></div></header><main><section class="page-hero wrap"><p class="eyebrow">EVIDENCE · RESEARCH CREDIBILITY</p><h1>Don't take Loom's word for it.</h1><p class="dek">Loom is being built around a simple distinction: an AI system can help find, organize, or propose information. It cannot establish a research claim by itself.</p></section><section class="wrap section"><div class="section-head"><span class="section-no">01</span><div><p class="eyebrow">THE EVIDENCE CHAIN</p><h2>From source to public statement.</h2></div></div><div class="chain"><div><span>01</span><b>Source</b><p>A document, record, dataset, interview, or other identifiable source.</p></div><div><span>02</span><b>Evidence</b><p>A retrieved passage, observation, or source object that can be located and inspected.</p></div><div><span>03</span><b>Claim</b><p>A bounded statement about what the evidence establishes. Observation and claim are not interchangeable.</p></div><div><span>04</span><b>Verification</b><p>Checks that establish whether the evidence supports the claim, including cross-verification and contradiction handling.</p></div><div><span>05</span><b>Promotion</b><p>A human-governed decision about whether a claim may move to a stronger epistemic status.</p></div></div></section><section class="ink-section"><div class="wrap section"><div class="section-head light"><span class="section-no">02</span><div><p class="eyebrow">EPISTEMIC DISCIPLINE</p><h2>Uncertainty is part of the record.</h2></div></div><div class="two-col light-copy"><div><h3>What Loom will distinguish</h3><ul><li>Observation ≠ Claim</li><li>Source-backed evidence ≠ independently verified fact</li><li>Candidate claim ≠ supported claim</li><li>Diagnostic explanation ≠ established causal proof</li><li>Repository status ≠ public certainty</li></ul></div><div><h3>What Loom is building</h3><p>The claims and verification specification uses typed epistemic statuses, retrieval requirements, cross-verification, contradiction records, near-duplicate detection, append-only verification events, and human promotion gates.</p><p>The research system is designed to make it possible to answer a basic question: <strong>why does Loom believe this?</strong></p></div></div></div></section><section class="wrap section"><div class="section-head"><span class="section-no">03</span><div><p class="eyebrow">PUBLIC RECORD</p><h2>The technical layer is available when you want it.</h2></div></div><p class="wide-copy">The public site is intentionally not a Git repository or an Obsidian vault. Technical provenance is progressively disclosed: first the finding, then the evidence, then the research record behind the finding. The underlying repository remains open so that researchers and technical collaborators can inspect the machinery.</p><div class="actions"><a class="button" href="https://github.com/loom-research-system/loom-research-system">Open the research repository</a><a class="text-link" href="../development/">See what is still being built →</a></div></section></main><footer class="site-footer"><div class="wrap footer-row"><span>PROJECT LOOM</span><span>Evidence</span><a href="../">Home</a></div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Project Loom links sources, evidence, claims, verification and public findings.">
+  <title>Evidence — Project Loom</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="../">LOOM<span>.</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="../research/">Research</a>
+      <a href="../cases/">Cases</a>
+      <a href="../how-loom-works/">How Loom Works</a>
+      <a class="active" href="./">Evidence</a>
+      <a href="../development/">Development</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="page-hero wrap">
+    <p class="eyebrow">EVIDENCE · RESEARCH CREDIBILITY</p>
+    <h1>Don't take Loom's word for it.</h1>
+    <p class="dek">Loom's central rule is simple: AI can help propose a claim, but the evidence must establish what can responsibly be said. The source, the excerpt, the claim, the checks, and the decision must remain distinguishable.</p>
+    <p class="wide-copy"><strong>Important distinction:</strong> Loom has written specifications, schemas, and validation code. That does not mean every provenance, audit, or verification safeguard is already implemented and validated on every research artifact.</p>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <span class="section-no">01</span>
+      <div><p class="eyebrow">THE EVIDENCE CHAIN</p><h2>From source to public statement.</h2></div>
+    </div>
+    <div class="chain">
+      <div><span>01</span><b>Source</b><p>An identifiable document, record, dataset, or other material that can be retrieved and inspected.</p></div>
+      <div><span>02</span><b>Evidence</b><p>A located excerpt or data point, linked to the source and its exact location.</p></div>
+      <div><span>03</span><b>Observation</b><p>A preliminary interpretation that may suggest what to investigate next.</p></div>
+      <div><span>04</span><b>Claim</b><p>A bounded statement whose wording and scope can be assessed against supporting and contradictory evidence.</p></div>
+      <div><span>05</span><b>Review + decision</b><p>Verification and human governance determine whether, and how, a claim may enter the public record.</p></div>
+    </div>
+  </section>
+
+  <section class="ink-section">
+    <div class="wrap section">
+      <div class="section-head light">
+        <span class="section-no">02</span>
+        <div><p class="eyebrow">WHAT CHECKS MEAN</p><h2>A label is only as strong as the work behind it.</h2></div>
+      </div>
+      <div class="two-col light-copy">
+        <div>
+          <h3>Keep these distinctions visible</h3>
+          <ul>
+            <li>Finding a URL is not retrieving a source.</li>
+            <li>A source containing a passage is not the same as a claim being independently corroborated.</li>
+            <li>Primary-source status does not automatically mean independence.</li>
+            <li>A validator passing structural rules does not prove a claim true.</li>
+            <li>A hash can help identify a captured object; it cannot prove the object is truthful or authentic by itself.</li>
+            <li>An observation is not a claim, and a claim is not a causal diagnosis.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>How Loom treats uncertainty</h3>
+          <p>Supporting evidence and contradictory evidence belong in the same research record. Where the record is incomplete, conflicting, or unavailable, the status should say so. “Not found in the searched records” must not quietly become “does not exist.”</p>
+          <p>Promotion is a governance decision, not an automatic reward for passing a validator. AI cannot promote its own output.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <span class="section-no">03</span>
+      <div><p class="eyebrow">READ THE RULES</p><h2>The full research documents are available here.</h2></div>
+    </div>
+    <div class="research-grid">
+      <a class="research-item" href="../research/documents/evidence-provenance/">
+        <span>MODEL · v0.1</span><h3>Evidence and Provenance Model</h3>
+        <p>The object-level rules for sources, evidence, extraction, verification, provenance events, corrections, and publication.</p><b>Read the model →</b>
+      </a>
+      <a class="research-item" href="../research/documents/pl-307/">
+        <span>PL-307</span><h3>Claims, Epistemic Status, Verification &amp; Promotion</h3>
+        <p>The governing distinctions for claim status, verification, contradiction handling, and promotion eligibility.</p><b>Read the specification →</b>
+      </a>
+      <a class="research-item" href="../research/documents/research-protocol/">
+        <span>PROTOCOL · DRAFT</span><h3>How a case is investigated</h3>
+        <p>The repeatable working protocol, including search records, claim testing, alternatives, and limitations.</p><b>Read the protocol →</b>
+      </a>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <span class="section-no">04</span>
+      <div><p class="eyebrow">IMPLEMENTATION STATUS</p><h2>Specification is not proof of enforcement.</h2></div>
+    </div>
+    <p class="wide-copy">The evidence model is a working specification and implementation target. The repository contains schemas and validator code, but each stronger claim about retrieval, hash verification, independent review, append-only history, or adversarial testing must be supported by actual test results and artifact records. The Flint case is currently undergoing that source-and-provenance audit rather than being represented as a completed reproducible package.</p>
+    <div class="actions">
+      <a class="button" href="../research/record/">Inspect the research record</a>
+      <a class="text-link" href="../development/">See what is still being built →</a>
+    </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="wrap footer-row"><span>PROJECT LOOM</span><span>Evidence</span><a href="../">Home</a></div></footer>
+</body>
+</html>
