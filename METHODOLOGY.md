@@ -1,66 +1,114 @@
-﻿# How Loom Research Works (v1.0)
-**Effective Date:** October 9, 2026  
-**Governing Specifications:** PL-307 v1.0, PL-001 v1.1  
-**Status:** Active and Mechanically Enforced  
+# How Loom Research Works
+**Version:** 1.1  
+**Status:** Active public methodology; implementation claims are qualified  
+**Updated:** October 2026
 
----
+## The basic question
 
-## 1. The Core Philosophy
-Project Loom is an empirical governance research program. We do not rely on the inherent trustworthiness of AI, nor do we rely on the inherent authority of human reviewers. Instead, we rely on a **mechanically enforced, auditable trail of evidence**.
+Project Loom investigates what happens between a public decision and the outcome people experience. A policy can be announced or formally adopted without all the authority, resources, people, information, systems, and follow-through needed to carry it out.
 
-Our core directive is simple: *We do not call a research finding "working" until our automated validators and human auditors can demonstrate that it behaves exactly as the evidence dictates.*
+Loom studies that gap through cases and evidence. It does not assume in advance that a policy succeeded or failed, and it does not treat a plausible explanation as established merely because it sounds convincing.
 
-## 2. The Four Dimensions of Truth
-In traditional research, a claim is often just "true" or "false." In Loom, every claim is evaluated across four distinct dimensions to prevent bias and overconfidence:
+> **AI may propose. Evidence must establish. Humans may promote.**
 
-1. **Workflow Status:** Where is the object in the pipeline? (e.g., `proposed`, `under_review`, `completed`).
-2. **Epistemic Status:** What does the evidence actually allow us to say? (e.g., `unknown`, `contested`, `supported`, `known`).
-3. **Verification Level:** How deeply has it been checked? (e.g., `source_backed`, `cross_verified`, `primary_verified`).
-4. **Promotion Stage:** Has it been formally admitted to the permanent record? (e.g., `candidate`, `accepted`, `canonical`).
+This is both an epistemic rule and a test for the research system itself. The system must not claim to enforce a safeguard until its behavior has been implemented and tested.
 
-*Crucially, a claim cannot be "promoted" just because it is "verified." Promotion is a separate governance decision.*
+## 1. Start with a bounded question
 
-## 3. The Research Lifecycle
-Here is exactly what happens when Loom investigates a topic (like the Flint Water Crisis):
+A case begins with a question that can be investigated. Researchers define the policy or decision, the intended outcome, the observed outcome being examined, the relevant institutions, geography and timeframe, and the limits of the inquiry.
 
-### Step 1: Source Retrieval
-We do not accept URLs. A source is only "retrieved" when we have a local copy of the document and have generated a cryptographic hash (SHA-256) of it. If the document changes, the hash changes, and the evidence is invalidated.
+The question should leave room for more than one answer. The researcher should identify what evidence could support the initial explanation, what could challenge it, and what would leave the question unresolved.
 
-### Step 2: Evidence Extraction
-We extract specific passages from those documents. 
-* If an AI extracts the text, it is capped at a low verification level until a human physically opens the document and confirms the text matches. 
-* AI may propose, but evidence must establish.
+## 2. Find and retrieve sources
 
-### Step 3: Claim Formulation
-We write atomic claims (one discrete fact per claim). We explicitly define the scope (geography, timeframe) so a claim cannot silently expand to cover things it wasn't proven to cover.
+Potential sources include laws and regulations, agency records, budgets, audits, technical reports, court documents, meeting minutes, datasets, official statements, peer-reviewed research, and credible reporting. Which sources matter depends on the case.
 
-### Step 4: The Mechanical Gate (The Validator)
-Before a human ever reviews the claim, our automated Python validator checks it against 23+ strict epistemic rules. 
-* *Does it claim to be "known" while having an unresolved contradiction?* **Blocked.**
-* *Does it claim "cross_verified" but both sources are from the same publisher?* **Blocked.**
-* *Is it a "canonical" claim without a formal promotion event?* **Blocked.**
+A search result or URL is a lead, not evidence by itself. A source is usable as evidence only when its relevant content has been retrieved and can be inspected. Access failures, missing pages, unavailable records, and changes in the source should be recorded rather than silently filled in.
 
-### Step 5: Human Audit & Governance
-Once the validator passes the claim, it enters the human audit queue. 
-* To prevent solo-founder bias, our current governance rule requires at least **two designated internal auditors** to independently review and sign off on a claim before it can be promoted to `accepted`. 
-* Auditors must disclose their independence distance and sign an agreement. Their reviews are logged as permanent, append-only provenance events.
+Where an exact captured file or response is available, a cryptographic hash can help identify that particular object and detect later changes. A hash does not prove that the source is truthful, authentic, or correctly interpreted.
 
-### Step 6: Publication
-Only after the validator passes and the human audit is complete do we generate a Publication Bundle. This bundle includes the claim, the exact evidence excerpts, the source hashes, the full audit trail, and a list of all known system limitations (errata) at the time of publication.
+## 3. Separate source, evidence, observation, and claim
 
-## 4. What Loom Does NOT Do
-Transparency requires stating our limits as clearly as our capabilities.
+These are different things:
 
-* **Schema validity is not research credibility.** Just because a claim passes our automated checks does not mean it is infallible. It means it meets our structural and epistemic minimums.
-* **AI agreement is not evidence.** If an AI model generates a plausible-sounding fact, it is treated as a `proposed` claim with zero verification until a human anchors it to a retrieved source.
-* **Canonical is not infallible.** A `canonical` claim is simply one that has passed our highest current governance threshold. If new evidence emerges, the system is designed to trigger a "retraction cascade" and downgrade the claim.
+- **Source:** the document, dataset, record, or other material being examined.
+- **Evidence:** a specific passage, data point, or other located material from that source.
+- **Observation:** an initial interpretation or pattern noticed during research.
+- **Claim:** a bounded statement that can be assessed against evidence.
+- **Diagnostic:** an explanation of how or why a mechanism may have contributed to an outcome.
 
-## 5. How to Verify Us
-You do not have to take our word for it. Project Loom is built on reproducibility.
+A claim should say one main thing and define the scope that the evidence supports. A broad causal explanation requires more than a source showing that one event occurred.
 
-1. **View the Code:** Our entire specification, schema, and validator code is open in our GitHub repository.
-2. **Inspect the Artifacts:** Every Flint Water Crisis claim, source hash, and auditor signature is stored in machine-readable YAML files.
-3. **Run the Validator:** You can clone our repository, install Python, and run our validator yourself. If we have violated our own epistemic rules, the machine will tell you.
+AI can help locate material, suggest claims, or organize analysis. Its output is a proposal until the relevant underlying evidence has been retrieved and checked. AI agreement is not corroboration.
 
----
-*This document describes the current operational reality of Project Loom as of v1.0. It is not a roadmap of future intentions.*
+## 4. Assess evidence and uncertainty
+
+Loom distinguishes four dimensions rather than compressing them into a single status:
+
+| Dimension | Question |
+|---|---|
+| Workflow status | Where is this object in the review process? |
+| Epistemic status | What does the available evidence currently allow us to say? |
+| Verification level | What checks have actually been performed? |
+| Promotion stage | What is the object's standing in the governed research record? |
+
+A source-backed claim is not automatically cross-verified. Multiple sources are not automatically independent: they may repeat the same report, share an institutional interest, or rely on one underlying source. Primary-source status and independence are also different questions.
+
+Researchers should seek evidence that challenges the emerging explanation, preserve contradictions, and explain how conflicts are assessed. If the record is inadequate, conflicting, or incomplete, “unknown” or “unresolved” may be the correct result. Failure to find a record in one search does not prove that the record does not exist.
+
+## 5. Map the implementation mechanism
+
+After establishing the relevant facts, Loom examines the path between the decision and the outcome. Depending on the case, that can include:
+
+- who had legal or operational authority;
+- which actors had to act, and in what order;
+- the funding, staffing, technical systems, and administrative capacity required;
+- procurement and interagency dependencies;
+- what information decision-makers received;
+- how monitoring, appeals, warnings, and correction were supposed to work;
+- where the observed pathway diverged from the intended one.
+
+The existence of a dependency or a capacity gap does not by itself prove that it caused the outcome. Loom must distinguish observed facts from interpretation, test alternatives, and keep conclusions within the limits of the evidence.
+
+## 6. Validate records and review decisions
+
+Schemas and validators can check whether research objects follow specified structural rules. Those checks are useful, but schema validity is not the same as factual accuracy or research credibility.
+
+Human review should consider source fidelity, claim scope, independence, contradictory evidence, provenance, causal reasoning, and limitations. Where independent review is required, reviewers must actually perform distinct reviews; duplicate entries do not establish independence.
+
+Passing a validator may make an object eligible for review. It does not automatically make a claim true or promote it to the permanent record. Promotion, correction, demotion, and retraction are governance decisions that should be recorded with their rationale.
+
+## 7. Publish the finding and the limits
+
+A public case should help readers understand:
+
+1. what question was investigated;
+2. what the evidence supports;
+3. what contradicts or complicates the explanation;
+4. how the proposed mechanism connects decisions to outcomes;
+5. what remains unknown or unverified;
+6. what the research system itself has and has not implemented.
+
+The public page should not ask readers to trust a label such as “passed,” “audited,” or “verified” without giving them a meaningful way to inspect what that label represents.
+
+## 8. Keep a correction path
+
+Research can change when a source is corrected, a missing document becomes available, an interpretation is challenged, or a test reveals a system defect. Loom's target design is to preserve a traceable history of verification and correction rather than silently rewriting the record.
+
+The specification and schemas describe parts of this design. Their presence in the repository does not establish that every intended safeguard is already implemented, tested, and satisfied by every case. Each such claim requires implementation evidence.
+
+## Current implementation boundary
+
+Loom has public specifications, schemas, validation code, and a growing research record. The work of validating provenance and review behavior against real artifacts remains important. In particular, placeholder hashes, unretrieved sources, unverified quotations, or incomplete audit records must not be presented as completed cryptographic provenance or independent verification.
+
+The Flint case is therefore being treated as a source-and-provenance audit task before it is represented as a fully reproducible public case artifact. The same rule applies to all future cases.
+
+## How to inspect the work
+
+- Read the [Claims, Epistemic Status, Verification & Promotion Specification](../pl-307/).
+- Read the [Evidence and Provenance Model](../evidence-provenance/).
+- Read the [Research Protocol](../research-protocol/).
+- Read the [Ontology](../ontology/).
+- Browse the [public Research Record](../record/).
+
+The repository is the underlying development record; the Loom website publishes the research documents in a readable form. The governing test remains simple: **do not ask readers to accept more than the evidence and the implementation can support.**
