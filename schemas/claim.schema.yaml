@@ -4,7 +4,7 @@ title: "Claim"
 type: object
 required: [id, type, claim_type, statement, status, epistemic_status, verification_level, promotion_stage, primary_applicability, current_as_of, related_evidence, contradiction_status, created, updated]
 properties:
-  id: {type: string, pattern: "^CLM-[0-9]{4,}$"}
+  id: {type: string, pattern: "^CLM-(?:[A-Z0-9]+-)?[0-9]{3,}$"}
   type: {type: string, const: "claim"}
   claim_type: {type: string, enum: ["standard", "dispositive_document"]}
   statement: {type: string}
@@ -17,9 +17,11 @@ properties:
   primary_applicability: {type: string, enum: ["applicable", "not_applicable", "destroyed_or_inaccessible"]}
   current_as_of: {type: string, format: date}
   search_protocol_id: {type: string, pattern: "^PROT-[0-9]{4,}$"}
-  related_evidence: {type: array, items: {type: string, pattern: "^EVD-[0-9]{4,}$"}}
-  contradictory_evidence: {type: array, items: {type: string, pattern: "^EVD-[0-9]{4,}$"}}
+  related_evidence: {type: array, items: {type: string, pattern: "^EVD-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
+  contradictory_evidence: {type: array, items: {type: string, pattern: "^EVD-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
   contradiction_status: {type: string, enum: ["none", "documented", "unresolved", "resolved"]}
+  contradiction_note: {type: string}
+  contradiction_resolution: {type: string}
   created: {type: string, format: date-time}
   updated: {type: string, format: date-time}
 additionalProperties: false
