@@ -4,7 +4,7 @@ title: "Provenance Event"
 type: object
 required: [event_id, type, action, actor, timestamp, target_object_id]
 properties:
-  event_id: {type: string, pattern: "^EVT-[0-9]{4,}$"}
+  event_id: {type: string, pattern: "^EVT-(?:[A-Z0-9]+-)?[0-9]{3,}$"}
   type: {type: string, enum: ["extraction_event", "verification_event", "assessment_event", "promotion_event", "demotion_event", "contradiction_search_event", "retraction_event", "correction_event", "cascade_trigger_event"]}
   action: {type: string}
   actor: {type: string}
@@ -15,6 +15,8 @@ properties:
   result: {type: string}
   method: {type: string}
   rationale: {type: string}
+  previous_stage: {type: string}
+  new_stage: {type: string}
   disclosure_text: {type: string}
   publication_location: {type: string}
   model_identifier: {type: string}
