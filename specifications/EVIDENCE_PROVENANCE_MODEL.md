@@ -136,7 +136,7 @@ Implementation status should be upgraded only after the relevant behavior has be
 
 ## Related documents
 
-- [PL-307 — Claims, Epistemic Status, Verification & Promotion](../research/documents/pl-307/)
-- [How Loom Research Works](../research/documents/methodology/)
-- [Research Protocol](../research/documents/research-protocol/)
-- [Ontology](../research/documents/ontology/)
+- [PL-307 — Claims, Epistemic Status, Verification & Promotion](../pl-307/)
+- [How Loom Research Works](../methodology/)
+- [Research Protocol](../research-protocol/)
+- [Ontology](../ontology/)
