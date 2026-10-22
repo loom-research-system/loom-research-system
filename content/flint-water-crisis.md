@@ -1,105 +1,60 @@
 ---
-title: "Flint Water Crisis: Corrosion Control Failure"
-date: 2026-10-08
-tags: [flint, water-crisis, validated, phase-9]
-loom_spec: "PL-307 v1.0"
-validation_status: "PASSED"
+title: "Flint Water Crisis: Source and Provenance Audit"
+date: 2026-10-22
+tags: [flint, water-crisis, provenance-audit, working-draft]
+loom_spec: "PL-307"
+research_status: "SOURCE_AUDIT_REQUIRED"
 ---
 
-# Flint Water Crisis Analysis
-> [!abstract] Executive Summary
-> **Thesis:** The Flint water crisis was a failure of self-correction fragility, where institutional bias overrode technical warnings.  
-> **Epistemic Status:** `Supported` | **Audit Status:** `Completed`
+# Flint Water Crisis: Source and Provenance Audit
 
-This artifact represents a fully audited, multi-source analysis of the Flint Water Crisis. Every claim below is mechanically validated and backed by a cryptographic audit trail.
+**Public status: Working research record — not yet a verified case artifact.**
 
----
+This record tracks the research question and source-retrieval work required before Loom publishes a substantive, reproducible analysis. It does not assert that all listed sources have been retrieved, that the excerpts in earlier drafts are exact quotations, or that cryptographic provenance and independent review have been completed.
 
-## 1. The Core Claim
-**Statement:** "Corrosion-control treatment was not in place at the outset of the April 2014 Flint River water switch."
+## Research question
 
-> [!check] Validation Metrics
-> - **Epistemic Status:** `Supported`
-> - **Verification Level:** `Cross Verified`
-> - **Promotion Stage:** `Accepted`
-> - **Contradiction Status:** `Resolved`
+How did decisions about Flint's water supply, water treatment, institutional responsibilities, technical information, and corrective action interact over time—and what does the available record establish about the pathway from decision to public outcome?
 
----
+The question is deliberately open. The case analysis must distinguish established facts, competing accounts, mechanism hypotheses, and unresolved issues.
 
-## 2. Evidence Chain & Source Registry
+## Core claim to test
 
-### 2.1 Primary Supporting Evidence
+**Candidate claim:** Corrosion-control treatment was not in place at the outset of the April 2014 switch to the Flint River as a water source.
 
-#### Source A: Flint Water Advisory Task Force Final Report
-> "The Task Force found that corrosion control was not implemented at the time of the switch in April 2014."  
-> — *State of Michigan, 2016-03-17*
+This wording is a research target, not a promoted finding in this version of the artifact. Before assigning a stronger status, researchers must retrieve the relevant primary or authoritative documentary record, inspect the exact passages and context, assess independent corroboration, and record any contradictory evidence.
 
-<details>
-<summary><strong>⚙️ View Provenance & Cryptographic Hash</strong></summary>
+## Source leads requiring retrieval and verification
 
-> [!info] Raw Metadata
-> - **Object ID:** `[[EVD-FLINT-001]]`
-> - **Source ID:** `[[SRC-FLINT-001]]`
-> - **Location:** page 12, paragraph 3
-> - **Document Hash:** `sha256:0000000000000000000000000000000000000000000000000000000000000001`
-> - **Extracted By:** `human:founder`
-> - **Retrieved At:** 2026-10-09T10:00:00Z
-</details>
+The following items appeared in an earlier working draft and must be treated as leads until the actual documents and exact passages are retrieved and inspected:
 
-#### Source B: Draft Review of Flint Water System
-> "Flint is not optimizing corrosion control, which is a violation of the Lead and Copper Rule."  
-> — *US Environmental Protection Agency (Region 5), 2015-06-24*
+1. **Flint Water Advisory Task Force final report** — locate the official report, establish its publication details and relevant page/section, capture the source object, and verify the passage attributed to it.
+2. **U.S. Environmental Protection Agency Region 5 review or memorandum concerning Flint water and corrosion control** — identify the exact document/version, determine its status (draft or final), retrieve it, and verify its scope and passage.
+3. **Michigan Department of Environmental Quality public statement about Flint water safety** — locate the original statement and establish its date, full wording, context, and relation to other records.
 
-<details>
-<summary><strong>⚙️ View Provenance & Cryptographic Hash</strong></summary>
+These source leads do not by themselves establish the claim or resolve the historical record. A source's institutional role and independence must be assessed, not assumed.
 
-> [!info] Raw Metadata
-> - **Object ID:** `[[EVD-FLINT-002]]`
-> - **Source ID:** `[[SRC-FLINT-002]]`
-> - **Location:** page 4, section 3
-> - **Document Hash:** `sha256:0000000000000000000000000000000000000000000000000000000000000002`
-> - **Extracted By:** `human:founder`
-> - **Retrieved At:** 2026-10-09T10:15:00Z
-</details>
+## Required work before promotion
 
-### 2.2 Contradictory Evidence & Resolution
+- [ ] Retrieve the actual source objects or document the access failure.
+- [ ] Record stable source IDs, official titles, publishers, dates, URLs, and retrieval method/date.
+- [ ] Generate SHA-256 hashes from the exact captured files; do not use placeholder values.
+- [ ] Confirm every excerpt against the retrieved source and record its page/section/paragraph.
+- [ ] Identify whether sources are primary, secondary, independent, derivative, or institutionally interested.
+- [ ] Search for contradictory and disconfirming evidence.
+- [ ] Form atomic claims with explicit scope and link them to evidence records.
+- [ ] Record verification, review, and promotion events only when those actions actually occur.
+- [ ] Run structural validation and adversarial checks; preserve the actual output.
+- [ ] Publish a bounded case narrative that separates evidence, diagnosis, uncertainty, and alternative explanations.
 
-#### Source C: MDEQ Public Statement on Flint Water Safety
-> "The water in Flint is safe to drink and meets all state and federal standards."  
-> — *Michigan Department of Environmental Quality, 2015-01-21*
+## Provenance warning
 
-<details>
-<summary><strong>⚙️ View Provenance & Cryptographic Hash</strong></summary>
+An earlier draft included hash-shaped placeholder values, asserted a completed audit, and represented repeated founder entries as separate verification actions. Those statements are not accepted as proof of retrieval, cryptographic provenance, or independent review. They must not be carried forward as established audit facts.
 
-> [!warning] Contradictory Source
-> - **Object ID:** `[[EVD-FLINT-003]]`
-> - **Source ID:** `[[SRC-FLINT-003]]`
-> - **Location:** Press Release, January 21, 2015
-> - **Document Hash:** `sha256:0000000000000000000000000000000000000000000000000000000000000003`
-> - **Resolution:** The 2015 MDEQ statement was a premature political assurance, explicitly contradicted and superseded by the independent 2016 Task Force report and the EPA Del Toral memo.
-</details>
+No placeholder hash is a valid substitute for hashing the exact source object. No validator result substitutes for examining the source. No publication label upgrades a claim's evidentiary status.
 
----
+## Current conclusion
 
-## 3. Human Audit & Provenance Trail
-This artifact was promoted to `accepted` only after satisfying the PL-001 v1.1 Bootstrap Governance Rule (requiring ≥2 designated internal auditors).
+**No substantive case conclusion is promoted by this audit-state document.** The appropriate next step is to retrieve and inspect the source material, build traceable evidence records, test the candidate claim and alternatives, and then publish only what that record supports.
 
-> [!timeline] Audit Log
-> 1. **Verification:** `human:founder` confirmed excerpt at 2026-10-09.
-> 2. **Verification:** `human:founder` confirmed excerpt at 2026-10-09.
-> 3. **Assessment:** `[[ACT-0001]]` resolved contradiction: *"The 2015 MDEQ statement was a premature political assurance..."*
-> 4. **Promotion:** `[[ACT-0001]]` promoted claim to `accepted`.
-> 5. **Independent Audit:** `[[ACT-0002]]` performed blind confirmation.
-> 6. **Diagnostic Promotion:** `[[ACT-0002]]` promoted diagnostic to `completed`.
-
----
-
-## 4. Reproducibility
-You do not have to take our word for it. 
-
-1. Clone the repository: `git clone https://github.com/loom-research-system/loom-research-system.git`
-2. Install dependencies: `pip install pyyaml`
-3. Run the validator: `python loom_validator/validator.py .`
-4. Expected output: `✓ All validation rules passed`
-
-*Generated by Project Loom Publication Compiler v1.1 (Quartz Optimized)*
+This is an explicit research state, not a null result about the historical event. The evidence has not yet been assembled here in a form that justifies the stronger claims made by the previous draft.
