@@ -5,6 +5,9 @@ on:
     branches: [ "main" ]
     paths:
       - 'public/**'
+      - 'specifications/**'
+      - 'scripts/build_public_docs.py'
+      - '.github/workflows/deploy-public.yml'
   workflow_dispatch:
 
 permissions:
@@ -21,6 +24,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install document renderer
+        run: python -m pip install markdown
+
+      - name: Build public research documents
+        run: python scripts/build_public_docs.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
