@@ -164,9 +164,7 @@ class LoomValidator:
         if trans.get("sequence_order") is not None and trans["sequence_order"] < 1:
             self.errors.append(ValidationError("TRANS-002", "error", trans_id, "sequence_order must be >= 1", "Update sequence order", False))
 
-    
-        if promotion == "rejected" and epistemic_status != "contradicted":
-            self.errors.append(ValidationError("EROS-001", "error", claim_id, "Rejected claims must have epistemic_status 'contradicted'", "Update epistemic status", False))
+
 
     def _validate_cascade_integrity(self):
         for event in self.events:
