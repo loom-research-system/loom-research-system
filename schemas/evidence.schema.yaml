@@ -4,9 +4,9 @@ title: "Evidence"
 type: object
 required: [id, type, source_id, extracted_content, location, retrieved_at, document_hash, extracted_by]
 properties:
-  id: {type: string, pattern: "^EVD-[0-9]{4,}$"}
+  id: {type: string, pattern: "^EVD-(?:[A-Z0-9]+-)?[0-9]{3,}$"}
   type: {type: string, const: "evidence"}
-  source_id: {type: string, pattern: "^SRC-[0-9]{4,}$"}
+  source_id: {type: string, pattern: "^SRC-(?:[A-Z0-9]+-)?[0-9]{3,}$"}
   extracted_content: {type: string}
   location: {type: string}
   retrieved_at: {type: string, format: date-time}
