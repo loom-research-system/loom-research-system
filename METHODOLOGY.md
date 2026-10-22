@@ -109,6 +109,6 @@ The Flint case is therefore being treated as a source-and-provenance audit task 
 - Read the [Evidence and Provenance Model](../evidence-provenance/).
 - Read the [Research Protocol](../research-protocol/).
 - Read the [Ontology](../ontology/).
-- Browse the [public Research Record](../record/).
+- Browse the [public Research Record](../../record/).
 
 The repository is the underlying development record; the Loom website publishes the research documents in a readable form. The governing test remains simple: **do not ask readers to accept more than the evidence and the implementation can support.**
