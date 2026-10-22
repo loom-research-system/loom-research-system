@@ -25,10 +25,31 @@ DOCUMENTS = [
     },
     {
         "id": "methodology",
-        "label": "METHODOLOGY · v1.0",
+        "label": "METHODOLOGY · v1.1",
         "title": "How Loom Research Works",
         "source": ROOT / "METHODOLOGY.md",
-        "description": "The active methodological description of Loom: source retrieval, evidence extraction, claim formulation, mechanical validation, human audit, publication, and the limits of what the system can establish.",
+        "description": "Loom's research lifecycle, evidence discipline, review requirements, publication rules, and explicit distinction between specified controls and validated implementation.",
+    },
+    {
+        "id": "evidence-provenance",
+        "label": "MODEL · v0.1",
+        "title": "Evidence and Provenance Model",
+        "source": ROOT / "specifications" / "EVIDENCE_PROVENANCE_MODEL.md",
+        "description": "How Loom connects sources, evidence, observations, claims, verification, governance decisions, and public research artifacts—and what provenance can and cannot prove.",
+    },
+    {
+        "id": "ontology",
+        "label": "ONTOLOGY · v1.0",
+        "title": "Project Loom Ontology",
+        "source": ROOT / "specifications" / "ONTOLOGY.md",
+        "description": "The core concepts Loom uses to study the gap between policy decisions and outcomes, including concept maturity and the rules for promotion.",
+    },
+    {
+        "id": "research-protocol",
+        "label": "PROTOCOL · v0.1 DRAFT",
+        "title": "Project Loom Research Protocol",
+        "source": ROOT / "specifications" / "RESEARCH_PROTOCOL.md",
+        "description": "A repeatable case-research method for defining scope, retrieving sources, extracting evidence, testing claims, mapping implementation mechanisms, reviewing contradictions, and reporting uncertainty.",
     },
 ]
 
