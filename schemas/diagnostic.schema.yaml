@@ -4,7 +4,7 @@ title: "Diagnostic"
 type: object
 required: [id, type, ontology_concept_id, thesis, supporting_claims, epistemic_status, status, created]
 properties:
-  id: {type: string, pattern: "^DIAG-[0-9]{4,}$"}
+  id: {type: string, pattern: "^DIAG-(?:[A-Z0-9]+-)?[0-9]{3,}$"}
   type: {type: string, const: "diagnostic"}
   ontology_concept_id: {type: string, pattern: "^PL-[0-9]{3,}$"}
   thesis: {type: string}
@@ -14,9 +14,10 @@ properties:
       type: object
       required: [claim_id, materiality]
       properties:
-        claim_id: {type: string, pattern: "^CLM-[0-9]{4,}$"}
+        claim_id: {type: string, pattern: "^CLM-(?:[A-Z0-9]+-)?[0-9]{3,}$"}
         materiality: {type: boolean}
   epistemic_status: {type: string, enum: ["proposed", "unknown", "unresolved", "contested", "supported", "known"]}
   status: {type: string, enum: ["proposed", "under_review", "system_flagged_for_review", "completed"]}
   created: {type: string, format: date-time}
+  updated: {type: string, format: date-time}
 additionalProperties: false
