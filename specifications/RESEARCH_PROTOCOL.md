@@ -117,7 +117,7 @@ The protocol is successful when another researcher can understand what was asked
 
 ## Related documents
 
-- [Evidence and Provenance Model](../research/documents/evidence-provenance/)
-- [Ontology](../research/documents/ontology/)
-- [PL-307 — Claims, Epistemic Status, Verification & Promotion](../research/documents/pl-307/)
-- [How Loom Research Works](../research/documents/methodology/)
+- [Evidence and Provenance Model](../evidence-provenance/)
+- [Ontology](../ontology/)
+- [PL-307 — Claims, Epistemic Status, Verification & Promotion](../pl-307/)
+- [How Loom Research Works](../methodology/)
