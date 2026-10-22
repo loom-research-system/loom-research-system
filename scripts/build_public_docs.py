@@ -23,6 +23,13 @@ DOCUMENTS = [
         "source": ROOT / "specifications" / "PL-307_PL-307 — Claims, Epistemic Status, Verification & Promotion Specification.md",
         "description": "The specification that separates workflow status, epistemic status, verification level, and promotion stage—and defines how claims move through evidence, review, contradiction, correction, and governance.",
     },
+    {
+        "id": "methodology",
+        "label": "METHODOLOGY · v1.0",
+        "title": "How Loom Research Works",
+        "source": ROOT / "METHODOLOGY.md",
+        "description": "The active methodological description of Loom: source retrieval, evidence extraction, claim formulation, mechanical validation, human audit, publication, and the limits of what the system can establish.",
+    },
 ]
 
 PAGE_CSS = r"""
