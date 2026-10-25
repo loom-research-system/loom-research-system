@@ -1,0 +1,14 @@
+id: SRC-FLINT-004
+type: source
+title: "Revised Lead and Copper Report and Consumer Notice of Lead Result Certificate for Community Water Supply"
+publisher: "Michigan Department of Environmental Quality"
+date: "2015-08-20"
+primary_secondary: "primary"
+independence: false
+retrieved: true
+document_hash: "sha256:8eefeacf0eccd826a6150bfe7083504461a5e74fd73db6b0d7d0f63165f4bbbf"
+copyright_status: "public_domain"
+source_assessment:
+  quality_rating: "high"
+  factors: ["directness: high", "bias_risk: moderate (agency reporting record)"]
+  rationale: "Revised MDEQ Lead and Copper Report supplied through the FOIA record. The document explicitly identifies itself as revised after a conference call with DEQ staff."
