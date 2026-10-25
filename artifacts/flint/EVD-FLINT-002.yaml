@@ -1,8 +1,8 @@
-﻿id: EVD-FLINT-002
+id: EVD-FLINT-002
 type: evidence
 source_id: "SRC-FLINT-002"
-extracted_content: "Flint is not optimizing corrosion control, which is a violation of the Lead and Copper Rule."
-location: "page 4, section 3"
-retrieved_at: "2026-10-09T10:15:00Z"
-document_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000002"
+extracted_content: "When the City of Flint switched to the Flint River as their water source on April 30, 2014, the orthophosphate treatment for lead and copper control was not continued. In effect, the City of Flint stopped providing treatment used to mitigate lead and copper levels in the water."
+location: "PDF page 2, section discussing corrosion control after the source switch"
+retrieved_at: "2026-10-25T22:37:37Z"
+document_hash: "sha256:02765bd4bc8c399e5a0e3ade4147dc5b74e2fa76b999ad2a0cdf6e0af0b429bf"
 extracted_by: "human:founder"
