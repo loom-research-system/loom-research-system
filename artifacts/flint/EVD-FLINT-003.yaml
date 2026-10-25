@@ -1,8 +1,8 @@
-﻿id: EVD-FLINT-003
+id: EVD-FLINT-003
 type: evidence
 source_id: "SRC-FLINT-003"
-extracted_content: "The water in Flint is safe to drink and meets all state and federal standards."
-location: "Press Release, January 21, 2015"
-retrieved_at: "2026-10-09T10:30:00Z"
-document_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000003"
+extracted_content: "The original Lead and Copper Report states that 175 sample bottles and instructions were distributed to city residents and that the City was continuing to solicit samples because it did not reach the minimum number for the monitoring period."
+location: "Lead and Copper Report, Comments section; monitoring period 1/1/2015–6/30/2015"
+retrieved_at: "2026-10-25T23:45:00Z"
+document_hash: "sha256:ee7a3384d57bf1fb4a0638c2fa4f4ffe4d994fe73f2c5a47edf3c003dae95576"
 extracted_by: "human:founder"
