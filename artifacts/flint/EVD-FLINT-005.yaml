@@ -1,0 +1,8 @@
+id: EVD-FLINT-005
+type: evidence
+source_id: "SRC-FLINT-005"
+extracted_content: "MDEQ's FOIA appeal response states that its September 14, 2015 production contained a copy of the Flint LCR and emails discussing the Flint LCR. It states that the appealed LCR form was completed by Michael Glasgow and dated August 20, 2015, and that MDEQ believed the conference call occurred between July 28 and August 20, 2015."
+location: "FOIA Appeal Response, September 28, 2015; appeal response discussion of FOIA 6429-15"
+retrieved_at: "2026-10-25T23:45:00Z"
+document_hash: "sha256:7b9bade6bb783742d4bf7576ff9212cf6b3dd680be96f4d51d6aa0e98110feac"
+extracted_by: "human:founder"
