@@ -1,14 +1,14 @@
-﻿id: SRC-FLINT-003
+id: SRC-FLINT-003
 type: source
-title: "MDEQ Public Statement on Flint Water Safety"
+title: "Original Lead and Copper Report and Consumer Notice of Lead Result Certificate for Community Water Supply"
 publisher: "Michigan Department of Environmental Quality"
-date: "2015-01-21"
+date: "2015-08-20"
 primary_secondary: "primary"
 independence: false
 retrieved: true
-document_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000003"
+document_hash: "sha256:ee7a3384d57bf1fb4a0638c2fa4f4ffe4d994fe73f2c5a47edf3c003dae95576"
 copyright_status: "public_domain"
 source_assessment:
-  quality_rating: "moderate"
-  factors: ["directness: high", "bias_risk: high (self-reporting during crisis)"]
-  rationale: "Primary source of the contradictory claim, but carries high institutional bias risk."
+  quality_rating: "high"
+  factors: ["directness: high", "bias_risk: moderate (agency reporting record)"]
+  rationale: "Original MDEQ Lead and Copper Report supplied through the FOIA record. The report is directly relevant to the later revision documented in the FOIA appeal."
