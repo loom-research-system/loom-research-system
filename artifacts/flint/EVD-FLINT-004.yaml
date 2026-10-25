@@ -1,0 +1,8 @@
+id: EVD-FLINT-004
+type: evidence
+source_id: "SRC-FLINT-004"
+extracted_content: "The revised report states that it was revised after a conference call with DEQ staff; two samples were removed from the list for not meeting sample criteria; and, due to population, the number of samples required was reduced to 60. The report lists 69 samples taken."
+location: "Revised Lead and Copper Report, Comments section and fields 4–7; monitoring period 1/4/2015–6/30/2015"
+retrieved_at: "2026-10-25T23:45:00Z"
+document_hash: "sha256:8eefeacf0eccd826a6150bfe7083504461a5e74fd73db6b0d7d0f63165f4bbbf"
+extracted_by: "human:founder"
