@@ -1,0 +1,23 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/evidence_gap.schema.yaml"
+title: "Evidence Gap"
+type: object
+required: [id, type, missing_information, search_performed, search_result, created, updated]
+properties:
+  id: {type: string, pattern: "^GAP-[A-Z0-9-]+$"}
+  type: {type: string, const: "evidence_gap"}
+  related_claim_id: {type: string, pattern: "^CLM-(?:[A-Z0-9]+-)?[0-9]{3,}$"}
+  missing_information: {type: string}
+  hypothesized_source: {type: string}
+  search_protocol_id: {type: string, pattern: "^PROT-[0-9]{4,}$"}
+  search_performed: {type: boolean}
+  search_result: {type: string, enum: ["pending", "not_found", "exhausted", "found", "confirmed_absent"]}
+  search_scope: {type: array, items: {type: string}}
+  search_methods: {type: array, items: {type: string}}
+  search_performed_at: {type: string, format: date-time}
+  absence_basis: {type: string}
+  result_evidence: {type: array, items: {type: string, pattern: "^EVD-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
+  notes: {type: string}
+  created: {type: string, format: date-time}
+  updated: {type: string, format: date-time}
+additionalProperties: false
