@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 from typing import List, Dict
 from dataclasses import dataclass
+import re
 
 @dataclass
 class ValidationError:
@@ -31,7 +32,7 @@ class LoomValidator:
             path = self.repo_root / schema_dir
             if path.exists():
                 for yaml_file in path.rglob("*.yaml"):
-                    with open(yaml_file, encoding='utf-8') as f:
+                    with open(yaml_file, encoding='utf-8-sig') as f:
                         obj = yaml.safe_load(f)
                         if obj:
                             obj_id = obj.get("id") or obj.get("event_id")
@@ -48,6 +49,7 @@ class LoomValidator:
             elif obj_type == "diagnostic": self._validate_diagnostic(obj)
             elif obj_type == "evidence": self._validate_evidence(obj)
             elif obj_type == "source": self._validate_source(obj)
+            elif obj_type == "evidence_gap": self._validate_evidence_gap(obj)
             elif obj_type == "mechanism": self._validate_mechanism(obj)
             elif obj_type == "dependency": self._validate_dependency(obj)
             elif obj_type == "transition": self._validate_transition(obj)
@@ -72,7 +74,7 @@ class LoomValidator:
             self.errors.append(ValidationError("EPISTEMIC-003", "error", claim_id, "Claim is 'contested' but contradiction is marked 'resolved' (stale state)", "Reassess contradiction_status or update epistemic_status", False))
         if epistemic in ["supported", "known"] and verification in ["none", "source_backed"]:
             self.errors.append(ValidationError("VERIFICATION-001", "error", claim_id, f"epistemic_status '{epistemic}' requires verification_level >= cross_verified", "Upgrade verification_level or downgrade epistemic_status", False))
-        
+
         if verification == "cross_verified":
             source_ids = set()
             for evd_id in related_evidence:
@@ -111,6 +113,16 @@ class LoomValidator:
         if epistemic == "unknown" and not claim.get("search_protocol_id"):
             self.errors.append(ValidationError("UNKNOWN-001", "error", claim_id, "unknown claim missing search_protocol_id", "Reference a formalized research protocol", False))
 
+        if contradiction == "resolved":
+            if not claim.get("contradiction_resolution"):
+                self.errors.append(ValidationError("CONTRADICTION-001", "error", claim_id, "Resolved contradiction missing contradiction_resolution", "Explain how the evidence supports the resolution", False))
+            resolution_evidence = claim.get("contradiction_resolution_evidence", [])
+            if not resolution_evidence:
+                self.errors.append(ValidationError("CONTRADICTION-002", "error", claim_id, "Resolved contradiction missing contradiction_resolution_evidence", "Reference evidence supporting the resolution", False))
+            for evd_id in resolution_evidence:
+                if evd_id not in self.objects or self.objects[evd_id].get("type") != "evidence":
+                    self.errors.append(ValidationError("PHANTOM-003", "error", claim_id, f"Contradiction resolution references non-existent evidence '{evd_id}'", "Create evidence object or correct the reference", False))
+
         if claim.get("status") == "system_flagged_for_review":
             cascade_events = [e for e in self.events if e.get("type") == "cascade_trigger_event" and claim_id in e.get("affected_object_ids", [])]
             if not cascade_events:
@@ -137,12 +149,37 @@ class LoomValidator:
             self.errors.append(ValidationError("SCOPE-001", "error", diag_id, f"Diagnostic epistemic_status '{diag_epistemic}' exceeds weakest material claim", f"Downgrade diagnostic to at most '{list(lattice.keys())[min_level]}'", False))
 
     def _validate_evidence(self, evd: dict):
-        if evd.get("source_id") not in self.objects:
+        source = self.objects.get(evd.get("source_id"))
+        if not source or source.get("type") != "source":
             self.errors.append(ValidationError("PHANTOM-001", "error", evd["id"], f"Evidence references non-existent source '{evd.get('source_id')}'", "Create source object or correct source_id reference", False))
+            return
+        source_hash = source.get("document_hash")
+        evidence_hash = evd.get("document_hash")
+        if source_hash and evidence_hash != source_hash:
+            self.errors.append(ValidationError("PROVENANCE-001", "error", evd["id"], "Evidence document_hash does not match its source document_hash", "Use the hash of the exact source version from which the evidence was extracted", False))
+        if not source_hash and evidence_hash:
+            self.errors.append(ValidationError("PROVENANCE-002", "error", evd["id"], "Evidence has a document_hash while its source has no document_hash", "Hash and record the source artifact, or set evidence document_hash to null", False))
 
     def _validate_source(self, src: dict):
-        if src.get("retrieved") and not src.get("document_hash"):
-            self.errors.append(ValidationError("SOURCE-001", "error", src["id"], "Retrieved source missing document_hash", "Add sha256 hash of retrieved document", False))
+        if src.get("retrieved") and not src.get("retrieval_method"):
+            self.errors.append(ValidationError("SOURCE-002", "error", src["id"], "Retrieved source missing retrieval_method", "Record how the source was obtained", False))
+        if src.get("retrieved") and src.get("source_format") == "pdf" and src.get("primary_secondary") == "primary" and not src.get("document_hash"):
+            self.errors.append(ValidationError("SOURCE-003", "error", src["id"], "Retrieved primary PDF missing document_hash", "Hash the exact retrieved PDF bytes", False))
+        if src.get("document_hash") is not None and not re.fullmatch(r"sha256:[a-f0-9]{64}", str(src.get("document_hash"))):
+            self.errors.append(ValidationError("SOURCE-004", "error", src["id"], "document_hash is not a valid SHA-256 value", "Use sha256: followed by 64 lowercase hexadecimal characters", False))
+
+    def _validate_evidence_gap(self, gap: dict):
+        gap_id = gap["id"]
+        claim_id = gap.get("related_claim_id")
+        protocol_id = gap.get("search_protocol_id")
+        if claim_id and (claim_id not in self.objects or self.objects[claim_id].get("type") != "claim"):
+            self.errors.append(ValidationError("GAP-001", "error", gap_id, f"Evidence gap references non-existent claim '{claim_id}'", "Create claim object or correct related_claim_id", False))
+        if protocol_id and protocol_id not in self.objects:
+            self.errors.append(ValidationError("GAP-002", "error", gap_id, f"Evidence gap references non-existent search protocol '{protocol_id}'", "Create protocol object or correct search_protocol_id", False))
+        if gap.get("search_result") in ["exhausted", "confirmed_absent"] and not gap.get("search_performed"):
+            self.errors.append(ValidationError("GAP-003", "error", gap_id, "Search result indicates a completed search but search_performed is false", "Record the search as performed or use pending", False))
+        if gap.get("search_result") == "confirmed_absent" and not gap.get("absence_basis"):
+            self.errors.append(ValidationError("GAP-004", "error", gap_id, "confirmed_absent requires an absence_basis", "Cite the evidence establishing that the material is absent", False))
 
     def _validate_mechanism(self, mech: dict):
         mech_id = mech["id"]
@@ -163,8 +200,6 @@ class LoomValidator:
             self.errors.append(ValidationError("TRANS-001", "error", trans_id, f"Transition references non-existent target node '{trans.get('target_node_id')}'", "Create target node or correct ID", False))
         if trans.get("sequence_order") is not None and trans["sequence_order"] < 1:
             self.errors.append(ValidationError("TRANS-002", "error", trans_id, "sequence_order must be >= 1", "Update sequence order", False))
-
-
 
     def _validate_cascade_integrity(self):
         for event in self.events:
