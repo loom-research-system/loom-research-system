@@ -2,7 +2,7 @@ $schema: "http://json-schema.org/draft-07/schema#"
 $id: "loom://schemas/evidence.schema.yaml"
 title: "Evidence"
 type: object
-required: [id, type, source_id, extracted_content, location, retrieved_at, document_hash, extracted_by]
+required: [id, type, source_id, extracted_content, location, retrieved_at, document_hash, extracted_by, extraction_method]
 properties:
   id: {type: string, pattern: "^EVD-(?:[A-Z0-9]+-)?[0-9]{3,}$"}
   type: {type: string, const: "evidence"}
@@ -10,6 +10,11 @@ properties:
   extracted_content: {type: string}
   location: {type: string}
   retrieved_at: {type: string, format: date-time}
-  document_hash: {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
-  extracted_by: {type: string}
+  document_hash:
+    anyOf:
+      - {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
+      - {type: "null"}
+  extracted_by: {type: string, pattern: "^(human|agent):[A-Z0-9-]+$"}
+  extraction_method: {type: string, enum: ["manual_copy", "manual_transcription", "ocr", "api_scrape", "structured_extraction", "other"]}
+  extraction_note: {type: string}
 additionalProperties: false
