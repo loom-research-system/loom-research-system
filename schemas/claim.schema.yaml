@@ -22,6 +22,13 @@ properties:
   contradiction_status: {type: string, enum: ["none", "documented", "unresolved", "resolved"]}
   contradiction_note: {type: string}
   contradiction_resolution: {type: string}
+  contradiction_resolution_evidence: {type: array, items: {type: string, pattern: "^EVD-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
   created: {type: string, format: date-time}
   updated: {type: string, format: date-time}
+allOf:
+  - if:
+      properties:
+        contradiction_status: {const: "resolved"}
+    then:
+      required: [contradiction_resolution, contradiction_resolution_evidence]
 additionalProperties: false
