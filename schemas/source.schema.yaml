@@ -2,7 +2,7 @@ $schema: "http://json-schema.org/draft-07/schema#"
 $id: "loom://schemas/source.schema.yaml"
 title: "Source"
 type: object
-required: [id, type, title, publisher, date, primary_secondary, independence, retrieved, document_hash, copyright_status, source_assessment]
+required: [id, type, title, publisher, date, primary_secondary, independence, retrieved, retrieval_method, source_format, document_hash, copyright_status, source_assessment]
 properties:
   id: {type: string, pattern: "^SRC-(?:[A-Z0-9]+-)?[0-9]{3,}$"}
   type: {type: string, const: "source"}
@@ -12,7 +12,14 @@ properties:
   primary_secondary: {type: string, enum: ["primary", "secondary"]}
   independence: {type: boolean}
   retrieved: {type: boolean}
-  document_hash: {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
+  retrieval_method: {type: string, enum: ["direct_download", "web_page", "web_archive", "api", "foia_production", "repository_copy", "other"]}
+  source_format: {type: string, enum: ["pdf", "html", "web_page", "dataset", "image", "audio", "video", "spreadsheet", "archive", "other"]}
+  document_hash:
+    anyOf:
+      - {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
+      - {type: "null"}
+  archive_url: {type: string, format: uri}
+  url: {type: string, format: uri}
   copyright_status: {type: string, enum: ["public_domain", "creative_commons", "fair_use", "restricted", "unknown"]}
   source_assessment:
     type: object
@@ -21,4 +28,5 @@ properties:
       quality_rating: {type: string, enum: ["high", "moderate", "low", "unknown"]}
       factors: {type: array, items: {type: string}}
       rationale: {type: string}
+    additionalProperties: false
 additionalProperties: false
