@@ -1,0 +1,10 @@
+id: EVD-FLINT-006
+type: evidence
+source_id: "SRC-FLINT-006"
+extracted_content: "Michigan Public reported on July 13, 2015 that Michigan DEQ spokesperson Brad Wurfel said: “Let me start here – anyone who is concerned about lead in the drinking water in Flint can relax.” The article also described an EPA memo raising concerns about lead levels at a Flint home and questions about whether other elevated results were included in broader testing."
+location: "Article body, paragraphs quoting Brad Wurfel and describing the EPA memo"
+retrieved_at: "2026-10-28T01:45:00Z"
+document_hash: null
+extracted_by: "human:founder"
+extraction_method: "manual_transcription"
+extraction_note: "Secondary source. This evidence establishes what the article reported, not the complete contents of the underlying EPA memo."
