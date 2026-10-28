@@ -1,0 +1,17 @@
+id: SRC-FLINT-006
+type: source
+title: "Leaked internal memo shows federal regulator’s concerns about lead in Flint’s water"
+publisher: "Michigan Public"
+date: "2015-07-13"
+primary_secondary: "secondary"
+independence: true
+retrieved: true
+retrieval_method: "web_page"
+source_format: "web_page"
+document_hash: null
+url: "https://www.michiganpublic.org/health/2015-07-13/leaked-internal-memo-shows-federal-regulators-concerns-about-lead-in-flints-water"
+copyright_status: "unknown"
+source_assessment:
+  quality_rating: "moderate"
+  factors: ["directness: moderate", "contemporaneous: high", "source_type: secondary journalism"]
+  rationale: "Contemporaneous reporting records a public statement by Michigan DEQ spokesperson Brad Wurfel and summarizes an EPA memo. It is secondary reporting, not the EPA memo itself."
