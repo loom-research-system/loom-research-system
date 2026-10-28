@@ -20,4 +20,14 @@ properties:
   notes: {type: string}
   created: {type: string, format: date-time}
   updated: {type: string, format: date-time}
+allOf:
+  - if:
+      properties:
+        search_result: {const: "confirmed_absent"}
+      required: [search_result]
+    then:
+      required: [absence_basis, result_evidence]
+      properties:
+        absence_basis: {type: string, minLength: 1}
+        result_evidence: {type: array, minItems: 1}
 additionalProperties: false
