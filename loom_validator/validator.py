@@ -79,9 +79,12 @@ class LoomValidator:
             source_ids = set()
             for evd_id in related_evidence:
                 evd = self.objects.get(evd_id)
-                if evd: source_ids.add(evd.get("source_id"))
+                if evd:
+                    source = self.objects.get(evd.get("source_id"))
+                    if source and source.get("type") == "source" and source.get("independence") is True:
+                        source_ids.add(source["id"])
             if len(source_ids) < 2:
-                self.errors.append(ValidationError("VERIFICATION-002", "error", claim_id, f"cross_verified requires 2+ independent sources, found {len(source_ids)}", "Add evidence from a second independent source", False))
+                self.errors.append(ValidationError("VERIFICATION-002", "error", claim_id, f"cross_verified requires evidence from 2+ sources marked independent, found {len(source_ids)}", "Add evidence from a second independent source and record its independence assessment", False))
 
         if promotion == "canonical" and verification in ["none", "source_backed"]:
             self.errors.append(ValidationError("PROMOTION-001", "error", claim_id, "canonical promotion requires verification_level >= cross_verified", "Complete cross-verification before canonical promotion", False))
@@ -91,9 +94,15 @@ class LoomValidator:
             self.errors.append(ValidationError("PROMOTION-004", "error", claim_id, f"accepted promotion requires epistemic_status 'supported' or 'known', found '{epistemic}'", "Resolve epistemic barriers before accepted promotion", False))
 
         if verification == "primary_verified" and claim_type == "standard":
-            source_ids = set(evd.get("source_id") for evd_id in related_evidence if (evd := self.objects.get(evd_id)))
-            if len(source_ids) < 2:
-                self.errors.append(ValidationError("VERIFICATION-004", "error", claim_id, "primary_verified on a 'standard' claim requires cross_verified basis (2+ sources)", "Add second independent source or change claim_type to 'dispositive_document'", False))
+            independent_source_ids = set()
+            for evd_id in related_evidence:
+                evd = self.objects.get(evd_id)
+                if evd:
+                    source = self.objects.get(evd.get("source_id"))
+                    if source and source.get("type") == "source" and source.get("independence") is True:
+                        independent_source_ids.add(source["id"])
+            if len(independent_source_ids) < 2:
+                self.errors.append(ValidationError("VERIFICATION-004", "error", claim_id, "primary_verified on a 'standard' claim requires evidence from 2+ independent sources", "Add evidence from a second independent source or use claim_type 'dispositive_document' when justified", False))
         if verification == "primary_verified" and claim.get("primary_applicability") in ["not_applicable", "destroyed_or_inaccessible"]:
             self.errors.append(ValidationError("VERIFICATION-005", "error", claim_id, "primary_verified requires primary_applicability to be 'applicable'", "Correct primary_applicability or downgrade verification_level", False))
 
@@ -178,8 +187,15 @@ class LoomValidator:
             self.errors.append(ValidationError("GAP-002", "error", gap_id, f"Evidence gap references non-existent search protocol '{protocol_id}'", "Create protocol object or correct search_protocol_id", False))
         if gap.get("search_result") in ["exhausted", "confirmed_absent"] and not gap.get("search_performed"):
             self.errors.append(ValidationError("GAP-003", "error", gap_id, "Search result indicates a completed search but search_performed is false", "Record the search as performed or use pending", False))
-        if gap.get("search_result") == "confirmed_absent" and not gap.get("absence_basis"):
-            self.errors.append(ValidationError("GAP-004", "error", gap_id, "confirmed_absent requires an absence_basis", "Cite the evidence establishing that the material is absent", False))
+        result_evidence = gap.get("result_evidence", [])
+        for evd_id in result_evidence:
+            if evd_id not in self.objects or self.objects[evd_id].get("type") != "evidence":
+                self.errors.append(ValidationError("GAP-005", "error", gap_id, f"Evidence gap references non-existent evidence '{evd_id}'", "Create the evidence object or correct result_evidence", False))
+        if gap.get("search_result") == "confirmed_absent":
+            if not gap.get("absence_basis"):
+                self.errors.append(ValidationError("GAP-004", "error", gap_id, "confirmed_absent requires an absence_basis", "Cite the evidence establishing that the material is absent", False))
+            if not result_evidence:
+                self.errors.append(ValidationError("GAP-006", "error", gap_id, "confirmed_absent requires at least one result_evidence reference", "Link the source evidence that establishes the absence", False))
 
     def _validate_mechanism(self, mech: dict):
         mech_id = mech["id"]
