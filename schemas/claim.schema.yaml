@@ -31,4 +31,7 @@ allOf:
         contradiction_status: {const: "resolved"}
     then:
       required: [contradiction_resolution, contradiction_resolution_evidence]
+      properties:
+        contradiction_resolution: {type: string, minLength: 1}
+        contradiction_resolution_evidence: {type: array, minItems: 1}
 additionalProperties: false
