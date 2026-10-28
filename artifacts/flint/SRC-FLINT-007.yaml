@@ -1,0 +1,17 @@
+id: SRC-FLINT-007
+type: source
+title: "Management Alert: Drinking Water Contamination in Flint, Michigan, Demonstrates a Need to Clarify EPA Authority to Issue Emergency Orders to Protect the Public"
+publisher: "U.S. Environmental Protection Agency, Office of Inspector General"
+date: "2016-10-20"
+primary_secondary: "primary"
+independence: true
+retrieved: true
+retrieval_method: "web_page"
+source_format: "html"
+document_hash: null
+url: "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100R9U9.TXT"
+copyright_status: "public_domain"
+source_assessment:
+  quality_rating: "high"
+  factors: ["directness: high", "source_type: official oversight report", "institutional_position: EPA Office of Inspector General"]
+  rationale: "Official EPA OIG report text hosted in EPA's National Environmental Publications Internet Site. This is the text rendition; no byte-level hash is asserted."
