@@ -1,0 +1,10 @@
+id: EVD-FLINT-007
+type: evidence
+source_id: "SRC-FLINT-007"
+extracted_content: "The EPA Office of Inspector General's October 20, 2016 Management Alert states that EPA Region 5 had the authority and sufficient information to issue a Safe Drinking Water Act Section 1431 emergency order to protect Flint residents from lead-contaminated water as early as June 2015. It says Region 5 had information that systems designed to protect Flint drinking water from lead contamination were not in place and that some home test results exceeded the federal action level."
+location: "At a Glance, 'What We Found'; report text under the findings discussion"
+retrieved_at: "2026-10-28T01:45:00Z"
+document_hash: null
+extracted_by: "human:founder"
+extraction_method: "manual_transcription"
+extraction_note: "Transcribed from the official EPA OIG text rendition. The report states the OIG's assessment; it does not itself establish what Michigan DEQ spokesperson Brad Wurfel knew when making the July 2015 statement."
