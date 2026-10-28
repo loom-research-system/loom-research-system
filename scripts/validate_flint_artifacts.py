@@ -107,10 +107,21 @@ def main() -> int:
 
         doc_hash = obj.get("document_hash")
         if object_type in ("source", "evidence"):
-            if not isinstance(doc_hash, str) or not re.fullmatch(r"sha256:[a-f0-9]{64}", doc_hash):
-                errors.append(f"{object_id}: document_hash is missing or malformed")
-            elif doc_hash.startswith("sha256:" + "0" * 32):
+            if doc_hash is not None and (
+                not isinstance(doc_hash, str)
+                or not re.fullmatch(r"sha256:[a-f0-9]{64}", doc_hash)
+            ):
+                errors.append(f"{object_id}: document_hash is malformed")
+            elif isinstance(doc_hash, str) and doc_hash.startswith("sha256:" + "0" * 32):
                 errors.append(f"{object_id}: document_hash looks like a placeholder; retrieve and hash the actual source object")
+            elif (
+                object_type == "source"
+                and obj.get("retrieved") is True
+                and obj.get("primary_secondary") == "primary"
+                and obj.get("source_format") == "pdf"
+                and not doc_hash
+            ):
+                errors.append(f"{object_id}: retrieved primary PDF requires a document_hash")
 
         records.append({
             "id": object_id,
@@ -130,6 +141,13 @@ def main() -> int:
             source_id = obj.get("source_id")
             if source_id not in objects or objects[source_id].get("type") != "source":
                 errors.append(f"{object_id}: source_id {source_id!r} does not resolve to a source object")
+            else:
+                source_hash = objects[source_id].get("document_hash")
+                evidence_hash = obj.get("document_hash")
+                if source_hash and evidence_hash != source_hash:
+                    errors.append(f"{object_id}: document_hash must match source {source_id}")
+                elif not source_hash and evidence_hash is not None:
+                    errors.append(f"{object_id}: document_hash must be null when source {source_id} has no captured-byte hash")
         elif obj.get("type") == "claim":
             for evidence_id in obj.get("related_evidence", []) + obj.get("contradictory_evidence", []):
                 if evidence_id not in objects or objects[evidence_id].get("type") != "evidence":
