@@ -1,0 +1,16 @@
+id: CLM-FLINT-003
+type: claim
+claim_type: "standard"
+statement: "In its October 20, 2016 Management Alert, EPA OIG concluded that EPA Region 5 had sufficient information to issue an emergency order to protect Flint residents from lead-contaminated water as early as June 2015."
+status: "under_review"
+epistemic_status: "supported"
+verification_level: "source_backed"
+promotion_stage: "candidate"
+primary_applicability: "applicable"
+current_as_of: "2026-10-28"
+related_evidence:
+  - "EVD-FLINT-007"
+contradictory_evidence: []
+contradiction_status: "none"
+created: "2026-10-28T01:45:00Z"
+updated: "2026-10-28T01:45:00Z"
