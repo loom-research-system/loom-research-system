@@ -3,7 +3,7 @@ type: claim
 claim_type: "standard"
 statement: "On July 13, 2015, Michigan Public reported that Michigan DEQ spokesperson Brad Wurfel publicly reassured residents concerned about lead in Flint drinking water, saying they could relax."
 status: "under_review"
-epistemic_status: "supported"
+epistemic_status: "proposed"
 verification_level: "source_backed"
 promotion_stage: "candidate"
 primary_applicability: "applicable"
