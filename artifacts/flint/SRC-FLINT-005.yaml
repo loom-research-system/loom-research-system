@@ -6,6 +6,8 @@ date: "2015-09-28"
 primary_secondary: "primary"
 independence: false
 retrieved: true
+retrieval_method: "foia_production"
+source_format: "pdf"
 document_hash: "sha256:7b9bade6bb783742d4bf7576ff9212cf6b3dd680be96f4d51d6aa0e98110feac"
 copyright_status: "public_domain"
 source_assessment:
