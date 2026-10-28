@@ -6,6 +6,8 @@ date: "2016-03-21"
 primary_secondary: "secondary"
 independence: true
 retrieved: true
+retrieval_method: "direct_download"
+source_format: "pdf"
 document_hash: "sha256:2f0bb0e3d9d6f86bd57c2be72fc22e434188a513e339867667ebb2f2d2f7fb98"
 copyright_status: "public_domain"
 source_assessment:
