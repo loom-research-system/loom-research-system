@@ -28,5 +28,15 @@ properties:
       quality_rating: {type: string, enum: ["high", "moderate", "low", "unknown"]}
       factors: {type: array, items: {type: string}}
       rationale: {type: string}
-    additionalProperties: false
+    allOf:
+  - if:
+      properties:
+        retrieved: {const: true}
+        source_format: {const: "pdf"}
+        primary_secondary: {const: "primary"}
+      required: [retrieved, source_format, primary_secondary]
+    then:
+      properties:
+        document_hash: {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
+additionalProperties: false
 additionalProperties: false
