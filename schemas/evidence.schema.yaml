@@ -14,7 +14,7 @@ properties:
     anyOf:
       - {type: string, pattern: "^sha256:[a-f0-9]{64}$"}
       - {type: "null"}
-  extracted_by: {type: string, pattern: "^(human|agent):[A-Z0-9-]+$"}
+  extracted_by: {type: string, pattern: "^(human|agent):[A-Za-z0-9._-]+$"}
   extraction_method: {type: string, enum: ["manual_copy", "manual_transcription", "ocr", "api_scrape", "structured_extraction", "other"]}
   extraction_note: {type: string}
 additionalProperties: false
