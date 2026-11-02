@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ask Loom a question about a law, policy, public promise, government decision, or implementation. Start with a quick read and go deeper when you need to.">
+  <title>Ask Loom — Project Loom</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .ask-hero{padding:5rem 0 3rem}.ask-box{max-width:900px;margin:2rem auto 0;border:1px solid #b8b2a7;background:#fbfaf6;padding:2rem}.ask-box textarea{width:100%;min-height:150px;border:1px solid #8f8a80;background:#fffefb;padding:1rem;font:inherit;font-size:1.05rem;resize:vertical}.ask-box button{margin-top:1rem;border:0;background:#173f3c;color:#fff;padding:.9rem 1.4rem;font:inherit;cursor:pointer}.examples{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}.example{border:1px solid #b8b2a7;background:transparent;padding:.55rem .75rem;cursor:pointer;font:inherit}.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#b8b2a7;margin-top:2rem}.tier{background:#fbfaf6;padding:1.5rem}.tier h3{margin:.3rem 0 .6rem}.tier-label{font-size:.75rem;letter-spacing:.08em}.accountability{margin-top:2rem;border-left:4px solid #a55b3f;padding:1.2rem 1.5rem;background:#f2eee5}.status-note{font-size:.85rem;margin-top:1rem;opacity:.75}.disclaimer{font-size:.9rem;max-width:850px;margin-top:1.5rem}.hidden{display:none}@media(max-width:760px){.tier-grid{grid-template-columns:1fr}.ask-box{padding:1rem}}
+  </style>
+</head>
+<body>
+<header class="site-header"><div class="wrap nav-row"><a class="wordmark" href="../index.html">LOOM<span>.</span></a><nav aria-label="Primary navigation"><a class="active" href="index.html">Ask Loom</a><a href="../research/">Research</a><a href="../cases/">Cases</a><a href="../how-loom-works/">How Loom Works</a><a href="../evidence/">Evidence</a></nav></div></header>
+<main>
+<section class="ask-hero wrap">
+  <p class="eyebrow">ASK LOOM · PUBLIC RESEARCH STARTING POINT</p>
+  <h1>Have a question about<br><em>what government is actually doing?</em></h1>
+  <p class="dek">Start with a simple question. Loom is designed to give you a plain-language answer first, then let you follow the evidence as far as you need.</p>
+  <div class="ask-box">
+    <label for="question"><strong>What do you want to know?</strong></label>
+    <textarea id="question" placeholder="Examples: Will this legislation pass? Did the governor keep this promise? Has this policy actually been implemented?"></textarea>
+    <div class="examples">
+      <button class="example" data-q="What are the odds of this legislation being passed?">Will this bill pass?</button>
+      <button class="example" data-q="Did the government actually implement this policy as promised?">Was it implemented?</button>
+      <button class="example" data-q="What happened to the money allocated for this program?">Where did the money go?</button>
+      <button class="example" data-q="Did this politician keep this promise?">Was the promise kept?</button>
+    </div>
+    <button id="askButton" type="button">Get a Quick Read →</button>
+    <p id="status" class="status-note">The public query interface is being built. The research standard is already defined; live question answering will be connected to the validated Loom evidence layer.</p>
+    <div id="result" class="accountability hidden"></div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><span class="section-no">01</span><div><p class="eyebrow">START WHERE YOU ARE</p><h2>You do not need to know how Loom works.</h2></div></div>
+  <p class="large-copy">You can ask Loom the question the way you would ask a person. The system should determine what kind of research is needed, identify the relevant public record, and give you the simplest useful answer it can support.</p>
+  <p>It should never manufacture certainty just to answer quickly. If the evidence is incomplete, the answer should tell you that—and show you what is missing.</p>
+</section>
+
+<section class="paper-rule"><div class="wrap section">
+  <div class="section-head"><span class="section-no">02</span><div><p class="eyebrow">THREE LEVELS OF DEPTH</p><h2>Same evidence standard. Different depth.</h2></div></div>
+  <div class="tier-grid">
+    <article class="tier"><span class="tier-label">01 · QUICK READ</span><h3>The answer first.</h3><p>A plain-language response, evidence status, key facts, and the most important uncertainty.</p></article>
+    <article class="tier"><span class="tier-label">02 · LOOM BRIEF</span><h3>Show me the work.</h3><p>A structured reconstruction of the decision, responsible actors, implementation, evidence, contradictions, and unresolved questions.</p></article>
+    <article class="tier"><span class="tier-label">03 · FULL LOOM AUDIT</span><h3>Investigate it.</h3><p>A formal research request for deeper reconstruction, source verification, evidence-gap work, competing explanations, and an accountability record.</p></article>
+  </div>
+</div></section>
+
+<section class="wrap section">
+  <div class="section-head"><span class="section-no">03</span><div><p class="eyebrow">ACCOUNTABILITY</p><h2>The point is not to score politicians. It is to trace responsibility.</h2></div></div>
+  <div class="accountability"><strong>What was promised?</strong> → <strong>What authority existed?</strong> → <strong>What was required?</strong> → <strong>What actually happened?</strong> → <strong>Where did implementation diverge?</strong> → <strong>Who could act?</strong> → <strong>What happened next?</strong></div>
+  <p class="large-copy">Loom can therefore examine legislation, executive actions, public promises, agency decisions, spending, programs, regulations, and implementation—not merely whether a statement was technically true.</p>
+</section>
+
+<section class="ink-section"><div class="wrap section"><div class="section-head light"><span class="section-no">04</span><div><p class="eyebrow">THE RULE UNDERNEATH</p><h2>AI may propose.<br>Evidence must establish.<br>Humans may promote.</h2></div></div><p class="large-copy">The public interface can be simple because the research machinery underneath it is not. A Quick Read is not a lower standard of evidence. It is a smaller research surface.</p><a class="light-link" href="../how-loom-works/">See how the research system works →</a></div></section>
+</main>
+<footer class="site-footer"><div class="wrap footer-row"><span>PROJECT LOOM</span><span>Reconstructing how governance actually happens.</span><a href="../development/">Development</a></div></footer>
+<script>
+const q=document.getElementById('question'), status=document.getElementById('status'), result=document.getElementById('result');
+document.querySelectorAll('.example').forEach(b=>b.addEventListener('click',()=>{q.value=b.dataset.q;q.focus()}));
+document.getElementById('askButton').addEventListener('click',()=>{if(!q.value.trim()){q.focus();return} result.classList.remove('hidden');result.innerHTML='<strong>Quick Read is not yet connected to live research.</strong><p>Your question has the right starting point. The production version will route it through Loom\'s evidence and claim layer rather than generate an unsupported answer.</p><p><strong>For now:</strong> use the public cases to see the research record that already exists.</p><a href="../cases/">Explore current research →</a>';status.textContent='Prototype interface · live evidence retrieval is the next implementation layer.'});
+</script>
+</body>
+</html>
