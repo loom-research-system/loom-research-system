@@ -36,7 +36,7 @@ def inquiry_record(**overrides):
 
 class SchemaContractTests(unittest.TestCase):
     def test_all_schemas_are_valid_draft7_schemas(self):
-        for name in ("source.schema.yaml","evidence.schema.yaml","claim.schema.yaml","evidence_gap.schema.yaml","inquiry.schema.yaml"):
+        for name in ("source.schema.yaml","evidence.schema.yaml","claim.schema.yaml","evidence_gap.schema.yaml","inquiry.schema.yaml","research_plan.schema.yaml"):
             with self.subTest(schema=name): Draft7Validator.check_schema(load_schema(name))
 
     def test_hashed_primary_pdf_is_valid(self): self.assertTrue(is_valid("source.schema.yaml", source_record()))
@@ -59,6 +59,15 @@ class SchemaContractTests(unittest.TestCase):
         record=gap_record(search_result="confirmed_absent"); self.assertFalse(is_valid("evidence_gap.schema.yaml",record)); record["absence_basis"]="The agency response explicitly states no records exist."; record["result_evidence"]=["EVD-TEST-001"]; self.assertTrue(is_valid("evidence_gap.schema.yaml",record))
 
     def test_not_found_gap_does_not_require_absence_claim(self): self.assertTrue(is_valid("evidence_gap.schema.yaml",gap_record()))
+
+    def test_valid_research_plan_accepts_prefixed_inquiry_id(self):
+        record = {"id":"PLAN-0042","type":"research_plan","inquiry_id":"INQ-GH-0042","question_type":"promise_commitment","depth":"quick_read","objective":"Establish whether the documented promise was fulfilled.","research_steps":[{"id":"01-promise","purpose":"Identify the commitment.","evidence_target":"primary statement","suggested_sources":[],"status":"pending"}],"stopping_conditions":["Do not infer beyond evidence."],"unresolved_questions":[],"status":"ready","created":"2026-10-01T12:00:00Z","updated":"2026-10-01T12:00:00Z"}
+        self.assertTrue(is_valid("research_plan.schema.yaml", record))
+
+    def test_research_plan_rejects_unrecognized_inquiry_id(self):
+        record = {"id":"PLAN-0042","type":"research_plan","inquiry_id":"INQ-INVALID","question_type":"promise_commitment","depth":"quick_read","objective":"Establish whether the documented promise was fulfilled.","research_steps":[{"id":"01-promise","purpose":"Identify the commitment.","evidence_target":"primary statement","suggested_sources":[],"status":"pending"}],"status":"ready","created":"2026-10-01T12:00:00Z","updated":"2026-10-01T12:00:00Z"}
+        self.assertFalse(is_valid("research_plan.schema.yaml", record))
+
     def test_valid_inquiry_record_is_accepted(self): self.assertTrue(is_valid("inquiry.schema.yaml",inquiry_record()))
     def test_invalid_inquiry_depth_is_rejected(self): self.assertFalse(is_valid("inquiry.schema.yaml",inquiry_record(requested_depth="chatbot")))
 
