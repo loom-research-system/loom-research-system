@@ -4,7 +4,7 @@ title: "Loom Inquiry"
 type: object
 required: [id, type, question, question_type, scope, requested_depth, status, created, updated]
 properties:
-  id: {type: string, pattern: "^INQ-[0-9]{4,}$"}
+  id: {type: string, pattern: "^INQ-(?:[A-Z0-9]+-)?[0-9]{4,}$"}
   type: {type: string, const: "inquiry"}
   question: {type: string, minLength: 5}
   question_type:
