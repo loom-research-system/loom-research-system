@@ -61,6 +61,7 @@ const q=document.getElementById('question');
 const status=document.getElementById('status');
 const result=document.getElementById('result');
 let index=null;
+const REQUEST_URL='https://github.com/loom-research-system/loom-research-system/issues/new?template=research-request.yml';
 
 document.querySelectorAll('.example').forEach(b=>b.addEventListener('click',()=>{q.value=b.dataset.q;q.focus()}));
 
@@ -85,29 +86,26 @@ function sourceList(claim){
   (claim.evidence||[]).forEach(e=>{const s=e.source||{}; rows.push(`<div class="source-line">${esc(s.title)} · ${esc(s.publisher)}${s.date?' · '+esc(s.date):''}</div>`)});
   return rows.join('');
 }
+function requestLink(question,depth){
+  const params=new URLSearchParams({title:`[Research Request] ${question.slice(0,80)}`});
+  const url=`${REQUEST_URL}&${params.toString()}`;
+  return `<a class="secondary" href="${esc(url)}" target="_blank" rel="noopener">Submit as a ${esc(depth)} →</a>`;
+}
 function renderRead(question){
   const type=classify(question);
   const qt=tokens(question);
   const ranked=(index.claims||[]).map(c=>({c,score:[...qt].filter(t=>tokens(c.statement).has(t)).length})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4).map(x=>x.c);
   result.classList.remove('hidden');
   if(!ranked.length){
-    result.innerHTML=`<strong>Loom cannot support an answer from the published evidence yet.</strong><div class="result-meta"><span class="badge">${esc(type)}</span><span class="badge">Evidence limited</span></div><p>The inquiry has been classified, but no promoted claim in the public evidence layer is sufficiently related to it. That is a research gap—not permission to guess.</p><div class="result-actions"><a class="secondary" href="../how-loom-works/">How the evidence layer works →</a><button class="secondary" id="briefButton" type="button">Request a Loom Brief</button></div>`;
+    result.innerHTML=`<strong>Loom cannot support an answer from the published evidence yet.</strong><div class="result-meta"><span class="badge">${esc(type)}</span><span class="badge">Evidence limited</span></div><p>The inquiry has been classified, but no promoted claim in the public evidence layer is sufficiently related to it. That is a research gap—not permission to guess.</p><div class="result-actions">${requestLink(question,'Loom Brief')}<a class="secondary" href="../how-loom-works/">How the evidence layer works →</a></div>`;
     return;
   }
   if(type==='legislative_likelihood'){
-    result.innerHTML=`<strong>Indeterminate from the current Loom research layer.</strong><div class="result-meta"><span class="badge">legislative likelihood</span><span class="badge">No probability model</span></div><p>Loom does not invent a percentage. A future legislative assessment can report Low, Moderate, High, or Indeterminate only when a validated method and sufficient evidence exist.</p><p>The claims below are related evidence, not a prediction.</p>${ranked.map(c=>`<div class="result-claim"><strong>${esc(c.statement)}</strong><p class="source-line">${esc(c.verification_level)} · ${esc(c.epistemic_status)} · as of ${esc(c.current_as_of)}</p>${sourceList(c)}</div>`).join('')}<div class="result-actions"><button class="secondary" id="briefButton" type="button">Request a Loom Brief</button><button class="secondary" id="auditButton" type="button">Request a Full Audit</button></div>`;
+    result.innerHTML=`<strong>Indeterminate from the current Loom research layer.</strong><div class="result-meta"><span class="badge">legislative likelihood</span><span class="badge">No probability model</span></div><p>Loom does not invent a percentage. A future legislative assessment can report Low, Moderate, High, or Indeterminate only when a validated method and sufficient evidence exist.</p><p>The claims below are related evidence, not a prediction.</p>${ranked.map(c=>`<div class="result-claim"><strong>${esc(c.statement)}</strong><p class="source-line">${esc(c.verification_level)} · ${esc(c.epistemic_status)} · as of ${esc(c.current_as_of)}</p>${sourceList(c)}</div>`).join('')}<div class="result-actions">${requestLink(question,'Loom Brief')}${requestLink(question,'Full Loom Audit')}</div>`;
     return;
   }
   const c=ranked[0];
-  result.innerHTML=`<strong>${esc(c.statement)}</strong><div class="result-meta"><span class="badge">${esc(type)}</span><span class="badge">${esc(c.epistemic_status)}</span><span class="badge">${esc(c.verification_level)}</span></div><p>${c.contradiction_status==='none'?'No unresolved contradiction is recorded on this published claim.':'This claim carries a contradiction status; the deeper record should be consulted before treating it as settled.'}</p><div class="result-claim"><strong>Evidence trail</strong><p class="source-line">Claim ${esc(c.id)} · current as of ${esc(c.current_as_of)}</p>${sourceList(c)}</div>${ranked.length>1?`<p><strong>Related published claims</strong></p>${ranked.slice(1).map(x=>`<div class="result-claim"><strong>${esc(x.statement)}</strong><p class="source-line">${esc(x.id)} · ${esc(x.verification_level)} · ${esc(x.epistemic_status)}</p></div>`).join('')}`:''}<div class="result-actions"><button class="secondary" id="briefButton" type="button">Show me the work →</button><button class="secondary" id="auditButton" type="button">Investigate it →</button></div>`;
-  bindEscalation(question);
-}
-function bindEscalation(question){
-  document.getElementById('briefButton')?.addEventListener('click',()=>escalate('Loom Brief',question));
-  document.getElementById('auditButton')?.addEventListener('click',()=>escalate('Full Loom Audit',question));
-}
-function escalate(level,question){
-  result.insertAdjacentHTML('beforeend',`<p><strong>${esc(level)} requested.</strong> The public site is currently static, so this records the next research surface rather than pretending a live queue exists. Your inquiry type is <code>${esc(classify(question))}</code>.</p>`);
+  result.innerHTML=`<strong>${esc(c.statement)}</strong><div class="result-meta"><span class="badge">${esc(type)}</span><span class="badge">${esc(c.epistemic_status)}</span><span class="badge">${esc(c.verification_level)}</span></div><p>${c.contradiction_status==='none'?'No unresolved contradiction is recorded on this published claim.':'This claim carries a contradiction status; the deeper record should be consulted before treating it as settled.'}</p><div class="result-claim"><strong>Evidence trail</strong><p class="source-line">Claim ${esc(c.id)} · current as of ${esc(c.current_as_of)}</p>${sourceList(c)}</div>${ranked.length>1?`<p><strong>Related published claims</strong></p>${ranked.slice(1).map(x=>`<div class="result-claim"><strong>${esc(x.statement)}</strong><p class="source-line">${esc(x.id)} · ${esc(x.verification_level)} · ${esc(x.epistemic_status)}</p></div>`).join('')}`:''}<div class="result-actions">${requestLink(question,'Loom Brief')}${requestLink(question,'Full Loom Audit')}</div>`;
 }
 
 document.getElementById('askButton').addEventListener('click',async()=>{
