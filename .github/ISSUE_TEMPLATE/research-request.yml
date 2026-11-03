@@ -1,0 +1,34 @@
+name: Loom research request
+description: Ask Loom to investigate a question about government, policy, implementation, spending, responsibility, or outcomes.
+title: "[Research Request] "
+labels:
+  - research-request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ask the question in ordinary language. Loom will classify it and create a research inquiry. A submitted request is not itself evidence and does not guarantee that the question can be answered.
+  - type: textarea
+    id: question
+    attributes:
+      label: What do you want to know?
+      description: State the question as clearly as you can.
+      placeholder: Did the government actually implement this policy?
+    validations:
+      required: true
+  - type: dropdown
+    id: depth
+    attributes:
+      label: Requested depth
+      options:
+        - Quick Read
+        - Loom Brief
+        - Full Loom Audit
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Helpful scope or identifiers
+      description: Optional. Include jurisdiction, program, bill number, dates, agency, or other identifiers if known.
