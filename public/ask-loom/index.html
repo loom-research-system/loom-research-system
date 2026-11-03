@@ -7,7 +7,7 @@
   <title>Ask Loom — Project Loom</title>
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    .ask-hero{padding:5rem 0 3rem}.ask-box{max-width:900px;margin:2rem auto 0;border:1px solid #b8b2a7;background:#fbfaf6;padding:2rem}.ask-box textarea{width:100%;min-height:150px;border:1px solid #8f8a80;background:#fffefb;padding:1rem;font:inherit;font-size:1.05rem;resize:vertical}.ask-box button{margin-top:1rem;border:0;background:#173f3c;color:#fff;padding:.9rem 1.4rem;font:inherit;cursor:pointer}.examples{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}.example{border:1px solid #b8b2a7;background:transparent;padding:.55rem .75rem;cursor:pointer;font:inherit}.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#b8b2a7;margin-top:2rem}.tier{background:#fbfaf6;padding:1.5rem}.tier h3{margin:.3rem 0 .6rem}.tier-label{font-size:.75rem;letter-spacing:.08em}.accountability{margin-top:2rem;border-left:4px solid #a55b3f;padding:1.2rem 1.5rem;background:#f2eee5}.status-note{font-size:.85rem;margin-top:1rem;opacity:.75}.disclaimer{font-size:.9rem;max-width:850px;margin-top:1.5rem}.hidden{display:none}@media(max-width:760px){.tier-grid{grid-template-columns:1fr}.ask-box{padding:1rem}}
+    .ask-hero{padding:5rem 0 3rem}.ask-box{max-width:900px;margin:2rem auto 0;border:1px solid #b8b2a7;background:#fbfaf6;padding:2rem}.ask-box textarea{width:100%;min-height:150px;border:1px solid #8f8a80;background:#fffefb;padding:1rem;font:inherit;font-size:1.05rem;resize:vertical}.ask-box button{margin-top:1rem;border:0;background:#173f3c;color:#fff;padding:.9rem 1.4rem;font:inherit;cursor:pointer}.examples{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}.example{border:1px solid #b8b2a7;background:transparent!important;color:#171714!important;padding:.55rem .75rem!important;cursor:pointer;font:inherit}.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#b8b2a7;margin-top:2rem}.tier{background:#fbfaf6;padding:1.5rem}.tier h3{margin:.3rem 0 .6rem}.tier-label{font-size:.75rem;letter-spacing:.08em}.accountability{margin-top:2rem;border-left:4px solid #a55b3f;padding:1.2rem 1.5rem;background:#f2eee5}.status-note{font-size:.85rem;margin-top:1rem;opacity:.75}.result-meta{display:flex;gap:.6rem;flex-wrap:wrap;margin:.9rem 0}.badge{font:700 .68rem Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;border:1px solid #b8b2a7;padding:.35rem .55rem;background:#fffefb}.result-claim{margin:1rem 0;padding:1rem;background:#fffefb;border:1px solid #d2cabc}.result-claim p{margin:.35rem 0}.source-line{font-size:.82rem;color:#6b675f}.result-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}.result-actions a,.result-actions button{margin:0!important;text-decoration:none}.secondary{background:transparent!important;color:#173f3c!important;border:1px solid #173f3c!important}.disclaimer{font-size:.9rem;max-width:850px;margin-top:1.5rem}.hidden{display:none}@media(max-width:760px){.tier-grid{grid-template-columns:1fr}.ask-box{padding:1rem}}
   </style>
 </head>
 <body>
@@ -16,10 +16,10 @@
 <section class="ask-hero wrap">
   <p class="eyebrow">ASK LOOM · PUBLIC RESEARCH STARTING POINT</p>
   <h1>Have a question about<br><em>what government is actually doing?</em></h1>
-  <p class="dek">Start with a simple question. Loom is designed to give you a plain-language answer first, then let you follow the evidence as far as you need.</p>
+  <p class="dek">Ask the question in ordinary language. Loom classifies the inquiry, searches the published evidence layer, and gives you the simplest answer that the evidence can support.</p>
   <div class="ask-box">
     <label for="question"><strong>What do you want to know?</strong></label>
-    <textarea id="question" placeholder="Examples: Will this legislation pass? Did the governor keep this promise? Has this policy actually been implemented?"></textarea>
+    <textarea id="question" placeholder="Examples: Did the governor actually implement this policy? What happened to the money allocated for this program?"></textarea>
     <div class="examples">
       <button class="example" data-q="What are the odds of this legislation being passed?">Will this bill pass?</button>
       <button class="example" data-q="Did the government actually implement this policy as promised?">Was it implemented?</button>
@@ -27,21 +27,21 @@
       <button class="example" data-q="Did this politician keep this promise?">Was the promise kept?</button>
     </div>
     <button id="askButton" type="button">Get a Quick Read →</button>
-    <p id="status" class="status-note">The public query interface is being built. The research standard is already defined; live question answering will be connected to the validated Loom evidence layer.</p>
-    <div id="result" class="accountability hidden"></div>
+    <p id="status" class="status-note">Quick Read uses only claims that have already passed Loom's publication gate. It will not invent an answer when the evidence layer cannot support one.</p>
+    <div id="result" class="accountability hidden" aria-live="polite"></div>
   </div>
 </section>
 
 <section class="wrap section">
   <div class="section-head"><span class="section-no">01</span><div><p class="eyebrow">START WHERE YOU ARE</p><h2>You do not need to know how Loom works.</h2></div></div>
-  <p class="large-copy">You can ask Loom the question the way you would ask a person. The system should determine what kind of research is needed, identify the relevant public record, and give you the simplest useful answer it can support.</p>
-  <p>It should never manufacture certainty just to answer quickly. If the evidence is incomplete, the answer should tell you that—and show you what is missing.</p>
+  <p class="large-copy">Your question becomes an <strong>Inquiry</strong>. Loom classifies what kind of research it requires, then routes it to the appropriate evidence surface.</p>
+  <p>The public interface is deliberately simpler than the machinery underneath it. If the evidence is incomplete, the answer says so. If the question needs deeper work, you can escalate it rather than treating a thin answer as a conclusion.</p>
 </section>
 
 <section class="paper-rule"><div class="wrap section">
   <div class="section-head"><span class="section-no">02</span><div><p class="eyebrow">THREE LEVELS OF DEPTH</p><h2>Same evidence standard. Different depth.</h2></div></div>
   <div class="tier-grid">
-    <article class="tier"><span class="tier-label">01 · QUICK READ</span><h3>The answer first.</h3><p>A plain-language response, evidence status, key facts, and the most important uncertainty.</p></article>
+    <article class="tier"><span class="tier-label">01 · QUICK READ</span><h3>The answer first.</h3><p>A plain-language response compiled from promoted claims, with evidence status, key facts, and uncertainty.</p></article>
     <article class="tier"><span class="tier-label">02 · LOOM BRIEF</span><h3>Show me the work.</h3><p>A structured reconstruction of the decision, responsible actors, implementation, evidence, contradictions, and unresolved questions.</p></article>
     <article class="tier"><span class="tier-label">03 · FULL LOOM AUDIT</span><h3>Investigate it.</h3><p>A formal research request for deeper reconstruction, source verification, evidence-gap work, competing explanations, and an accountability record.</p></article>
   </div>
@@ -50,16 +50,80 @@
 <section class="wrap section">
   <div class="section-head"><span class="section-no">03</span><div><p class="eyebrow">ACCOUNTABILITY</p><h2>The point is not to score politicians. It is to trace responsibility.</h2></div></div>
   <div class="accountability"><strong>What was promised?</strong> → <strong>What authority existed?</strong> → <strong>What was required?</strong> → <strong>What actually happened?</strong> → <strong>Where did implementation diverge?</strong> → <strong>Who could act?</strong> → <strong>What happened next?</strong></div>
-  <p class="large-copy">Loom can therefore examine legislation, executive actions, public promises, agency decisions, spending, programs, regulations, and implementation—not merely whether a statement was technically true.</p>
+  <p class="large-copy">Loom can examine legislation, executive actions, public promises, agency decisions, spending, programs, regulations, and implementation—not merely whether a statement was technically true.</p>
 </section>
 
-<section class="ink-section"><div class="wrap section"><div class="section-head light"><span class="section-no">04</span><div><p class="eyebrow">THE RULE UNDERNEATH</p><h2>AI may propose.<br>Evidence must establish.<br>Humans may promote.</h2></div></div><p class="large-copy">The public interface can be simple because the research machinery underneath it is not. A Quick Read is not a lower standard of evidence. It is a smaller research surface.</p><a class="light-link" href="../how-loom-works/">See how the research system works →</a></div></section>
+<section class="ink-section"><div class="wrap section"><div class="section-head light"><span class="section-no">04</span><div><p class="eyebrow">THE RULE UNDERNEATH</p><h2>AI may propose.<br>Evidence must establish.<br>Humans may promote.</h2></div></div><p class="large-copy">A Quick Read is not a lower standard of evidence. It is a smaller research surface. The browser can read published claims; it cannot promote a claim or manufacture a factual answer.</p><a class="light-link" href="../how-loom-works/">See how the research system works →</a></div></section>
 </main>
 <footer class="site-footer"><div class="wrap footer-row"><span>PROJECT LOOM</span><span>Reconstructing how governance actually happens.</span><a href="../development/">Development</a></div></footer>
 <script>
-const q=document.getElementById('question'), status=document.getElementById('status'), result=document.getElementById('result');
+const q=document.getElementById('question');
+const status=document.getElementById('status');
+const result=document.getElementById('result');
+let index=null;
+
 document.querySelectorAll('.example').forEach(b=>b.addEventListener('click',()=>{q.value=b.dataset.q;q.focus()}));
-document.getElementById('askButton').addEventListener('click',()=>{if(!q.value.trim()){q.focus();return} result.classList.remove('hidden');result.innerHTML='<strong>Quick Read is not yet connected to live research.</strong><p>Your question has the right starting point. The production version will route it through Loom\'s evidence and claim layer rather than generate an unsupported answer.</p><p><strong>For now:</strong> use the public cases to see the research record that already exists.</p><a href="../cases/">Explore current research →</a>';status.textContent='Prototype interface · live evidence retrieval is the next implementation layer.'});
+
+function tokens(text){
+  const stop=new Set(['what','this','that','does','actually','government','about','will','were','from','have','they','them','with','keep','kept','policy','program']);
+  return new Set((text.toLowerCase().match(/[a-z0-9]{4,}/g)||[]).filter(x=>!stop.has(x)));
+}
+function classify(text){
+  const t=text.toLowerCase();
+  if(/implement|in effect|enforced|carried out|actually doing/.test(t)) return 'implementation_status';
+  if(/pass|passed|become law|legislation|bill/.test(t)) return 'legislative_likelihood';
+  if(/promise|promised|commitment|pledged/.test(t)) return 'promise_commitment';
+  if(/money|fund|funding|spent|spending|budget|allocated/.test(t)) return 'spending_funding';
+  if(/responsible|authority|who decided|who could/.test(t)) return 'responsibility_authority';
+  if(/worked|outcome|result|did it help/.test(t)) return 'outcome';
+  if(/what happened|how did|why did|timeline|history/.test(t)) return 'historical_reconstruction';
+  return 'full_research';
+}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function sourceList(claim){
+  const rows=[];
+  (claim.evidence||[]).forEach(e=>{const s=e.source||{}; rows.push(`<div class="source-line">${esc(s.title)} · ${esc(s.publisher)}${s.date?' · '+esc(s.date):''}</div>`)});
+  return rows.join('');
+}
+function renderRead(question){
+  const type=classify(question);
+  const qt=tokens(question);
+  const ranked=(index.claims||[]).map(c=>({c,score:[...qt].filter(t=>tokens(c.statement).has(t)).length})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4).map(x=>x.c);
+  result.classList.remove('hidden');
+  if(!ranked.length){
+    result.innerHTML=`<strong>Loom cannot support an answer from the published evidence yet.</strong><div class="result-meta"><span class="badge">${esc(type)}</span><span class="badge">Evidence limited</span></div><p>The inquiry has been classified, but no promoted claim in the public evidence layer is sufficiently related to it. That is a research gap—not permission to guess.</p><div class="result-actions"><a class="secondary" href="../how-loom-works/">How the evidence layer works →</a><button class="secondary" id="briefButton" type="button">Request a Loom Brief</button></div>`;
+    return;
+  }
+  if(type==='legislative_likelihood'){
+    result.innerHTML=`<strong>Indeterminate from the current Loom research layer.</strong><div class="result-meta"><span class="badge">legislative likelihood</span><span class="badge">No probability model</span></div><p>Loom does not invent a percentage. A future legislative assessment can report Low, Moderate, High, or Indeterminate only when a validated method and sufficient evidence exist.</p><p>The claims below are related evidence, not a prediction.</p>${ranked.map(c=>`<div class="result-claim"><strong>${esc(c.statement)}</strong><p class="source-line">${esc(c.verification_level)} · ${esc(c.epistemic_status)} · as of ${esc(c.current_as_of)}</p>${sourceList(c)}</div>`).join('')}<div class="result-actions"><button class="secondary" id="briefButton" type="button">Request a Loom Brief</button><button class="secondary" id="auditButton" type="button">Request a Full Audit</button></div>`;
+    return;
+  }
+  const c=ranked[0];
+  result.innerHTML=`<strong>${esc(c.statement)}</strong><div class="result-meta"><span class="badge">${esc(type)}</span><span class="badge">${esc(c.epistemic_status)}</span><span class="badge">${esc(c.verification_level)}</span></div><p>${c.contradiction_status==='none'?'No unresolved contradiction is recorded on this published claim.':'This claim carries a contradiction status; the deeper record should be consulted before treating it as settled.'}</p><div class="result-claim"><strong>Evidence trail</strong><p class="source-line">Claim ${esc(c.id)} · current as of ${esc(c.current_as_of)}</p>${sourceList(c)}</div>${ranked.length>1?`<p><strong>Related published claims</strong></p>${ranked.slice(1).map(x=>`<div class="result-claim"><strong>${esc(x.statement)}</strong><p class="source-line">${esc(x.id)} · ${esc(x.verification_level)} · ${esc(x.epistemic_status)}</p></div>`).join('')}`:''}<div class="result-actions"><button class="secondary" id="briefButton" type="button">Show me the work →</button><button class="secondary" id="auditButton" type="button">Investigate it →</button></div>`;
+  bindEscalation(question);
+}
+function bindEscalation(question){
+  document.getElementById('briefButton')?.addEventListener('click',()=>escalate('Loom Brief',question));
+  document.getElementById('auditButton')?.addEventListener('click',()=>escalate('Full Loom Audit',question));
+}
+function escalate(level,question){
+  result.insertAdjacentHTML('beforeend',`<p><strong>${esc(level)} requested.</strong> The public site is currently static, so this records the next research surface rather than pretending a live queue exists. Your inquiry type is <code>${esc(classify(question))}</code>.</p>`);
+}
+
+document.getElementById('askButton').addEventListener('click',async()=>{
+  const question=q.value.trim();
+  if(!question){q.focus();return;}
+  status.textContent='Classifying inquiry and reading the published evidence layer…';
+  try{
+    if(!index){const response=await fetch('./data/index.json',{cache:'no-store'});if(!response.ok)throw new Error('index unavailable');index=await response.json();}
+    renderRead(question);
+    status.textContent='Quick Read compiled from the current public evidence index.';
+  }catch(error){
+    result.classList.remove('hidden');
+    result.innerHTML='<strong>The public evidence index is not available.</strong><p>Loom will not substitute an unsupported model answer. The research interface is available, but this deployment does not currently have a readable evidence index.</p>';
+    status.textContent='Evidence layer unavailable.';
+  }
+});
 </script>
 </body>
 </html>
