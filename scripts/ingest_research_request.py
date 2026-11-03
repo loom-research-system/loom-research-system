@@ -37,7 +37,11 @@ def ingest(number: int, title: str, body: str, url: str):
     inquiry_path = INQUIRY_DIR / f"{inquiry_id}.json"
     plan_path = PLAN_DIR / f"{plan_id}.json"
     if inquiry_path.exists():
-        return inquiry_path, plan_path, json.loads(inquiry_path.read_text(encoding="utf-8")), False
+        existing = json.loads(inquiry_path.read_text(encoding="utf-8"))
+        if not plan_path.exists():
+            plan = build_plan(existing, plan_id)
+            plan_path.write_text(json.dumps(plan, indent=2) + "\n", encoding="utf-8")
+        return inquiry_path, plan_path, existing, False
     now = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     route = classify(question)
     inquiry = {
