@@ -15,7 +15,7 @@ PLAN_DIR = ROOT / "research" / "plans"
 def extract_question(body: str) -> str:
     # Accept both the dedicated issue-form heading and classic prefilled issue body.
     patterns = [
-        r"(?ims)^##\s*Question\s*\n+(.*?)(?=^##\s|\Z)",
+        r"(?ims)^##\s*(?:Question|What do you want to know\?)\s*\n+(.*?)(?=^##\s|\Z)",
         r"(?ims)^Question:\s*\n+(.*?)(?=^##\s|\Z)",
     ]
     for pattern in patterns:
