@@ -1,6 +1,6 @@
 """Turn a submitted GitHub research-request issue into a persistent Loom Inquiry and plan."""
 from __future__ import annotations
-import argparse, json, re, sys
+import argparse, json, os, re, sys
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -65,6 +65,9 @@ def main():
     parser.add_argument("--url", required=True)
     args = parser.parse_args()
     ip, pp, inquiry, created = ingest(args.number, args.title, args.body, args.url)
+    if os.environ.get("GITHUB_OUTPUT"):
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+            output.write("inquiry_id=" + inquiry["id"] + "\\n")
     print(json.dumps({"created": created, "inquiry": inquiry, "inquiry_path": str(ip), "plan_path": str(pp)}, indent=2))
 
 if __name__ == "__main__":
