@@ -60,5 +60,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          INQUIRY_ID: ${{ steps.ingest.outputs.inquiry_id }}
         run: |
-          gh issue comment "$ISSUE_NUMBER" --body "Loom has registered this request as a research inquiry. The inquiry has been classified and a research plan has been created. This is **receipt and triage, not a finding or an approval to publish**. Human review and evidence validation remain required."
+          gh issue comment "$ISSUE_NUMBER" --body "Loom has registered this request as inquiry **$INQUIRY_ID**. The question has been classified and a research plan has been created. This is **receipt and triage, not a finding or an approval to publish**. Human review and evidence validation remain required."
