@@ -8,11 +8,17 @@ on:
       - 'specifications/**'
       - 'schemas/**'
       - 'artifacts/**'
+      - 'research/**'
       - 'content/flint-water-crisis.md'
       - 'scripts/build_public_docs.py'
       - 'scripts/build_public_inquiry_index.py'
       - 'scripts/route_inquiry.py'
+      - 'scripts/create_inquiry.py'
+      - 'scripts/plan_inquiry.py'
+      - 'scripts/build_research_queue.py'
       - 'scripts/build_quick_read.py'
+      - 'scripts/build_loom_brief.py'
+      - 'scripts/build_loom_audit.py'
       - 'scripts/validate_flint_artifacts.py'
       - 'loom_validator/**'
       - 'tests/**'
@@ -55,6 +61,9 @@ jobs:
 
       - name: Build public inquiry evidence index
         run: python scripts/build_public_inquiry_index.py
+
+      - name: Build persistent research queue
+        run: python scripts/build_research_queue.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
