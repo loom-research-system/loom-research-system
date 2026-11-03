@@ -34,7 +34,7 @@ class ResearchRequestIntegrationTests(unittest.TestCase):
                 inquiry_path, plan_path, inquiry, created = intake.ingest(
                     42,
                     "[Ask Loom] Did the policy create the jobs promised?",
-                    "## What do you want to know?\\n\\nDid Hochul's AI data center policy create the jobs promised?\\n\\n## Requested depth\\n\\nQuick Read",
+                    "## What do you want to know?\n\nDid Hochul's AI data center policy create the jobs promised?\n\n## Requested depth\n\nQuick Read",
                     "https://github.com/example/repo/issues/42",
                 )
                 self.assertTrue(created)
@@ -55,8 +55,8 @@ class ResearchRequestIntegrationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             with patch.object(intake, "INQUIRY_DIR", root / "inquiries"), patch.object(intake, "PLAN_DIR", root / "plans"):
-                first = intake.ingest(43, "Test", "## What do you want to know?\\n\\nDid the agency implement this?", "https://example.test/43")
-                second = intake.ingest(43, "Test", "## What do you want to know?\\n\\nDid the agency implement this?", "https://example.test/43")
+                first = intake.ingest(43, "Test", "## What do you want to know?\n\nDid the agency implement this?", "https://example.test/43")
+                second = intake.ingest(43, "Test", "## What do you want to know?\n\nDid the agency implement this?", "https://example.test/43")
                 self.assertTrue(first[3])
                 self.assertFalse(second[3])
                 self.assertEqual(first[2]["id"], second[2]["id"])
