@@ -6,6 +6,7 @@ request that a later evidence/research layer can resolve.
 from __future__ import annotations
 import re
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Dict
 
 @dataclass(frozen=True)
@@ -14,13 +15,13 @@ class Route:
     rationale: str
 
 PATTERNS = [
-    ("implementation_status", [r"implemented", r"implementation", r"in effect", r"actually doing", r"carried out", r"enforced"]),
-    ("legislative_likelihood", [r"pass", r"passed", r"become law", r"legislation", r"bill"]),
-    ("promise_commitment", [r"promise", r"promised", r"commitment", r"pledged", r"said they would"]),
-    ("spending_funding", [r"money", r"fund", r"funding", r"spent", r"spending", r"budget", r"allocated"]),
-    ("responsibility_authority", [r"who was responsible", r"who had authority", r"responsible for", r"who could", r"who decided"]),
-    ("outcome", [r"worked", r"outcome", r"result", r"did it help", r"what happened"]),
-    ("historical_reconstruction", [r"what happened", r"how did", r"why did", r"timeline", r"history"]),
+    ("implementation_status", [r"\bimplemented\b", r"\bimplementation\b", r"\bin effect\b", r"\bactually doing\b", r"\bcarried out\b", r"\benforced\b"]),
+    ("legislative_likelihood", [r"\bpass\b", r"\bpassed\b", r"\bbecome law\b", r"\blegislation\b", r"\bbill\b"]),
+    ("promise_commitment", [r"\bpromise\b", r"\bpromised\b", r"\bcommitment\b", r"\bpledged\b", r"\bsaid they would\b"]),
+    ("spending_funding", [r"\bmoney\b", r"\bfund(?:ing)?\b", r"\bspent\b", r"\bspending\b", r"\bbudget\b", r"\ballocated\b"]),
+    ("responsibility_authority", [r"\bwho was responsible\b", r"\bwho had authority\b", r"\bresponsible for\b", r"\bwho could\b", r"\bwho decided\b"]),
+    ("outcome", [r"\bworked\b", r"\boutcome\b", r"\bresult\b", r"\bdid it help\b", r"\bwhat happened\b"]),
+    ("historical_reconstruction", [r"\bwhat happened\b", r"\bhow did\b", r"\bwhy did\b", r"\btimeline\b", r"\bhistory\b"]),
 ]
 
 def classify(question: str) -> Route:
@@ -33,7 +34,19 @@ def classify(question: str) -> Route:
 
 def make_inquiry(question: str, requested_depth: str = "quick_read", inquiry_id: str = "INQ-0001") -> Dict:
     route = classify(question)
-    return {"id": inquiry_id, "type": "inquiry", "question": question.strip(), "question_type": route.question_type, "scope": {"jurisdiction": "", "subject": "", "identifiers": []}, "requested_depth": requested_depth, "status": "classified", "routing_rationale": route.rationale}
+    now = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return {
+        "id": inquiry_id,
+        "type": "inquiry",
+        "question": question.strip(),
+        "question_type": route.question_type,
+        "scope": {"jurisdiction": "", "subject": "", "identifiers": []},
+        "requested_depth": requested_depth,
+        "status": "classified",
+        "routing_rationale": route.rationale,
+        "created": now,
+        "updated": now,
+    }
 
 if __name__ == "__main__":
     import argparse, json
