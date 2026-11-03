@@ -26,8 +26,9 @@
       <button class="example" data-q="What happened to the money allocated for this program?">Where did the money go?</button>
       <button class="example" data-q="Did this politician keep this promise?">Was the promise kept?</button>
     </div>
-    <button id="askButton" type="button">Get a Quick Read →</button>
-    <p id="status" class="status-note">Quick Read uses only claims that have already passed Loom's publication gate. It will not invent an answer when the evidence layer cannot support one.</p>
+    <button id="askButton" type="button">Check published evidence →</button>
+    <button id="submitButton" class="secondary" type="button">Submit question to Loom →</button>
+    <p id="status" class="status-note">Checking published claims does not initiate new research. Submit your question to create a persistent Loom inquiry and research plan. GitHub will ask you to confirm the submission; no private API key is exposed in this public page.</p>
     <div id="result" class="accountability hidden" aria-live="polite"></div>
   </div>
 </section>
@@ -61,7 +62,7 @@ const q=document.getElementById('question');
 const status=document.getElementById('status');
 const result=document.getElementById('result');
 let index=null;
-const REQUEST_URL='https://github.com/loom-research-system/loom-research-system/issues/new?template=research-request.yml';
+const REQUEST_URL='https://github.com/loom-research-system/loom-research-system/issues/new';
 
 document.querySelectorAll('.example').forEach(b=>b.addEventListener('click',()=>{q.value=b.dataset.q;q.focus()}));
 
@@ -107,6 +108,15 @@ function renderRead(question){
   const c=ranked[0];
   result.innerHTML=`<strong>${esc(c.statement)}</strong><div class="result-meta"><span class="badge">${esc(type)}</span><span class="badge">${esc(c.epistemic_status)}</span><span class="badge">${esc(c.verification_level)}</span></div><p>${c.contradiction_status==='none'?'No unresolved contradiction is recorded on this published claim.':'This claim carries a contradiction status; the deeper record should be consulted before treating it as settled.'}</p><div class="result-claim"><strong>Evidence trail</strong><p class="source-line">Claim ${esc(c.id)} · current as of ${esc(c.current_as_of)}</p>${sourceList(c)}</div>${ranked.length>1?`<p><strong>Related published claims</strong></p>${ranked.slice(1).map(x=>`<div class="result-claim"><strong>${esc(x.statement)}</strong><p class="source-line">${esc(x.id)} · ${esc(x.verification_level)} · ${esc(x.epistemic_status)}</p></div>`).join('')}`:''}<div class="result-actions">${requestLink(question,'Loom Brief')}${requestLink(question,'Full Loom Audit')}</div>`;
 }
+
+document.getElementById('submitButton').addEventListener('click',()=>{
+  const question=q.value.trim();
+  if(question.length<5){status.textContent='Please enter a question of at least five characters.';q.focus();return;}
+  const body='## What do you want to know?\n\n'+question+'\n\n## Requested depth\n\nQuick Read\n\n## Helpful scope or identifiers\n\nNot provided.';
+  const params=new URLSearchParams({title:'[Ask Loom] '+question.slice(0,80),body:body,labels:'research-request'});
+  status.textContent='Opening the secure research-request submission page…';
+  window.location.href=REQUEST_URL+'?'+params.toString();
+});
 
 document.getElementById('askButton').addEventListener('click',async()=>{
   const question=q.value.trim();
