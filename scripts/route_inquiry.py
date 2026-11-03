@@ -15,7 +15,7 @@ class Route:
     rationale: str
 
 PATTERNS = [
-    ("implementation_status", [r"\bimplemented\b", r"\bimplementation\b", r"\bin effect\b", r"\bactually doing\b", r"\bcarried out\b", r"\benforced\b"]),
+    ("implementation_status", [r"\bimplement(?:ed|ation|ing)?\b", r"\bin effect\b", r"\bactually doing\b", r"\bcarried out\b", r"\benforced\b"]),
     ("legislative_likelihood", [r"\bpass\b", r"\bpassed\b", r"\bbecome law\b", r"\blegislation\b", r"\bbill\b"]),
     ("promise_commitment", [r"\bpromise\b", r"\bpromised\b", r"\bcommitment\b", r"\bpledged\b", r"\bsaid they would\b"]),
     ("spending_funding", [r"\bmoney\b", r"\bfund(?:ing)?\b", r"\bspent\b", r"\bspending\b", r"\bbudget\b", r"\ballocated\b"]),
