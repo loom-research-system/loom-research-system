@@ -1,0 +1,44 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "loom://schemas/inquiry.schema.yaml"
+title: "Loom Inquiry"
+type: object
+required: [id, type, question, question_type, scope, requested_depth, status, created, updated]
+properties:
+  id: {type: string, pattern: "^INQ-[0-9]{4,}$"}
+  type: {type: string, const: "inquiry"}
+  question: {type: string, minLength: 5}
+  question_type:
+    type: string
+    enum: [implementation_status, legislative_likelihood, promise_commitment, spending_funding, responsibility_authority, outcome, historical_reconstruction, full_research]
+  scope:
+    type: object
+    properties:
+      jurisdiction: {type: string}
+      subject: {type: string}
+      as_of: {type: string, format: date}
+      identifiers: {type: array, items: {type: string}}
+    additionalProperties: false
+  requested_depth: {type: string, enum: [quick_read, loom_brief, full_loom_audit]}
+  status: {type: string, enum: [received, classified, researching, ready, escalated, completed, blocked]}
+  research_protocol_id: {type: string, pattern: "^PROT-[0-9]{4,}$"}
+  related_sources: {type: array, items: {type: string, pattern: "^SRC-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
+  related_evidence: {type: array, items: {type: string, pattern: "^EVD-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
+  related_claims: {type: array, items: {type: string, pattern: "^CLM-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
+  related_gaps: {type: array, items: {type: string, pattern: "^GAP-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
+  assessment:
+    type: object
+    properties:
+      status: {type: string}
+      epistemic_status: {type: string, enum: [proposed, unknown, unresolved, contested, supported, known]}
+      as_of: {type: string, format: date}
+    additionalProperties: false
+  escalation:
+    type: object
+    properties:
+      eligible_for_brief: {type: boolean}
+      eligible_for_audit: {type: boolean}
+      reason: {type: string}
+    additionalProperties: false
+  created: {type: string, format: date-time}
+  updated: {type: string, format: date-time}
+additionalProperties: false
