@@ -6,7 +6,7 @@ required: [id, type, inquiry_id, question_type, depth, objective, research_steps
 properties:
   id: {type: string, pattern: "^PLAN-[0-9]{4,}$"}
   type: {type: string, const: "research_plan"}
-  inquiry_id: {type: string, pattern: "^INQ-[0-9]{4,}$"}
+  inquiry_id: {type: string, pattern: "^INQ-(?:[A-Z0-9]+-)?[0-9]{4,}$"}
   question_type: {type: string}
   depth: {type: string, enum: [quick_read, loom_brief, full_loom_audit]}
   objective: {type: string, minLength: 10}
