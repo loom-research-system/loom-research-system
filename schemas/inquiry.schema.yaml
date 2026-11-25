@@ -26,6 +26,15 @@ properties:
   related_evidence: {type: array, items: {type: string, pattern: "^EVD-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
   related_claims: {type: array, items: {type: string, pattern: "^CLM-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
   related_gaps: {type: array, items: {type: string, pattern: "^GAP-(?:[A-Z0-9]+-)?[0-9]{3,}$"}}
+  source_request:
+    type: object
+    required: [platform, issue_number, title, issue_url]
+    properties:
+      platform: {type: string, const: "github_issue"}
+      issue_number: {type: integer, minimum: 1}
+      title: {type: string}
+      issue_url: {type: string, format: uri}
+    additionalProperties: false
   assessment:
     type: object
     properties:
