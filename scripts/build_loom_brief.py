@@ -9,7 +9,7 @@ from pathlib import Path
 
 def compile_brief(inquiry, claims, gaps=None):
     gaps = gaps or []
-    usable = [c for c in claims if c.get("promotion_stage") in {"supported", "canonical"} and c.get("verification_level") != "none"]
+    usable = [c for c in claims if c.get("promotion_stage") in {"accepted", "canonical"} and c.get("verification_level") != "none"]
     supported = [c for c in usable if c.get("epistemic_status") in {"supported", "known"}]
     contested = [c for c in usable if c.get("contradiction_status") in {"documented", "unresolved"}]
     if supported:
@@ -28,7 +28,7 @@ def compile_brief(inquiry, claims, gaps=None):
         "question": inquiry.get("question"),
         "status": status,
         "headline": headline,
-        "answer_basis": "Compiled only from supported/canonical claims in the validated research record.",
+        "answer_basis": "Compiled only from accepted/canonical claims in the validated research record.",
         "key_findings": usable,
         "contested_or_unresolved": contested,
         "evidence_gaps": gaps,
