@@ -1,36 +1,46 @@
 # PL-307 version reconciliation
 
-**Status: implementation hold on unresolved normative text**
+**Status: governing specification restored; implementation validation remains open**
 
-## Governing version
+## Authoritative version
 
-The Project Loom working record identifies **PL-307 v0.3 as LOCKED, effective 2026-09-08**. The repository's current files do not faithfully represent that state:
+The current governing claim-state specification is **PL-307 v1.0, LOCKED, effective 2026-09-10**. The complete 31-section text has been restored to:
 
-- The file named `PL-307_PL-307 — Claims, Epistemic Status, Verification & Promotion Specification.md` labels itself v0.1 and LOCKED.
-- `PL-307_v1.0_Claims_Epistemic_Status_Verification_Promotion.md` is a placeholder, not a specification.
-- The claim schema and output compilers use `accepted` where the locked promotion vocabulary is `supported`.
+`specifications/PL-307_v1.0_Claims_Epistemic_Status_Verification_Promotion.md`
 
-This repository state must not be interpreted as evidence that v1.0 superseded the locked v0.3 specification.
+The recovered v1.0 text supersedes the earlier v0.5 stable implementation baseline. The repository's older file labelled PL-307 v0.1 is a historical artifact and must not be treated as the current governing specification.
 
-## Locked rules recovered for implementation
+## Governing distinctions
 
-The following v0.3 rules are confirmed in the project record and are applied in this change set:
+PL-307 v1.0 keeps four dimensions separate:
 
-1. Keep four dimensions separate: workflow `status`, `epistemic_status`, `verification_level`, and `promotion_stage`.
-2. Epistemic statuses: `proposed`, `unknown`, `unresolved`, `contested`, `supported`, `known`.
-3. Verification levels: `none`, `source_backed`, `cross_verified`, `primary_verified`.
-4. Promotion stages: `candidate`, `supported`, `canonical`.
-5. `cross_verified` requires at least two independently evaluated sources; source count alone is not corroboration.
-6. AI-extracted material without independent human re-examination of the source is capped at `source_backed`; human confirmation is required to remove that cap.
-7. Verification eligibility does not itself promote a claim. Canonical admission remains a human governance decision.
-8. Core rule: **AI may propose. Evidence must establish. Humans may promote.**
+- Workflow `status`: `proposed`, `under_review`, `system_flagged_for_review`, `completed`, `rejected`, `deprecated`.
+- Epistemic status: `proposed`, `unknown`, `unresolved`, `contested`, `supported`, `known`.
+- Verification level: `none`, `source_backed`, `cross_verified`, `primary_verified`.
+- Promotion stage: `candidate`, `accepted`, `canonical`.
 
-## Work deliberately not inferred
+In particular, `supported` is an epistemic status; `accepted` is a promotion stage. They are not interchangeable.
 
-The complete authoritative v0.3 text and all accepted errata must be restored from the original locked source before implementing additional normative requirements. In particular, this change does not invent or complete the full KNOWN rule set, exception handling, verification-event schema, override semantics, demotion events, or diagnostic constraints from partial summaries.
+Other governing requirements include:
+- `supported` and `accepted` require `cross_verified` or stronger.
+- `known` requires cross-verification, no unresolved contradiction, explicit primary applicability, applicable primary examination, human review, and documented scope limits.
+- `primary_verified` presupposes cross-verification except for the narrow `dispositive_document` case.
+- AI/OCR-extracted material evidence caps verification at `source_backed` until a human verification event independently re-examines the original source.
+- Promotion is a governance event; validator eligibility does not itself promote a claim.
+- Claim atomicity, append-only verification events, evidence-retraction cascades, demotion/revision, and diagnostic epistemic ceilings are mandatory.
+- The solo-founder exception for public `supported`/`canonical` claims requires visible disclosure; it never permits `known`.
 
-Until that source is restored and checked, the repository must not claim full PL-307 v0.3 conformance. The v0.1 file and v1.0 placeholder remain preserved as historical repository artifacts pending an explicit versioned migration.
+## Repository drift identified
 
-## Immediate implementation scope
+Before this restoration:
+- The repository's v0.1 specification was marked LOCKED despite being superseded.
+- The v1.0 file contained only a placeholder.
+- The claim schema already used the v1.0 promotion vocabulary (`candidate`, `accepted`, `canonical`), but the Brief and Audit compilers selected `accepted` and `canonical` without tests guarding that contract.
+- The GitHub issue workflow called a separate ingester from the implementation exercised by tests, creating divergent IDs and missing idempotency in the production path.
+- The issue workflow installed `jsonschema` but did not validate the records it committed.
 
-This reconciliation changes only the promotion-stage vocabulary where it is unambiguous, unifies GitHub issue intake behind one idempotent implementation, and validates inquiry/plan records before the intake workflow commits them. It does not promote any claim or modify research findings.
+## Changes in this branch
+
+This branch restores the full v1.0 specification, adds regression tests for the correct separation of epistemic status and promotion stage, unifies GitHub issue ingestion behind one idempotent implementation, preserves issue metadata and requested depth, and validates inquiry/plan records before the issue workflow commits them.
+
+This is not a claim of full PL-307 v1.0 conformance. The claim, evidence, observation, diagnostic, actor, and verification-event schemas and cross-object validator still require implementation and adversarial testing against the complete specification. No claim is promoted by this change.
