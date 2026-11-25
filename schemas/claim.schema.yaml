@@ -13,7 +13,7 @@ properties:
   status: {type: string, enum: ["proposed", "under_review", "system_flagged_for_review", "completed", "rejected", "deprecated"]}
   epistemic_status: {type: string, enum: ["proposed", "unknown", "unresolved", "contested", "supported", "known"]}
   verification_level: {type: string, enum: ["none", "source_backed", "cross_verified", "primary_verified"]}
-  promotion_stage: {type: string, enum: ["candidate", "supported", "canonical"]}
+  promotion_stage: {type: string, enum: ["candidate", "accepted", "canonical"]}
   primary_applicability: {type: string, enum: ["applicable", "not_applicable", "destroyed_or_inaccessible"]}
   current_as_of: {type: string, format: date}
   search_protocol_id: {type: string, pattern: "^PROT-[0-9]{4,}$"}
