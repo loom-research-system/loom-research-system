@@ -7,7 +7,7 @@ from pathlib import Path
 def compile_audit(inquiry, plan, claims, gaps, transitions=None, mechanisms=None):
     transitions = transitions or []
     mechanisms = mechanisms or []
-    usable = [c for c in claims if c.get("promotion_stage") in {"accepted", "canonical"} and c.get("verification_level") != "none"]
+    usable = [c for c in claims if c.get("promotion_stage") in {"supported", "canonical"} and c.get("verification_level") != "none"]
     return {
         "version": "0.1",
         "type": "full_loom_audit",
@@ -38,6 +38,7 @@ def main():
     claims = json.loads(args.claims.read_text(encoding="utf-8"))
     gaps = json.loads(args.gaps.read_text(encoding="utf-8"))
     print(json.dumps(compile_audit(inquiry, plan, claims, gaps), indent=2))
+
 
 if __name__ == "__main__":
     main()
