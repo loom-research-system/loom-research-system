@@ -51,5 +51,6 @@ def main():
     gaps = json.loads(args.gaps.read_text(encoding="utf-8")) if args.gaps else []
     print(json.dumps(compile_brief(inquiry, claims, gaps), indent=2))
 
+
 if __name__ == "__main__":
     main()
