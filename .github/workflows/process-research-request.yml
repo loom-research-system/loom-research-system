@@ -24,10 +24,13 @@ jobs:
       - name: Install dependencies
         run: python -m pip install pyyaml jsonschema
 
-      - name: Create inquiry and research plan
+      - name: Ingest through canonical research-request path
         env:
           EVENT_PATH: ${{ github.event_path }}
         run: python scripts/process_research_request.py "$EVENT_PATH"
+
+      - name: Validate persisted inquiry and plan records
+        run: python scripts/validate_research_records.py
 
       - name: Build research queue
         run: python scripts/build_research_queue.py
