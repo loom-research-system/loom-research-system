@@ -52,7 +52,7 @@ The remaining gaps are narrower and concrete:
 The Heritage package remains a draft and is not imported by this change. Its own manifest records that no underlying court or election-authority records have yet been verified. Before import:
 
 - Create and review the missing `PROT-0001`; it is referenced by the inquiry and claims but absent from the package.
-- Resolve the source's date and source-type semantics. The date currently comes from the PDF identifier; the PDF is primary evidence of what Heritage published, but secondary evidence about the underlying cases.
+- Record the verified official source location: `https://docs.house.gov/meetings/JU/JU00/20190129/108824/HHRG-116-JU00-20190129-SD020.pdf`. The 434-page House-hosted copy reports the same 1,176 headline total and contains the two identified label/narrative discrepancies. Treat 2019-01-29 as the hearing-document date indicated by the document identifier/path, not as an independently confirmed publication date. The PDF is primary evidence of what Heritage published, but secondary evidence about the underlying cases.
 - Correct extraction-method metadata where PDF text extraction was labelled `manual_copy`.
 - Validate all IDs, schema fields, references, hashes, and relationships as one package before moving it into the repository.
 - Keep every claim provisional; do not imply that the 1,176 headline instances equal 860 panels, persons, incidents, ballots, or affected elections.
